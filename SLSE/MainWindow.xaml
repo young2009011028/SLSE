@@ -1,0 +1,86 @@
+﻿<Window x:Class="SLSE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:lvcrtl="clr-namespace:Wpf.CartesianChart.ConstantChanges"  
+        Title="Substation LSE" Height="350" Width="525">
+
+    <Grid Name="gdwhole">
+        <Grid.RowDefinitions>
+        <RowDefinition Height="25" />
+        <RowDefinition Height="0.7*" />
+        <RowDefinition Height="20" />
+         <RowDefinition Height="0.3*" />
+        </Grid.RowDefinitions>
+        <DockPanel Name="dpmenu" Grid.Row="0">
+            <Menu>
+                <MenuItem Header="文件">
+                    <MenuItem Header="新建">
+                        <MenuItem Header="File1"/>
+                        <MenuItem Header="File2"/>
+                        <MenuItem Header="File3"/>
+                    </MenuItem>
+                    <MenuItem Header="打开"/>
+                    <MenuItem Header="存储"/>
+                </MenuItem>
+                <MenuItem Header="编辑">
+                </MenuItem>
+                <MenuItem Header="视图">
+                </MenuItem>
+                <MenuItem Header="帮助">
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        
+         <TabControl Name="tabMainControl" Grid.Row="1">
+            <TabItem Header="输入">
+                <Grid Name="gdinput">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label HorizontalContentAlignment="Center" Content="输入控制" />
+                        <WrapPanel >
+                            <Label Content="输入文件" Width="100"/>
+                            <TextBox Height="32" HorizontalAlignment="Left" x:Name="tbxInputFileName"
+                        		VerticalAlignment="Top" Width="300" />
+                            <Button Content="Browse" Height="32" HorizontalAlignment="Left"
+                        		x:Name="btnBrowseInputFile" VerticalAlignment="Top" Width="88" Click="btnInputFileClick" />
+                        </WrapPanel>
+
+                        <WrapPanel>
+                            <Label Content="SLSE模型输入" Width="100"/>
+                            <TextBox Height="32" HorizontalAlignment="Left" x:Name="tbxInputModelName"
+                        		VerticalAlignment="Top" Width="300" />
+                            <Button Content="Browse" Height="32" HorizontalAlignment="Left"
+                        		x:Name="btnBrowseInputModel" VerticalAlignment="Top" Width="88" Click="btnInputModelClick" />
+                        </WrapPanel >
+                        <WrapPanel HorizontalAlignment="Center">
+                        <Button Content="载入" Width="100" Name="btnLoadFiles"  Click="btnLoadFileClick"></Button>
+                        <Button Content="开始运算" Width="100" Name="btnCalculate"  Click="btnCalculateClick"></Button>
+                        </WrapPanel>
+                        <!--<Label HorizontalContentAlignment="Center" Content="进度条"></Label>-->
+
+                    </StackPanel>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem  Header="实时监控和警报" >
+                <lvcrtl:ConstantChangesChart x:Name="rtlChart" />
+            </TabItem>
+            <TabItem Header="结果" />
+        </TabControl>
+        
+        <ProgressBar Name="pbCalculate" Minimum="0" Maximum="100" Value="0" Height="20" Grid.Row="2"/>
+        
+        <DataGrid Name="dgLog" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Row="3" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time"  Binding="{Binding Time}"/>
+                <DataGridTextColumn Header="Type"  Binding="{Binding Type}"/>
+                <DataGridTextColumn Width="*" Header="Message"  Binding="{Binding Message}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    
+    
+    
+    
+</Window>
