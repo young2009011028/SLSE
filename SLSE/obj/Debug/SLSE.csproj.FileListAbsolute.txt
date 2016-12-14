@@ -19,7 +19,9 @@ D:\AG\SLSE\SLSE\bin\Debug\Livecharts.pdb
 D:\AG\SLSE\SLSE\bin\Debug\Livecharts.xml
 D:\AG\SLSE\SLSE\bin\Debug\LiveCharts.Wpf.pdb
 D:\AG\SLSE\SLSE\bin\Debug\LiveCharts.Wpf.xml
-D:\AG\SLSE\SLSE\obj\Debug\RealTimeLineChart.g.cs
 D:\AG\SLSE\SLSE\obj\Debug\SLSE_MarkupCompile.lref
-D:\AG\SLSE\SLSE\obj\Debug\RealTimeLineChart.baml
 D:\AG\SLSE\SLSE\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\AG\SLSE\SLSE\obj\Debug\charts\LineChart.g.cs
+D:\AG\SLSE\SLSE\obj\Debug\charts\RealTimeLineChart.g.cs
+D:\AG\SLSE\SLSE\obj\Debug\charts\LineChart.baml
+D:\AG\SLSE\SLSE\obj\Debug\charts\RealTimeLineChart.baml

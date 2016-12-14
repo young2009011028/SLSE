@@ -15,7 +15,7 @@ namespace SLSE.Engine
         public ProgressEventArgs() { this.Percentage = 0; }
         public int Percentage { get; set; }
         public DateTime TimeStamp { get; set; }
-        public Double Value { get; set; }
+        public List<Double> Value { get; set; }
     }
 
     class SLSEDataHandler
@@ -156,6 +156,7 @@ namespace SLSE.Engine
             try
             {
                 ProgressEventArgs status = new ProgressEventArgs();
+                status.Value = new List<double>();
                 int count = 0;
                 foreach (var frame_time in _data_buffer)
                 {
@@ -171,7 +172,9 @@ namespace SLSE.Engine
 
                     status.Percentage = (count * 100 / _data_buffer.Count);
                     status.TimeStamp = Convert.ToDateTime(frame_time.Key);
-                    status.Value = frame.First().Value;
+                    status.Value.Clear();
+                    status.Value.Add( frame.First().Value);
+                    status.Value.Add(frame.ElementAt(2).Value);
                     if (ProgressUpdate != null)
                         ProgressUpdate(this, status);
 

@@ -104,7 +104,7 @@ namespace Wpf.CartesianChart.ConstantChanges
             SetAxisLimits(timestamp);
 
             //lets only use the last 30 values
-            if (ChartValues.Count > 100) ChartValues.RemoveAt(0);  
+            if (ChartValues.Count > 100) ChartValues.RemoveAt(0);
         }
 
 

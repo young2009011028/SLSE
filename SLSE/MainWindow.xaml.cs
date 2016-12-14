@@ -146,7 +146,7 @@ namespace SLSE
             {
                 Dispatcher.Invoke((Action)delegate() { 
                     pbCalculate.Value = ((ProgressEventArgs)status).Percentage;
-                    rtlChart.SetNextPoint(((ProgressEventArgs)status).TimeStamp, ((ProgressEventArgs)status).Value);
+                    rtlChart.SetNextPoint(((ProgressEventArgs)status).TimeStamp, ((ProgressEventArgs)status).Value[0]);
                 });
             };
             LSEthread = new Thread(new ParameterizedThreadStart(slse_handler.Run));

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\AG\SLSE\SLSE\App.xaml
-274098292
+3-2129645453
 
-9-1781987469
+10911211490
 16501242814
-MainWindow.xaml;RealTimeLineChart.xaml;
+charts\LineChart.xaml;MainWindow.xaml;charts\RealTimeLineChart.xaml;
 
 False
 
