@@ -7,6 +7,8 @@ using SLSE.Logger;
 using Microsoft.VisualBasic.FileIO;
 using System.IO;
 using System.Threading;
+using SubstationLSE;
+
 namespace SLSE.Engine
 {
 
@@ -20,18 +22,24 @@ namespace SLSE.Engine
 
     class SLSEDataHandler
     {
-        #region Properties
+        #region Private Member
         //path
         private string _datafile_path;
         private string _modelfile_path;
 
         //databuffer
         //<timestamp,<measurment,value>>
-        Dictionary<string, Dictionary<string, double>> _data_buffer;
-        List<string> _signals;
+        private Dictionary<string, Dictionary<string, double>> _data_buffer;
+        private List<string> _signals;
         //result buffer
-        Dictionary<string, Dictionary<string, double>> _result_buffer;
+        private Dictionary<string, Dictionary<string, double>> _result_buffer;
 
+        //SLSE Engine
+
+        private Substation _substation;
+
+        #endregion
+        #region Properties
         public string DataPath
         {
             set
@@ -57,6 +65,7 @@ namespace SLSE.Engine
             _data_buffer = new Dictionary<string, Dictionary<string, double>>();
             _result_buffer = new Dictionary<string, Dictionary<string, double>>();
             _signals = new List<string>();
+            _substation = new Substation();
         }
 
         public bool LoadData()
@@ -136,8 +145,8 @@ namespace SLSE.Engine
                 }
                 else
                 {
-                    string modeltext = "";
-                    File.WriteAllText(_modelfile_path, modeltext);
+                    _substation = _substation.DeserializeFromXml(_modelfile_path);
+                    _substation.Initialize();
                     ////////pass modeltext to engine
                 }
 
@@ -161,9 +170,11 @@ namespace SLSE.Engine
                 foreach (var frame_time in _data_buffer)
                 {
                     var frame = frame_time.Value;
+                    _substation.InputMeasurements = frame;
+                    _substation.SLSE();
                     //pass frame to engine
 
-
+                    var outputframe = _substation.OutputMeasurements;
 
                     //get result and insert to _result_buffer with timestamp
 

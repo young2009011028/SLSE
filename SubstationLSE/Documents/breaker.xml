@@ -1,0 +1,8 @@
+<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="ROSS_PCB_230_A30" Number="" Acronym="" Name="ROSS_PCB_230_A30" Description="" Key="" FromNode="ROSS_230_254" ToNode="ROSS_230_255" Normally="Closed" Actually="Closed" Status="ROSS PCB_230_A30" >
+	<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+		<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+			<Measurement BaseKV="39" MagnitudeKey="RKCR 230 A1 SA.L230WHITECRK_1IP.IM" AngleKey="RKCR 230 A1 SA.L230WHITECRK_1IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+			<Estimate BaseKV="39" MagnitudeKey="RKCR 230 A1 SA.L230WHITECRK_1IP.IM" AngleKey="RKCR 230 A1 SA.L230WHITECRK_1IP.IA" Type="I" />
+		</PositiveSequence>
+	</BreakerCurrent>
+</CircuitBreaker>

@@ -25,3 +25,8 @@ D:\AG\SLSE\SLSE\obj\Debug\charts\LineChart.g.cs
 D:\AG\SLSE\SLSE\obj\Debug\charts\RealTimeLineChart.g.cs
 D:\AG\SLSE\SLSE\obj\Debug\charts\LineChart.baml
 D:\AG\SLSE\SLSE\obj\Debug\charts\RealTimeLineChart.baml
+D:\AG\SLSE\SLSE\bin\Debug\SubstationLSE.exe
+D:\AG\SLSE\SLSE\bin\Debug\MathNet.Numerics.dll
+D:\AG\SLSE\SLSE\bin\Debug\SubstationLSE.pdb
+D:\AG\SLSE\SLSE\bin\Debug\MathNet.Numerics.pdb
+D:\AG\SLSE\SLSE\bin\Debug\MathNet.Numerics.xml

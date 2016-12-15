@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:lvcrtl="clr-namespace:Wpf.CartesianChart.ConstantChanges"  
-        Title="Substation LSE" Height="350" Width="525">
-
-    <Grid Name="gdwhole">
+        Title="Substation LSE" Height="350" Width="525"
+        Closing="Window_Closing">
+        
+        <Grid Name="gdwhole">
         <Grid.RowDefinitions>
         <RowDefinition Height="25" />
         <RowDefinition Height="0.7*" />

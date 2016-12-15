@@ -18,6 +18,7 @@ using System.Threading;
 
 using SLSE.Logger;
 using SLSE.Engine;
+using System.ComponentModel;
 namespace SLSE
 {
 
@@ -152,6 +153,15 @@ namespace SLSE
             LSEthread = new Thread(new ParameterizedThreadStart(slse_handler.Run));
             LSEthread.Start();
 
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            MessageBox.Show("Closing called");
+
+            // If data is dirty, notify user and ask for a response
+            if (LSEthread.IsAlive)
+            { LSEthread.Abort(); }
         }
         #endregion
     }

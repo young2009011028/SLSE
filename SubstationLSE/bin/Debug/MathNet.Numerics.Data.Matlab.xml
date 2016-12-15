@@ -1,0 +1,683 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MathNet.Numerics.Data.Matlab</name>
+    </assembly>
+    <members>
+        <member name="M:MathNet.Numerics.Data.Matlab.Adler32.Compute(System.Byte[])">
+            <summary>
+            Computes the Adler-32 checksum of the given data.
+            </summary>
+            <param name="data">The data to create the checksum.</param>
+            <returns>The checksum</returns>
+        </member>
+        <member name="T:MathNet.Numerics.Data.Matlab.ArrayClass">
+            <summary>
+            Enumeration for the Matlab array types
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Unknown">
+            <summary>
+            mxUNKNOWN CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Cell">
+            <summary>
+            mxCELL CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Structure">
+            <summary>
+             mxSTRUCT CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Object">
+            <summary>
+             mxOBJECT CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Character">
+            <summary>
+            mxCHAR CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Sparse">
+            <summary>
+            mxSPARSE CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Double">
+            <summary>
+            mxDOUBLE CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Single">
+            <summary>
+            mxSINGLE CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Int8">
+            <summary>
+            mxINT8 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.UInt8">
+            <summary>
+            mxUINT8 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Int16">
+            <summary>
+            mxINT16 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.UInt16">
+            <summary>
+            mxUINT16 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Int32">
+            <summary>
+            mxINT32 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.UInt32">
+            <summary>
+            mxUINT32 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Int64">
+            <summary>
+             mxINT64 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.UInt64">
+            <summary>
+            mxUINT64 CLASS
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayClass.Function">
+            <summary>
+             mxFUNCTION CLASS
+            </summary>
+        </member>
+        <member name="T:MathNet.Numerics.Data.Matlab.ArrayFlags">
+            <summary>
+            Matlab Array Flags
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayFlags.Complex">
+            <summary>
+            Complex flag
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayFlags.Global">
+            <summary>
+            Global flag
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.ArrayFlags.Logical">
+            <summary>
+            Logical flag
+            </summary>
+        </member>
+        <member name="T:MathNet.Numerics.Data.Matlab.DataType">
+            <summary>
+            Matlab data types
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Unknown">
+            <summary>
+            Unkown type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Int8">
+            <summary>
+            miINT8 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.UInt8">
+            <summary>
+             miUINT8 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Int16">
+            <summary>
+             miINT16 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.UInt16">
+            <summary>
+             miUINT16 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Int32">
+            <summary>
+             miINT32 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.UInt32">
+            <summary>
+             miUINT32 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Single">
+            <summary>
+             miSINGLE type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Double">
+            <summary>
+             miDOUBLE type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Int64">
+            <summary>
+             miINT64 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.UInt64">
+            <summary>
+             miUINT6 4type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Matrix">
+            <summary>
+            miMATRIX type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Compressed">
+            <summary>
+             miCOMPRESSED type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Utf8">
+            <summary>
+             miUTF8 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Utf16">
+            <summary>
+             miUTF16 type
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.DataType.Utf32">
+            <summary>
+             miUTF32 type
+            </summary>
+        </member>
+        <member name="T:MathNet.Numerics.Data.Matlab.MatlabFile`1">
+            <summary>
+            Represents a Matlab file
+            </summary>
+            <typeparam name="TDataType">The data type of the matrix to return.</typeparam>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabFile`1._matrices">
+            <summary>
+            Matrices in a matlab file stored as 1-D arrays
+            </summary>
+        </member>
+        <member name="P:MathNet.Numerics.Data.Matlab.MatlabFile`1.HeaderText">
+            <summary>
+            Gets or sets the header text.
+            </summary>
+            <value>The header text.</value>
+        </member>
+        <member name="P:MathNet.Numerics.Data.Matlab.MatlabFile`1.FirstMatrixName">
+            <summary>
+            Gets or sets the first name of the matrix.
+            </summary>
+            <value>The first name of the matrix.</value>
+        </member>
+        <member name="P:MathNet.Numerics.Data.Matlab.MatlabFile`1.FirstMatrix">
+            <summary>
+            Gets the first matrix.
+            </summary>
+            <value>The first matrix.</value>
+        </member>
+        <member name="P:MathNet.Numerics.Data.Matlab.MatlabFile`1.Matrices">
+            <summary>
+            Gets the matrices.
+            </summary>
+            <value>The matrices.</value>
+        </member>
+        <member name="T:MathNet.Numerics.Data.Matlab.MatlabParser`1">
+            <summary>
+            Parse a Matlab file
+            </summary>
+            <typeparam name="TDataType">The data type of the matrix.</typeparam>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabParser`1.LargeBlockSize">
+            <summary>
+            Large Block Size
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabParser`1.LittleEndianIndicator">
+            <summary>
+            Little Endian Indicator
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabParser`1.SmallBlockSize">
+            <summary>
+            Small Block Size
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabParser`1._names">
+            <summary>
+            Holds the names of the matrices in the file.
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabParser`1._stream">
+            <summary>
+            The stream to read the matlab file from.
+            </summary>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MathNet.Numerics.Data.Matlab.MatlabParser`1"/> class.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MathNet.Numerics.Data.Matlab.MatlabParser`1"/> class.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.#ctor(System.IO.Stream,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MathNet.Numerics.Data.Matlab.MatlabParser`1"/> class.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="objectNames">The name of the objects to retrieve.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MathNet.Numerics.Data.Matlab.MatlabParser`1"/> class.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <param name="objectNames">The name of the objects to retrieve.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.SetNames(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Copies the names of the objects to retrieve to a local field.
+            </summary>
+            <param name="objectNames">The name of the objects to retrieve.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.Parse">
+            <summary>
+            Parses the file.
+            </summary>
+            <returns>The parsed Matlab file as a <see cref="T:MathNet.Numerics.Data.Matlab.MatlabFile`1"/> object.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.AlignData(System.IO.Stream,System.Int32,System.Boolean)">
+            <summary>
+            Aligns the data.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="size">The size of the array.</param>
+            <param name="smallBlock">if set to <c>true</c> if reading from a small block.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.DecompressBlock(System.Byte[],MathNet.Numerics.Data.Matlab.DataType@)">
+            <summary>
+            Decompresses the block.
+            </summary>
+            <param name="compressed">The compressed data.</param>
+            <param name="type">The type data type contained in the block.</param>
+            <returns>The decompressed block.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.AddMatrix(System.Byte[],MathNet.Numerics.Data.Matlab.MatlabFile{`0})">
+            <summary>
+            Adds a matrix from the actual file into our presentation of a matlab file.
+            </summary>
+            <param name="data">The data of the matrix.</param>
+            <param name="file">The <see cref="T:MathNet.Numerics.Data.Matlab.MatlabFile`1"/> instance.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateSparseMatrix(System.IO.BinaryReader,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Populates a sparse matrix.
+            </summary>
+            <param name="reader">The reader.</param>
+            <param name="isComplex">if set to <c>true</c> if the Matlab complex flag is set.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The number of columns.</param>
+            <param name="size">The size of the block.</param>
+            <returns>A populated sparse matrix.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateDoubleSparseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Double},MathNet.Numerics.Data.Matlab.DataType,System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32},System.IO.BinaryReader)">
+            <summary>
+            Populates the double sparse matrix.
+            </summary>
+            <param name="matrix">The matrix to populate</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="ir">The row indices.</param>
+            <param name="jc">The column indices.</param>
+            <param name="reader">The reader to read from.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateSingleSparseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Single},MathNet.Numerics.Data.Matlab.DataType,System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32},System.IO.BinaryReader)">
+            <summary>
+            Populates the float sparse matrix.
+            </summary>
+            <param name="matrix">The matrix to populate</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="ir">The row indices.</param>
+            <param name="jc">The column indices.</param>
+            <param name="reader">The reader to read from.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateComplexSparseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Numerics.Complex},MathNet.Numerics.Data.Matlab.DataType,System.Boolean,System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32},System.IO.BinaryReader,System.Int32)">
+            <summary>
+            Populates the complex sparse matrix.
+            </summary>
+            <param name="matrix">The matrix to populate</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="isComplex">if set to <c>true</c> if the Matlab complex flag is set.</param>
+            <param name="ir">The row indices.</param>
+            <param name="jc">The column indices.</param>
+            <param name="reader">The reader to read from.</param>
+            <param name="dataSize">The length of the stored data.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateComplex32SparseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{MathNet.Numerics.Complex32},MathNet.Numerics.Data.Matlab.DataType,System.Boolean,System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32},System.IO.BinaryReader,System.Int32)">
+            <summary>
+            Populates the complex32 sparse matrix.
+            </summary>
+            <param name="matrix">The matrix to populate</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="isComplex">if set to <c>true</c> if the Matlab complex flag is set.</param>
+            <param name="ir">The row indices.</param>
+            <param name="jc">The column indices.</param>
+            <param name="reader">The reader to read from.</param>
+            <param name="dataSize">The length of the stored data.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateDenseMatrix(MathNet.Numerics.Data.Matlab.DataType,System.IO.BinaryReader,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Populates a dense matrix.
+            </summary>
+            <param name="type">The Matlab data type.</param>
+            <param name="reader">The reader to read from.</param>
+            <param name="isComplex">if set to <c>true</c> if the Matlab complex flag is set.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The number of columns.</param>
+            <param name="size">The length of the stored data.</param>
+            <returns>Returns a populated dense matrix.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateDoubleDenseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Double},MathNet.Numerics.Data.Matlab.DataType,System.IO.BinaryReader,System.Int32,System.Int32)">
+            <summary>
+            Populates the double dense matrix.
+            </summary>
+            <param name="matrix">The matrix to populate.</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="reader">The reader to read from.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The number of columns.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateComplexDenseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Numerics.Complex},MathNet.Numerics.Data.Matlab.DataType,System.Boolean,System.IO.BinaryReader,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Populates the complex dense matrix.
+            </summary>
+            <param name="matrix">The matrix to populate.</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="isComplex">if set to <c>true</c> if the Matlab complex flag is set.</param>
+            <param name="reader">The reader to read from.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The number of columns.</param>
+            <param name="dataSize">The length of the stored data.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateComplex32DenseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{MathNet.Numerics.Complex32},MathNet.Numerics.Data.Matlab.DataType,System.Boolean,System.IO.BinaryReader,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Populates the complex32 dense matrix.
+            </summary>
+            <param name="matrix">The matrix to populate.</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="isComplex">if set to <c>true</c> if the Matlab complex flag is set.</param>
+            <param name="reader">The reader to read from.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The number of columns.</param>
+            <param name="dataSize">The length of the stored data.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.PopulateSingleDenseMatrix(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Single},MathNet.Numerics.Data.Matlab.DataType,System.IO.BinaryReader,System.Int32,System.Int32)">
+            <summary>
+            Populates the float dense matrix.
+            </summary>
+            <param name="matrix">The matrix to populate.</param>
+            <param name="type">The Matlab data type.</param>
+            <param name="reader">The reader to read from.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The number of columns.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabParser`1.CreateMatrix(System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Creates a matrix.
+            </summary>
+            <param name="sparse">if set to <c>true</c>, creates a sparse matrix.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The number of columns.</param>
+            <returns>A matrix with the specified storage.</returns>
+        </member>
+        <member name="T:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1">
+            <summary>
+            Creates matrices from Matlab files.
+            </summary>
+            <typeparam name="TDataType">The data type of the Matrix. It can be either: double, float, Complex, or Complex32.</typeparam>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1._filename">
+            <summary>
+            The name of the file to read from.
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1._stream">
+            <summary>
+            The stream to read from if we are not reading from a file directly.
+            </summary>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1"/> class.
+            </summary>
+            <param name="filename">Name of the file to read matrices from.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1"/> class.
+            </summary>
+            <param name="stream">The stream to reader matrices from.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1.ReadMatrix">
+            <summary>
+            Reads the first matrix from the file or stream.
+            </summary>
+            <returns>
+            A sparse or dense matrix depending on how the matrix
+            is defined in the Matlab file.
+            </returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1.ReadMatrix(System.String)">
+            <summary>
+            Reads the named matrix from the file or stream.
+            </summary>
+            <param name="matrixName">The name of the matrix to read.</param>
+            <returns>
+            A sparse or dense matrix depending on how the matrix
+            is defined in the Matlab file.
+            <see langword="null"/> is returned if a matrix with the requests name doesn't exist.
+            </returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1.ReadMatrices">
+            <summary>
+            Reads all matrices from the file or stream.
+            </summary>
+            <returns>All matrices from the file or stream. The key to the <see cref="T:System.Collections.Generic.IDictionary`2"/> 
+            is the matrix's name.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixReader`1.ReadMatrices(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Reads the named matrices from the file or stream.
+            </summary>
+            <param name="names">The names of the matrices to retrieve.</param>
+            <returns>
+            The named matrices from the file or stream. The key to the <see cref="T:System.Collections.Generic.IDictionary`2"/> 
+            is the matrix's name.</returns>
+        </member>
+        <member name="T:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter">
+            <summary>
+            Writes matrices to a Matlab file.
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.HeaderText">
+            <summary>
+            The file header value
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.HeaderTextLength">
+            <summary>
+            The length of the header text.
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter._headerWritten">
+            <summary>
+            Have we written the header yet.
+            </summary>
+        </member>
+        <member name="F:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter._writer">
+            <summary>
+            The binary writer to write to.
+            </summary>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter"/> class.
+            </summary>
+            <param name="filename">The name of the Matlab file to save the matrices to.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.WriteMatrix``1(MathNet.Numerics.LinearAlgebra.Generic.Matrix{``0},System.String)">
+            <summary>
+            Writes the given <see cref="T:MathNet.Numerics.LinearAlgebra.Generic.Matrix`1"/> to the file. 
+            </summary>
+            <param name="matrix">The matrix to write.</param>
+            <param name="name">The name of the matrix to store in the file.</param>
+            <exception cref="T:System.ArgumentNullException">If either <paramref name="matrix"/> or <paramref name="name"/> is <c>null</c>.</exception>
+            <typeparam name="TDataType">The data type of the Matrix. It can be either: double, float, Complex, or Complex32.</typeparam>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.WriteMatrices``1(System.Collections.Generic.IList{MathNet.Numerics.LinearAlgebra.Generic.Matrix{``0}},System.Collections.Generic.IList{System.String})">
+            <summary>
+            Writes the given <see cref="T:MathNet.Numerics.LinearAlgebra.Generic.Matrix`1"/> to the file.
+            </summary>
+            <param name="matrices">The matrices to write.</param>
+            <param name="names">The names of the matrices to store in the file.</param>
+            <exception cref="T:System.ArgumentNullException">If either <paramref name="matrices"/> or <paramref name="names"/> is null.</exception>
+            <typeparam name="TDataType">The data type of the Matrix. It can be either: double, float, Complex, or Complex32.</typeparam>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.Close">
+            <summary>
+            Closes the stream the being written to.
+            </summary>
+            <remarks>Calls <see cref="M:System.IDisposable.Dispose"/>.</remarks>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.WriteMatrixTagAndName(System.IO.BinaryWriter,MathNet.Numerics.Data.Matlab.ArrayClass,System.Boolean,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Writes the matrix tag and name.
+            </summary>
+            <param name="writer">The writer we are using.</param>
+            <param name="arrayClass">The array class we are writing.</param>
+            <param name="isComplex">if set to <c>true</c> if this a complex matrix.</param>
+            <param name="name">The name name of the matrix.</param>
+            <param name="rows">The number of rows.</param>
+            <param name="columns">The columns of columns.</param>
+            <param name="nzmax">The maximum number of non-zero elements.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.CompressData(System.Byte[])">
+            <summary>
+            Compresses the data array.
+            </summary>
+            <param name="data">The data to compress.</param>
+            <returns>The compressed data.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetDenseDataArray(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Double},System.String)">
+            <summary>
+            Gets the dense data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetDenseDataArray(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Single},System.String)">
+            <summary>
+            Gets the dense data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetDenseDataArray(MathNet.Numerics.LinearAlgebra.Generic.Matrix{System.Numerics.Complex},System.String)">
+            <summary>
+            Gets the dense data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetDenseDataArray(MathNet.Numerics.LinearAlgebra.Generic.Matrix{MathNet.Numerics.Complex32},System.String)">
+            <summary>
+            Gets the dense data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetSparseDataArray(MathNet.Numerics.LinearAlgebra.Double.SparseMatrix,System.String)">
+            <summary>
+            Gets the sparse data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetSparseDataArray(MathNet.Numerics.LinearAlgebra.Single.SparseMatrix,System.String)">
+            <summary>
+            Gets the sparse data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetSparseDataArray(MathNet.Numerics.LinearAlgebra.Complex.SparseMatrix,System.String)">
+            <summary>
+            Gets the sparse data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.GetSparseDataArray(MathNet.Numerics.LinearAlgebra.Complex32.SparseMatrix,System.String)">
+            <summary>
+            Gets the sparse data array.
+            </summary>
+            <param name="matrix">The matrix to get the data from.</param>
+            <param name="name">The name of the matrix.</param>
+            <returns>The matrix data as an array.</returns>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.WriteCompressedData(System.Byte[])">
+            <summary>
+            Writes the compressed data.
+            </summary>
+            <param name="data">The data to write.</param>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.WriteHeader">
+            <summary>
+            Writes the file header.
+            </summary>
+        </member>
+        <member name="M:MathNet.Numerics.Data.Matlab.MatlabMatrixWriter.PadData(System.IO.BinaryWriter,System.Int32,System.Byte)">
+            <summary>
+            Pads the data with the given byte.
+            </summary>
+            <param name="writer">Where to write the pad values.</param>
+            <param name="bytes">The number of bytes to pad.</param>
+            <param name="pad">What value to pad with.</param>
+        </member>
+    </members>
+</doc>
