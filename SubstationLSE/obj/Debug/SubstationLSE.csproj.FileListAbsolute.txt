@@ -17,3 +17,11 @@ D:\AG\SLSE\SubstationLSE\bin\Debug\SubstationLSE.exe
 D:\AG\SLSE\SubstationLSE\bin\Debug\SubstationLSE.pdb
 D:\AG\SLSE\SubstationLSE\bin\Debug\MathNet.Numerics.dll
 D:\AG\SLSE\SubstationLSE\bin\Debug\MathNet.Numerics.xml
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\bin\Debug\SubstationLSE.exe.config
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\bin\Debug\SubstationLSE.exe
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\bin\Debug\SubstationLSE.pdb
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\bin\Debug\MathNet.Numerics.dll
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\bin\Debug\MathNet.Numerics.xml
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\obj\Debug\SubstationLSE.csprojResolveAssemblyReference.cache
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\obj\Debug\SubstationLSE.exe
+C:\Users\Lin\Documents\GitHub\SLSE\SubstationLSE\obj\Debug\SubstationLSE.pdb

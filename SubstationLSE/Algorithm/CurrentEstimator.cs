@@ -294,7 +294,7 @@ namespace SubstationLSE.Algorithm
             m_badDataList.Clear();
             foreach(KeyValuePair<string, Tree> kv in m_topologyProcessor)
             {
-                if (m_island_CB == null || m_island_CB.Count == 0)
+                if (m_island_CB == null || !m_island_CB.ContainsKey(kv.Key))
                 {
                     Console.WriteLine("not enough breaker current");
                     continue;
@@ -309,7 +309,7 @@ namespace SubstationLSE.Algorithm
                 Z = m_island_Z[kv.Key];
                 H = MatrixCalculationExtensions.VerticallyConcatenate(m_island_CB[kv.Key], m_island_EQ[kv.Key]);
                 W = m_island_W[kv.Key];
-                badDataList = LSECalculation.CalculateLSE(H, W, Z, out X, 50, true);
+                badDataList = LSECalculation.CalculateLSE(H, W, Z, out X, 10, true);
                 m_badDataList.Add(kv.Key, badDataList);
 
                 if (X.RowCount>0)

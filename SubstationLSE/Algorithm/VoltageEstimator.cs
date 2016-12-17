@@ -116,11 +116,11 @@ namespace SubstationLSE.Algorithm
 
                 DenseMatrix m_H_temp = DenseMatrix.OfArray(new Complex[1, 1]);
                 List<VoltagePhasorGroup> m_islandActiveVoltageMeasurements = islandActiveVoltageMeasurements.Values.ToList();
-                m_H_temp = DenseMatrix.OfArray(new Complex[m_islandActiveVoltageMeasurements.Count, m_islandActiveVoltageMeasurements.Count]);
+                m_H_temp = DenseMatrix.OfArray(new Complex[m_islandActiveVoltageMeasurements.Count, 1]);
 
                 foreach (VoltagePhasorGroup VoltagePhasorGroup in m_islandActiveVoltageMeasurements)
                 {
-                    m_H_temp[m_islandActiveVoltageMeasurements.IndexOf(VoltagePhasorGroup), m_islandActiveVoltageMeasurements.IndexOf(VoltagePhasorGroup)] = new Complex(1, 0);
+                    m_H_temp[m_islandActiveVoltageMeasurements.IndexOf(VoltagePhasorGroup),0] = new Complex(1, 0);
                 }
                 m_island_H.Add(kv.Key, m_H_temp);
 
@@ -165,7 +165,7 @@ namespace SubstationLSE.Algorithm
             m_badDataList.Clear();
             foreach (KeyValuePair<string, Tree> kv in m_topologyProcessor)
             {
-                if (m_island_H == null || m_island_H.Count == 0)
+                if (m_island_H == null || !m_island_H.ContainsKey(kv.Key))
                 {
                     Console.WriteLine("not enough voltage measurement");
                     continue;
@@ -180,7 +180,7 @@ namespace SubstationLSE.Algorithm
                 Z = m_island_Z[kv.Key];
                 H = m_island_H[kv.Key];
                 W = m_island_W[kv.Key];
-                badDataList = LSECalculation.CalculateLSE(H, W, Z, out X, 50, true);
+                badDataList = LSECalculation.CalculateLSE(H, W, Z, out X, 10, true);
                 m_badDataList.Add(kv.Key, badDataList);
 
                 if (X.RowCount > 0)
@@ -188,7 +188,7 @@ namespace SubstationLSE.Algorithm
                     List<VoltagePhasorGroup> islandVoltageMeasurements = m_islandVoltageMeasurements[kv.Key].Values.ToList();
                     for (int i = 0; i < islandVoltageMeasurements.Count; i++)
                     {
-                        islandVoltageMeasurements[i].PositiveSequence.Estimate.PerUnitComplexPhasor = X[i, 0];
+                        islandVoltageMeasurements[i].PositiveSequence.Estimate.PerUnitComplexPhasor = X[0, 0];
                     }
                 }
             }
