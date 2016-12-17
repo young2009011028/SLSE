@@ -456,8 +456,8 @@ namespace SubstationLSE
                 voltageEstimator = new VoltageEstimator(activeVoltageMeasurements, topologyProcessor);
                 voltageEstimator.CompleteVoltageLSE();
 
-                breakerStatusChange = false;
-                measurementStatusChange = false;
+                //breakerStatusChange = false;
+                //measurementStatusChange = false;
             }
             else
             {
@@ -508,7 +508,7 @@ namespace SubstationLSE
                     }
                     if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
                     {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
                     }
                 }
             }
@@ -523,7 +523,7 @@ namespace SubstationLSE
                     }
                     if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
                     {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
                     }
                 }
             }
@@ -534,11 +534,17 @@ namespace SubstationLSE
                 {
                     if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
                     {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                        if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                        }
                     }
                     if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
                     {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        }
                     }
                 }
             }

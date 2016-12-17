@@ -156,8 +156,8 @@
 			<Node Uid="86a9f520-b2a4-4b96-b29e-7cc8b30006d6" ID="SUBSTATION_500_919" Number="" Acronym="" Name="SUBSTATION_500_919" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
 				<Voltage Uid="700c8e17-38e6-4bf7-9bbd-ccba6e6fd3ec" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
 					<PositiveSequence Uid="2566101c-b499-4307-bf04-cb0f38efbf6f" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
-						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION919.500VP.VM" AngleKey="SUBSTATION919.500VP.VM" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
-						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION919.500VP.VM" AngleKey="SUBSTATION919.500VP.VM" Type="V" />
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION919.500VP.VM" AngleKey="SUBSTATION919.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION919.500VP.VM" AngleKey="SUBSTATION919.500VP.VA" Type="V" />
 					</PositiveSequence>
 				</Voltage>
 			</Node>
@@ -254,7 +254,7 @@
 		<Transformers>
 			<Transformer  Uid="a0a81aab-c397-4534-833e-9c22ab761f40" ID="SUBSTATION_500_1419" Number="" Name="SUBSTATION_500_1419" Description="" FromNode="SUBSTATION_500_911" ToNode="SUBSTATION_230_229" FromNodeConnectionType="Wye" ToNodeConnectionType="Wye" FromNodeCurrentPhasorGroup="" ToNodeCurrentPhasorGroup="" ParentSubstation="" TapConfiguration="1" TapPositionInputKey="undefined" TapPositionMeasurement="0" TapPositionOutputKey="undefined" FixedTapPosition="0" EnableUltc="false">
 				<Impedance R1="0.00011000000000000002" R2="0" R3="0.00011000000000000002" R4="0" R5="0" R6="0.00011000000000000002" X1="0.0086879999999999995" X2="0" X3="0.0086879999999999995" X4="0" X5="0" X6="0.0086879999999999995" G1="0" G2="0" G3="0" G4="0" G5="0" G6="0" B1="0" B2="0" B3="0" B4="0" B5="0" B6="0" />
-				<FromNodeCurrent Uid="596eaa29-8486-4212-8235-332c053d973e" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+				<FromNodeCurrent Uid="596eaa29-8486-4212-8235-332c053d973e" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" MeasuredBreakerOne = "SUBSTATION_PCB_500_4728" MeasuredBreakerOneDirection = "Negative" MeasuredBreakerTwo = "SUBSTATION_PCB_500_4731" MeasuredBreakerTwoDirection = "Positive">
 					<PositiveSequence Uid="f953108b-d407-4dc1-93df-278092a246f5" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
 						<Measurement BaseKV="500" MagnitudeKey="TRANSFORMER1419.500IP.IM" AngleKey="TRANSFORMER1419.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
 						<Estimate BaseKV="500" MagnitudeKey="TRANSFORMER1419.500IP.IM" AngleKey="TRANSFORMER1419.500IP.IA" Type="I" />
