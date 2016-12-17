@@ -1,0 +1,410 @@
+<?xml version="1.0"?>
+	<Substation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Uid="0128acfe-cc22-4138-9f4f-bcbf31f33200" ID="SUBSTATION" Number="" Acronym="" Name="SUBSTATION" Description="" Mode="PositiveSequence">
+		<Nodes>
+			<Node Uid="0396d4eb-c845-4891-a694-33118f435351" ID="SUBSTATION_500_906" Number="" Acronym="" Name="SUBSTATION_500_906" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="c38b49fa-f39e-45e1-ab8d-76eea59134c8" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="f3ab01e9-90a7-4e66-a75d-3a0c9d34f8d5" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="039bab3d-444d-43b4-a731-3f047c43ff20" ID="SUBSTATION_500_928" Number="" Acronym="" Name="SUBSTATION_500_928" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="d185782a-a3cb-4e56-902d-b512f240f998" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="ff01e7e3-8a59-405e-b7b5-6af8f2502802" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="04279cfc-68be-4ff9-bfbe-bfc77b78bc17" ID="SUBSTATION_500_923" Number="" Acronym="" Name="SUBSTATION_500_923" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="c8340717-a5af-4058-b6d7-a40f8e3d17a5" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="c9898f57-3969-43fb-ae4b-7e31df363f9d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION923.500VP.VM" AngleKey="SUBSTATION923.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION923.500VP.VM" AngleKey="SUBSTATION923.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="0d418fdc-a19b-49d9-9bd3-9a3dcd3bafe4" ID="SUBSTATION_500_920" Number="" Acronym="" Name="SUBSTATION_500_920" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="47520c11-c44d-4561-9988-94fa1576e2f5" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="8d2b7d6f-eb2c-40e4-a0b6-880f78d3cc97" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="1ee1f224-a721-4dff-8dbf-f1bd5eda7abe" ID="SUBSTATION_500_917" Number="" Acronym="" Name="SUBSTATION_500_917" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="fe6f33b0-0353-4d0f-8e37-8cc18864db90" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="af00ccb2-b38a-4d37-b824-d3f4562457e3" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="27cde34e-110d-42a1-854d-7535bae5fdc7" ID="SUBSTATION_500_907" Number="" Acronym="" Name="SUBSTATION_500_907" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="0b9f5969-3cd0-4dd5-90ac-ed03f33cb650" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="c005bb01-7abd-4c2e-89f7-4e4e3a821f24" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="2bff5a7b-9c58-4af2-ae49-64ee43dd3941" ID="SUBSTATION_500_921" Number="" Acronym="" Name="SUBSTATION_500_921" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="51fe4342-6018-4148-8034-86abed727f1a" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="66c138af-06bd-4acc-a534-237f347a993b" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="36ebec08-8bee-4f3f-8d77-217d60c71269" ID="SUBSTATION_500_903" Number="" Acronym="" Name="SUBSTATION_500_903" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="71b33451-2361-459b-a21c-99b203690171" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="4298ed19-7a34-4e2b-9ad4-8d8e939d3e10" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="3809ee69-b726-4022-b1d2-a91832b0be29" ID="SUBSTATION_500_901" Number="" Acronym="" Name="SUBSTATION_500_901" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="67901040-b2c4-4b49-b6c0-4f87ccc44ba6" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="e1d393c7-affb-4950-a299-556f43f5a93e" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION901.500VP.VM" AngleKey="SUBSTATION901.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION901.500VP.VM" AngleKey="SUBSTATION901.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="3acb9488-0fd2-4938-ad8d-9c99377a452c" ID="SUBSTATION_500_927" Number="" Acronym="" Name="SUBSTATION_500_927" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="501ac6eb-f0d9-4aba-9181-484d594b9641" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="eed033ee-13c5-4de9-b82d-ee75365462d3" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="50fb2a49-79a7-4077-a160-b49f847e4e97" ID="SUBSTATION_500_900" Number="" Acronym="" Name="SUBSTATION_500_900" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="13774733-3fb6-4a64-9c13-cdea331fb796" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="30de4542-548f-4fa1-a946-134736ce41c4" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION900.500VP.VM" AngleKey="SUBSTATION900.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION900.500VP.VM" AngleKey="SUBSTATION900.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="57ce1519-0206-4b59-9e88-8a7cdb2b22d0" ID="SUBSTATION_500_912" Number="" Acronym="" Name="SUBSTATION_500_912" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="b5400257-d884-4beb-81c4-3f19e0ac6ca7" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="d4b3f983-8aa0-4a01-ae40-325b1e2c389c" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="5b744088-86a6-4192-96f5-1d6eba39f1c8" ID="SUBSTATION_500_911" Number="" Acronym="" Name="SUBSTATION_500_911" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="53426f95-f9e8-4fb2-ac42-92fc384fd29b" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="75abeb75-6cd2-4105-bf94-a7a785dde20b" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION911.500VP.VM" AngleKey="SUBSTATION911.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION911.500VP.VM" AngleKey="SUBSTATION911.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="5d6deab3-a5f4-48be-8cf5-e979db615cf5" ID="SUBSTATION_500_915" Number="" Acronym="" Name="SUBSTATION_500_915" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="6838b664-2432-4e9e-83f6-d54ad1fe76c8" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="da8daac8-1892-4e38-8e21-0c5e1cbe1a7d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="69d1cadd-c73a-4516-9fe4-eafe72d586f3" ID="SUBSTATION_500_925" Number="" Acronym="" Name="SUBSTATION_500_925" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="a1d7ed31-4bb4-435c-a3d1-9e632e8afaa9" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="c71f305d-22c4-452b-ad37-85c980fe299a" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="6d158971-cf4c-49ba-b047-fd87b46d5ecc" ID="SUBSTATION_500_924" Number="" Acronym="" Name="SUBSTATION_500_924" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="d898f54b-9dfd-4a14-858c-ee4de54697b1" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="9c3b5d85-f5f0-4584-a952-5ddf6d0931ad" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="7cf60e7d-f75e-41a3-8b2c-e9841e56c251" ID="SUBSTATION_500_902" Number="" Acronym="" Name="SUBSTATION_500_902" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="9c4f4555-86aa-46b0-ae3b-9b2a6593b262" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="05fd64a8-83aa-4663-9924-6ed7b0e3501b" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION902.500VP.VM" AngleKey="SUBSTATION902.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION902.500VP.VM" AngleKey="SUBSTATION902.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="819e6587-31f6-4ba6-b1ca-b3b2184be126" ID="SUBSTATION_500_908" Number="" Acronym="" Name="SUBSTATION_500_908" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="a4b6d531-b1c1-4946-bfcf-e510c4c7746d" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="42009f13-df7c-4bed-99b7-6968f865a79c" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="85c2f68b-b8f0-42a2-8425-4aa7018620a8" ID="SUBSTATION_500_910" Number="" Acronym="" Name="SUBSTATION_500_910" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="d8093118-c0e8-44d2-ae30-dd0223993703" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="dd107393-84ae-4380-b301-a977d5774885" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION910.500VP.VM" AngleKey="SUBSTATION910.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION910.500VP.VM" AngleKey="SUBSTATION910.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="86a9f520-b2a4-4b96-b29e-7cc8b30006d6" ID="SUBSTATION_500_919" Number="" Acronym="" Name="SUBSTATION_500_919" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="700c8e17-38e6-4bf7-9bbd-ccba6e6fd3ec" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="2566101c-b499-4307-bf04-cb0f38efbf6f" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION919.500VP.VM" AngleKey="SUBSTATION919.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION919.500VP.VM" AngleKey="SUBSTATION919.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="92855ccb-2982-43c3-8dc5-41f7600b18d6" ID="SUBSTATION_500_914" Number="" Acronym="" Name="SUBSTATION_500_914" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="382b2eeb-9f05-4544-a448-cbcfd0498875" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="0679ec96-c502-4660-9ced-4823ae9858ee" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="9ba76757-1fff-48e7-b97b-3fcb8487d193" ID="SUBSTATION_500_909" Number="" Acronym="" Name="SUBSTATION_500_909" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="d7beae1f-68e4-4f41-ba12-f095b4ba9c97" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="02bc64a6-d148-49f5-8918-7acb8a0b2b86" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="bc5fc439-daca-4062-9104-3286149a49cf" ID="SUBSTATION_500_913" Number="" Acronym="" Name="SUBSTATION_500_913" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="26f8e9d2-d982-4bc0-8fd3-3bb3154646d8" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="2ac2e808-03a3-4625-8979-57e98cb8f5b2" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="c8037454-7983-435a-8881-ef6f39517665" ID="SUBSTATION_500_922" Number="" Acronym="" Name="SUBSTATION_500_922" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="1abe3656-dc75-4b10-914c-0e3388d16178" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="6571f506-01e8-4aa7-a196-2212e1683774" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="d769ba05-a7e9-4ebe-88c6-25e9a6bc2b33" ID="SUBSTATION_500_904" Number="" Acronym="" Name="SUBSTATION_500_904" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="a4d6a6af-ec28-46e6-b9d5-ccaa56523335" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="164e9e41-a1df-4aeb-bfde-c4bdd93a8567" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="e22d234b-4e92-468a-b370-ac645f93fcbe" ID="SUBSTATION_500_918" Number="" Acronym="" Name="SUBSTATION_500_918" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="04fe7460-2803-4527-aebb-5299e3cec1f8" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="f2a80fc7-4047-4fab-9681-20777b95ad91" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="eaf626d6-c5ae-43ce-91b8-d04b04baf617" ID="SUBSTATION_500_905" Number="" Acronym="" Name="SUBSTATION_500_905" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="b59bf967-1d32-4539-bfde-ecb253c2fc9b" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="4d29723b-09d8-469c-ab72-97547726e327" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="eb08d5a9-5ccb-46de-b626-eed41e95f726" ID="SUBSTATION_500_916" Number="" Acronym="" Name="SUBSTATION_500_916" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="ab321abd-04c0-44a3-b55f-6624a3a42783" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="8e19d007-bdad-4261-aaec-53f95970c8e1" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION916.500VP.VM" AngleKey="SUBSTATION916.500VP.VA" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION916.500VP.VM" AngleKey="SUBSTATION916.500VP.VA" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="ee625582-ea72-436c-a684-e7a8798bf685" ID="SUBSTATION_500_926" Number="" Acronym="" Name="SUBSTATION_500_926" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="98f1abd8-ce74-4a28-a553-c01ac2e3e212" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="d76defdd-4ec7-496c-b94e-cdf67da1e9a9" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="ee625582-ea72-436c-a684-e7a8798bf685" ID="SUBSTATION_500_931" Number="" Acronym="" Name="SUBSTATION_500_931" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="98f1abd8-ce74-4a28-a553-c01ac2e3e212" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="d76defdd-4ec7-496c-b94e-cdf67da1e9a9" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+			<Node Uid="ee625582-ea72-436c-a684-e7a8798bf685" ID="SUBSTATION_500_932" Number="" Acronym="" Name="SUBSTATION_500_932" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
+				<Voltage Uid="98f1abd8-ce74-4a28-a553-c01ac2e3e212" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="d76defdd-4ec7-496c-b94e-cdf67da1e9a9" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="Undefined" AngleKey="Undefined" Type="V" />
+					</PositiveSequence>
+				</Voltage>
+			</Node>
+		</Nodes>
+		<Shunts />
+		<Transformers>
+			<Transformer  Uid="a0a81aab-c397-4534-833e-9c22ab761f40" ID="SUBSTATION_500_1419" Number="" Name="SUBSTATION_500_1419" Description="" FromNode="SUBSTATION_500_911" ToNode="SUBSTATION_230_229" FromNodeConnectionType="Wye" ToNodeConnectionType="Wye" FromNodeCurrentPhasorGroup="" ToNodeCurrentPhasorGroup="" ParentSubstation="" TapConfiguration="1" TapPositionInputKey="undefined" TapPositionMeasurement="0" TapPositionOutputKey="undefined" FixedTapPosition="0" EnableUltc="false">
+				<Impedance R1="0.00011000000000000002" R2="0" R3="0.00011000000000000002" R4="0" R5="0" R6="0.00011000000000000002" X1="0.0086879999999999995" X2="0" X3="0.0086879999999999995" X4="0" X5="0" X6="0.0086879999999999995" G1="0" G2="0" G3="0" G4="0" G5="0" G6="0" B1="0" B2="0" B3="0" B4="0" B5="0" B6="0" />
+				<FromNodeCurrent Uid="596eaa29-8486-4212-8235-332c053d973e" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" MeasuredBreakerOne = "SUBSTATION_PCB_500_4728" MeasuredBreakerOneDirection = "Negative" MeasuredBreakerTwo = "SUBSTATION_PCB_500_4731" MeasuredBreakerTwoDirection = "Positive">
+					<PositiveSequence Uid="f953108b-d407-4dc1-93df-278092a246f5" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="TRANSFORMER1419.500IP.IM" AngleKey="TRANSFORMER1419.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="TRANSFORMER1419.500IP.IM" AngleKey="TRANSFORMER1419.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</FromNodeCurrent>
+				<ToNodeCurrent Uid="b2bdc8e8-6c71-4ac4-aa86-bcb113a1c773" ID="2" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">
+					<PositiveSequence Uid="ea194f98-77a5-4741-a07b-008507d55745" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="230" MagnitudeKey="Undefined" AngleKey="Undefined" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="230" MagnitudeKey="Undefined" AngleKey="Undefined" Type="I" />
+					</PositiveSequence>
+				</ToNodeCurrent>
+			</Transformer >
+		</Transformers>
+		<CircuitBreakers>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4724" Number="" Acronym="" Name="SUBSTATION_PCB_500_4724" Description="" Key="" FromNode="SUBSTATION_500_909" ToNode="SUBSTATION_500_908" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4724" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4724.500IP.IM" AngleKey="BREAKER4724.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4724.500IP.IM" AngleKey="BREAKER4724.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4728" Number="" Acronym="" Name="SUBSTATION_PCB_500_4728" Description="" Key="" FromNode="SUBSTATION_500_927" ToNode="SUBSTATION_500_928" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4728" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4728.500IP.IM" AngleKey="BREAKER4728.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4728.500IP.IM" AngleKey="BREAKER4728.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4594" Number="" Acronym="" Name="SUBSTATION_PCB_500_4594" Description="" Key="" FromNode="SUBSTATION_500_921" ToNode="SUBSTATION_500_922" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4594" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4594.500IP.IM" AngleKey="BREAKER4594.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4594.500IP.IM" AngleKey="BREAKER4594.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4598" Number="" Acronym="" Name="SUBSTATION_PCB_500_4598" Description="" Key="" FromNode="SUBSTATION_500_924" ToNode="SUBSTATION_500_925" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4598" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4598.500IP.IM" AngleKey="BREAKER4598.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4598.500IP.IM" AngleKey="BREAKER4598.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4586" Number="" Acronym="" Name="SUBSTATION_PCB_500_4586" Description="" Key="" FromNode="SUBSTATION_500_920" ToNode="SUBSTATION_500_926" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4586" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4586.500IP.IM" AngleKey="BREAKER4586.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4586.500IP.IM" AngleKey="BREAKER4586.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4732" Number="" Acronym="" Name="SUBSTATION_PCB_500_4732" Description="" Key="" FromNode="SUBSTATION_500_918" ToNode="SUBSTATION_500_917" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4732" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4732.500IP.IM" AngleKey="BREAKER4732.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4732.500IP.IM" AngleKey="BREAKER4732.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4730" Number="" Acronym="" Name="SUBSTATION_PCB_500_4730" Description="" Key="" FromNode="SUBSTATION_500_914" ToNode="SUBSTATION_500_915" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4730" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4730.500IP.IM" AngleKey="BREAKER4730.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4730.500IP.IM" AngleKey="BREAKER4730.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4588" Number="" Acronym="" Name="SUBSTATION_PCB_500_4588" Description="" Key="" FromNode="SUBSTATION_500_912" ToNode="SUBSTATION_500_913" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4588" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4588.500IP.IM" AngleKey="BREAKER4588.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4588.500IP.IM" AngleKey="BREAKER4588.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>
+			<CircuitBreaker Uid="17915f9d-b2cc-4bac-8678-e6a820a81c61" ID="SUBSTATION_PCB_500_4731" Number="" Acronym="" Name="SUBSTATION_PCB_500_4731" Description="" Key="" FromNode="SUBSTATION_500_932" ToNode="SUBSTATION_500_931" Normally="Closed" Actually="Closed" Status="SUBSTATION_PCB_500_4731" >
+				<BreakerCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" >
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="BREAKER4731.500IP.IM" AngleKey="BREAKER4731.500IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="BREAKER4731.500IP.IM" AngleKey="BREAKER4731.500IP.IA" Type="I" />
+					</PositiveSequence>
+				</BreakerCurrent>
+			</CircuitBreaker>					
+		</CircuitBreakers>
+		<Switches>
+			<Switch Uid="0602e815-84df-4c8f-a294-893b29698a2c" ID="SUBSTATION_DSC_500_4602" Number="" Acronym="" Name="SUBSTATION_DSC_500_4602" Description="" Key="" FromNode="SUBSTATION_500_900" ToNode="SUBSTATION_500_914" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="0b29c877-063d-4d49-b0d2-b83d2c35b693" ID="SUBSTATION_DSC_500_4725" Number="" Acronym="" Name="SUBSTATION_DSC_500_4725" Description="" Key="" FromNode="SUBSTATION_500_909" ToNode="SUBSTATION_500_910" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="0c96fb22-5b14-47c4-9c0a-cf0a9b9f8ab5" ID="SUBSTATION_DSC_500_4737" Number="" Acronym="" Name="SUBSTATION_DSC_500_4737" Description="" Key="" FromNode="SUBSTATION_500_907" ToNode="SUBSTATION_500_905" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="1a4dc3e8-452b-4013-9884-409c19cd3b5f" ID="SUBSTATION_DSC_500_4735" Number="" Acronym="" Name="SUBSTATION_DSC_500_4735" Description="" Key="" FromNode="SUBSTATION_500_904" ToNode="SUBSTATION_500_903" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="1af971a4-8555-472c-a5a9-6b72b9d25485" ID="SUBSTATION_DSC_500_4584" Number="" Acronym="" Name="SUBSTATION_DSC_500_4584" Description="" Key="" FromNode="SUBSTATION_500_932" ToNode="SUBSTATION_500_900" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="1afcdb11-ed0a-4069-8ec7-4063e76cb249" ID="SUBSTATION_DSC_500_4593" Number="" Acronym="" Name="SUBSTATION_DSC_500_4593" Description="" Key="" FromNode="SUBSTATION_500_908" ToNode="SUBSTATION_500_900" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="354abea4-1b15-4ea9-bb46-244d1ff9a074" ID="SUBSTATION_DSC_500_4587" Number="" Acronym="" Name="SUBSTATION_DSC_500_4587" Description="" Key="" FromNode="SUBSTATION_500_902" ToNode="SUBSTATION_500_926" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="37ad2a93-cda4-4b2f-9c1d-8d2cd374561f" ID="SUBSTATION_DSC_500_4589" Number="" Acronym="" Name="SUBSTATION_DSC_500_4589" Description="" Key="" FromNode="SUBSTATION_500_913" ToNode="SUBSTATION_500_902" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="4314ce47-a4eb-4492-a134-84602ddfb4dc" ID="SUBSTATION_DSC_500_4597" Number="" Acronym="" Name="SUBSTATION_DSC_500_4597" Description="" Key="" FromNode="SUBSTATION_500_924" ToNode="SUBSTATION_500_923" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="47908282-dd63-4a46-8bf9-4d786b73f5bb" ID="SUBSTATION_DSC_500_4578" Number="" Acronym="" Name="SUBSTATION_DSC_500_4578" Description="" Key="" FromNode="SUBSTATION_500_919" ToNode="SUBSTATION_500_918" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="4d8e8a79-05f7-40d7-8934-a615b4c413e0" ID="SUBSTATION_DSC_500_4727" Number="" Acronym="" Name="SUBSTATION_DSC_500_4727" Description="" Key="" FromNode="SUBSTATION_500_928" ToNode="SUBSTATION_500_911" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="5673015b-e800-4925-aea0-2b9216581126" ID="SUBSTATION_DSC_500_4596" Number="" Acronym="" Name="SUBSTATION_DSC_500_4596" Description="" Key="" FromNode="SUBSTATION_500_922" ToNode="SUBSTATION_500_923" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="65734e1a-cef7-4934-a5cd-32dd569b10e2" ID="SUBSTATION_DSC_500_4734" Number="" Acronym="" Name="SUBSTATION_DSC_500_4734" Description="" Key="" FromNode="SUBSTATION_500_925" ToNode="SUBSTATION_500_916" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="7fdc4abf-b43b-4a9f-bebe-c53d04128d6c" ID="SUBSTATION_DSC_500_4736" Number="" Acronym="" Name="SUBSTATION_DSC_500_4736" Description="" Key="" FromNode="SUBSTATION_500_907" ToNode="SUBSTATION_500_906" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="863ffa21-e5cf-416c-8dc3-ed7c7e59788a" ID="SUBSTATION_DSC_500_4733" Number="" Acronym="" Name="SUBSTATION_DSC_500_4733" Description="" Key="" FromNode="SUBSTATION_500_917" ToNode="SUBSTATION_500_901" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="8a224e5e-fe69-4f4c-adc4-c94a0985679b" ID="SUBSTATION_DSC_500_4731" Number="" Acronym="" Name="SUBSTATION_DSC_500_4731" Description="" Key="" FromNode="SUBSTATION_500_916" ToNode="SUBSTATION_500_915" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="9da93ae5-2e48-4f66-bd86-540c5db3ecc0" ID="SUBSTATION_DSC_500_4726" Number="" Acronym="" Name="SUBSTATION_DSC_500_4726" Description="" Key="" FromNode="SUBSTATION_500_910" ToNode="SUBSTATION_500_912" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="bbf9224d-fa7f-4dae-9237-eff379c91baa" ID="SUBSTATION_DSC_500_4729" Number="" Acronym="" Name="SUBSTATION_DSC_500_4729" Description="" Key="" FromNode="SUBSTATION_500_927" ToNode="SUBSTATION_500_919" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="c19b015b-92b2-4c2e-b93f-00426b903831" ID="SUBSTATION_DSC_500_4595" Number="" Acronym="" Name="SUBSTATION_DSC_500_4595" Description="" Key="" FromNode="SUBSTATION_500_901" ToNode="SUBSTATION_500_921" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="d1f300f9-cae3-4316-9472-9b348a68e88b" ID="SUBSTATION_DSC_500_4585" Number="" Acronym="" Name="SUBSTATION_DSC_500_4585" Description="" Key="" FromNode="SUBSTATION_500_901" ToNode="SUBSTATION_500_920" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+			<Switch Uid="d1f300f9-cae3-4316-9472-9b348a68e8aa" ID="SUBSTATION_DSC_500_4603" Number="" Acronym="" Name="SUBSTATION_DSC_500_4603" Description="" Key="" FromNode="SUBSTATION_500_911" ToNode="SUBSTATION_500_931" Normally="Closed" Actually="Closed" ParentSubstation="SUBSTATION" />
+		</Switches>
+		<TransmissionLines>
+			<TransmissionLine Uid="d3a207c7-b4c2-4a17-8867-816ef627d016" ID="TRANSMISSIONLINE1" Number="" Acronym="" Name="TRANSMISSIONLINE1" Description="" FromNode="SUBSTATION_500_919" ToNode="SUBSTATION1_500_923" FromSubstation="SUBSTATION" ToSubstation="SUBSTATION1" FromSubstationCurrentPhasorGroup="1" ToSubstationCurrentPhasorGroup="2" ConnectedNode="SUBSTATION_500_919" >
+				<LineCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" MeasuredBreakerOne = "SUBSTATION_PCB_500_4728" MeasuredBreakerOneDirection = "Positive" MeasuredBreakerTwo = "SUBSTATION_PCB_500_4732" MeasuredBreakerTwoDirection = "Negative">
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION1IP.IM" AngleKey="SUBSTATION.L500SUBSTATION1IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION1IP.IM" AngleKey="SUBSTATION.L500SUBSTATION1IP.IA" Type="I" />
+					</PositiveSequence>
+				</LineCurrent>
+			</TransmissionLine>
+			<TransmissionLine Uid="de00bad5-2888-4c5d-bd2c-b975d4b3ef6a" ID="TRANSMISSIONLINE2" Number="" Acronym="" Name="TRANSMISSIONLINE2" Description="" FromNode="SUBSTATION_500_923" ToNode="SUBSTATION2_500_935" FromSubstation="SUBSTATION" ToSubstation="SUBSTATION2" FromSubstationCurrentPhasorGroup="1" ToSubstationCurrentPhasorGroup="2" ConnectedNode="SUBSTATION_500_923">
+				<LineCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" MeasuredBreakerOne = "SUBSTATION_PCB_500_4598" MeasuredBreakerOneDirection = "Positive" MeasuredBreakerTwo = "SUBSTATION_PCB_500_4594" MeasuredBreakerTwoDirection = "Negative">
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION2IP.IM" AngleKey="SUBSTATION.L500SUBSTATION2IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION2IP.IM" AngleKey="SUBSTATION.L500SUBSTATION2IP.IA" Type="I" />
+					</PositiveSequence>
+				</LineCurrent>
+			</TransmissionLine>
+			<TransmissionLine Uid="fffe7d03-7116-4484-9b7d-9c286c90a12e" ID="TRANSMISSIONLINE3" Number="" Acronym="" Name="TRANSMISSIONLINE3" Description="" FromNode="SUBSTATION_500_902" ToNode="SUBSTATION3_500_923" FromSubstation="SUBSTATION" ToSubstation="SUBSTATION3" FromSubstationCurrentPhasorGroup="1" ToSubstationCurrentPhasorGroup="2" ConnectedNode="SUBSTATION_500_902">
+				<LineCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" MeasuredBreakerOne = "SUBSTATION_PCB_500_4586" MeasuredBreakerOneDirection = "Negative" MeasuredBreakerTwo = "SUBSTATION_PCB_500_4588" MeasuredBreakerTwoDirection = "Positive">
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION3IP.IM" AngleKey="SUBSTATION.L500SUBSTATION3IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION3IP.IM" AngleKey="SUBSTATION.L500SUBSTATION3IP.IA" Type="I" />
+					</PositiveSequence>
+				</LineCurrent>
+			</TransmissionLine>
+			<TransmissionLine Uid="fffe7d03-7116-4484-9b7d-9c286c90a12e" ID="TRANSMISSIONLINE4" Number="" Acronym="" Name="TRANSMISSIONLINE4" Description="" FromNode="SUBSTATION_500_916" ToNode="SUBSTATION4_500_923" FromSubstation="SUBSTATION" ToSubstation="SUBSTATION4" FromSubstationCurrentPhasorGroup="1" ToSubstationCurrentPhasorGroup="2" ConnectedNode="SUBSTATION_500_916">
+				<LineCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" MeasuredBreakerOne = "SUBSTATION_PCB_500_4730" MeasuredBreakerOneDirection = "Positive" MeasuredBreakerTwo = "SUBSTATION_PCB_500_4598" MeasuredBreakerTwoDirection = "Negative">
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION4IP.IM" AngleKey="SUBSTATION.L500SUBSTATION4IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION4IP.IM" AngleKey="SUBSTATION.L500SUBSTATION4IP.IA" Type="I" />
+					</PositiveSequence>
+				</LineCurrent>
+			</TransmissionLine>
+			<TransmissionLine Uid="fffe7d03-7116-4484-9b7d-9c286c90a12e" ID="TRANSMISSIONLINE5" Number="" Acronym="" Name="TRANSMISSIONLINE5" Description="" FromNode="SUBSTATION_500_910" ToNode="SUBSTATION5_500_932" FromSubstation="SUBSTATION" ToSubstation="SUBSTATION5" FromSubstationCurrentPhasorGroup="1" ToSubstationCurrentPhasorGroup="2" ConnectedNode="SUBSTATION_500_910">
+				<LineCurrent Uid="ad456c1b-076b-4b71-b818-de11bd7cfbf1" ID="1" Number="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined" MeasuredBreakerOne = "SUBSTATION_PCB_500_4724" MeasuredBreakerOneDirection = "Positive" MeasuredBreakerTwo = "SUBSTATION_PCB_500_4588" MeasuredBreakerTwoDirection = "Negative">
+					<PositiveSequence Uid="6c5b708d-3249-4fc4-bfc7-81cd0a82e66d" MagnitudeResidualKey="Undefined" AngleResidualKey="Undefined">
+						<Measurement BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION5IP.IM" AngleKey="SUBSTATION.L500SUBSTATION5IP.IA" Type="I" Variance="0.002" RCF="1" PACF="0" Calibrated="false" CalibrationType="Inactive" />
+						<Estimate BaseKV="500" MagnitudeKey="SUBSTATION.L500SUBSTATION5IP.IM" AngleKey="SUBSTATION.L500SUBSTATION5IP.IA" Type="I" />
+					</PositiveSequence>
+				</LineCurrent>
+			</TransmissionLine>
+		</TransmissionLines>	
+	</Substation>
