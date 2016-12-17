@@ -426,10 +426,17 @@ namespace SubstationLSE.Algorithm
 
         public void CompleteCurrentLSE()
         {
-            DistributeMeasurements();
-            //BuildMatrices(m_activeBreakerCurrentMeasurements, m_activeCurrentMeasurements, m_topologyProcessor);
-            CurrentLSEFormulation();
-            SolveLSE();
+            try
+            {
+                DistributeMeasurements();
+                //BuildMatrices(m_activeBreakerCurrentMeasurements, m_activeCurrentMeasurements, m_topologyProcessor);
+                CurrentLSEFormulation();
+                SolveLSE();
+            }
+            catch (Exception ex)
+            {
+                var i = ex.Message;
+            }
         }
 
         public void FastCurrentLSE(Dictionary<string, BreakerCurrentPhasorGroup> activeBreakerCurrentMeasurements, Dictionary<string, CurrentPhasorGroup> activeCurrentMeasurements)

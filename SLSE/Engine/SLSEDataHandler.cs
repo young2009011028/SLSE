@@ -184,8 +184,8 @@ namespace SLSE.Engine
                     status.Percentage = (count * 100 / _data_buffer.Count);
                     status.TimeStamp = Convert.ToDateTime(frame_time.Key);
                     status.Value.Clear();
-                    status.Value.Add( frame.First().Value);
-                    status.Value.Add(frame.ElementAt(2).Value);
+                    status.Value.Add(outputframe.First().Value);
+                    status.Value.Add(outputframe.ElementAt(2).Value);
                     if (ProgressUpdate != null)
                         ProgressUpdate(this, status);
 
