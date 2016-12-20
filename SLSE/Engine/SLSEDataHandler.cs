@@ -11,6 +11,12 @@ using SubstationLSE;
 
 namespace SLSE.Engine
 {
+    public class Signal
+    {
+        public Signal(string name, bool ischecked) { SignalName = name; IsChecked = ischecked; }
+        public string SignalName{get;set;}
+        public bool IsChecked { get; set; }
+    }
 
     public class ProgressEventArgs : EventArgs
     {
@@ -30,7 +36,8 @@ namespace SLSE.Engine
         //databuffer
         //<timestamp,<measurment,value>>
         private Dictionary<string, Dictionary<string, double>> _data_buffer;
-        private List<string> _signals;
+        private List<Signal> _signals;
+
         //result buffer
         private Dictionary<string, Dictionary<string, double>> _result_buffer;
 
@@ -55,7 +62,10 @@ namespace SLSE.Engine
             get
             { return this._modelfile_path; }
         }
-
+        public List<Signal> Signals
+        {
+            get { return this._signals; }
+        }
         public event EventHandler ProgressUpdate;
         #endregion
 
@@ -64,7 +74,7 @@ namespace SLSE.Engine
         {
             _data_buffer = new Dictionary<string, Dictionary<string, double>>();
             _result_buffer = new Dictionary<string, Dictionary<string, double>>();
-            _signals = new List<string>();
+            _signals = new List<Signal>();
             _substation = new Substation();
         }
 
@@ -98,7 +108,7 @@ namespace SLSE.Engine
                         {
                             if (rowcount == 1)
                             {
-                                _signals.Add(field);
+                                _signals.Add(new Signal(field,false));
                             }
                             else
                             {
@@ -114,7 +124,7 @@ namespace SLSE.Engine
                                     }
                                     else
                                     {
-                                        frame.Add(_signals[columncount-1], Convert.ToDouble(field));
+                                        frame.Add(_signals[columncount-1].SignalName, Convert.ToDouble(field));
                                     }
                                 }
                             }
@@ -125,6 +135,9 @@ namespace SLSE.Engine
                         rowcount++;
                     }
                 }
+
+                ////remove first column of csv for _signals
+                _signals.RemoveAt(0);
             }
             catch (Exception ex)
             {
@@ -170,28 +183,30 @@ namespace SLSE.Engine
                 foreach (var frame_time in _data_buffer)
                 {
                     var frame = frame_time.Value;
-                    _substation.InputMeasurements = frame;
+                    _substation.InputMeasurements = new Dictionary<string,double>(frame);
                     _substation.SLSE();
                     //pass frame to engine
 
-                    var outputframe = _substation.OutputMeasurements;
+                    var outputframe = new Dictionary<string,double>(_substation.OutputMeasurements);
 
                     //get result and insert to _result_buffer with timestamp
 
-
+                    _result_buffer.Add(frame_time.Key, outputframe);
                     //update prograss bar
 
                     status.Percentage = (count * 100 / _data_buffer.Count);
                     status.TimeStamp = Convert.ToDateTime(frame_time.Key);
-                    status.Value.Clear();
-                    status.Value.Add(outputframe.First().Value);
-                    status.Value.Add(outputframe.ElementAt(2).Value);
                     if (ProgressUpdate != null)
                         ProgressUpdate(this, status);
 
                     count++;
-                    Thread.Sleep(10);
+                    //Thread.Sleep(10);
                 }
+
+
+                status.Percentage =100;
+                if (ProgressUpdate != null)
+                    ProgressUpdate(this, status);
 
             }
             catch (Exception ex)
@@ -200,7 +215,37 @@ namespace SLSE.Engine
             }
         }
 
+
+        public void GetSignalResult(string signalname,  Dictionary<DateTime,double[]> result )
+        {
+
+            try
+            {
+                //result = new Dictionary<DateTime, double[]>();
+                if (_data_buffer.Count == _result_buffer.Count)
+                {
+                    foreach (var signal in _data_buffer)
+                    {
+                        foreach (var frame in signal.Value)
+                        {
+                            if (frame.Key == signalname)
+                            {
+                                var result_frame = (_result_buffer[signal.Key])[frame.Key];
+
+                                result.Add(Convert.ToDateTime(signal.Key), new double[] { frame.Value, result_frame });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+                
+            }
+        }
         #endregion
+
 
 
     }

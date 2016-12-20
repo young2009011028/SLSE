@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:lvcrtl="clr-namespace:Wpf.CartesianChart.ConstantChanges"  
+        xmlns:lvclinechart="clr-namespace:Wpf.CartesianChart.PointShapeLine"  
         Title="Substation LSE" Height="350" Width="525"
         Closing="Window_Closing">
         
@@ -67,16 +68,38 @@
             <TabItem  Header="实时监控和警报" >
                 <lvcrtl:ConstantChangesChart x:Name="rtlChart" />
             </TabItem>
-            <TabItem Header="结果" />
+            <TabItem Header="结果" >
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Name="dgResultSignals" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="9*" Header="信号名称"  Binding="{Binding SignalName}"/>
+                            <DataGridCheckBoxColumn  Width="*" Header="选择框" Binding="{Binding IsChecked}" >
+                                <DataGridCheckBoxColumn.CellStyle>
+                                    <Style>
+                                        <EventSetter Event="CheckBox.Checked" Handler="SignalChecked"/>
+                                        <EventSetter Event="CheckBox.Unchecked" Handler="SignalUnChecked"/>
+                                    </Style>
+                                </DataGridCheckBoxColumn.CellStyle>
+                            </DataGridCheckBoxColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <lvclinechart:PointShapeLineExample x:Name="ResultLineChart" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
         </TabControl>
         
         <ProgressBar Name="pbCalculate" Minimum="0" Maximum="100" Value="0" Height="20" Grid.Row="2"/>
         
         <DataGrid Name="dgLog" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Row="3" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Time"  Binding="{Binding Time}"/>
-                <DataGridTextColumn Header="Type"  Binding="{Binding Type}"/>
-                <DataGridTextColumn Width="*" Header="Message"  Binding="{Binding Message}"/>
+                <DataGridTextColumn Width="2*" Header="错误时间"  Binding="{Binding Time}"/>
+                <DataGridTextColumn Width="2*" Header="错误种类"  Binding="{Binding Type}"/>
+                <DataGridTextColumn Width="6*" Header="错误信息"  Binding="{Binding Message}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

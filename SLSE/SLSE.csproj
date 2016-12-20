@@ -69,6 +69,7 @@
     <Compile Include="charts\LineChart.xaml.cs">
       <DependentUpon>LineChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="charts\LineChartProperty.cs" />
     <Compile Include="charts\RealTimeLineChart.xaml.cs">
       <DependentUpon>RealTimeLineChart.xaml</DependentUpon>
     </Compile>

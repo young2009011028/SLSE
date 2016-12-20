@@ -39,10 +39,13 @@ namespace SLSE
             {
                 InitializeComponent();
 
-                //data binding
-                dgLog.DataContext = Log4NetHelper.Instance.GetEntries();
+
                 //initialize handler
                 slse_handler = new SLSEDataHandler();
+
+                //data binding
+                dgLog.DataContext = Log4NetHelper.Instance.GetEntries();
+                dgResultSignals.DataContext = slse_handler.Signals;
             }
             catch (Exception ex)
             {
@@ -147,7 +150,12 @@ namespace SLSE
             {
                 Dispatcher.Invoke((Action)delegate() { 
                     pbCalculate.Value = ((ProgressEventArgs)status).Percentage;
-                    rtlChart.SetNextPoint(((ProgressEventArgs)status).TimeStamp, ((ProgressEventArgs)status).Value[0]);
+                    //rtlChart.SetNextPoint(((ProgressEventArgs)status).TimeStamp, ((ProgressEventArgs)status).Value[0]);
+                    //if (pbCalculate.Value == 100)
+                    //{ 
+
+
+                    //}
                 });
             };
             LSEthread = new Thread(new ParameterizedThreadStart(slse_handler.Run));
@@ -162,6 +170,50 @@ namespace SLSE
             // If data is dirty, notify user and ask for a response
             if (LSEthread.IsAlive)
             { LSEthread.Abort(); }
+        }
+        #endregion
+
+        #region ResultTab
+        void SignalUnChecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Signal item = (Signal)(sender as DataGridCell).DataContext;            
+                ResultLineChart.DeselectLines(item.SignalName);
+                ResultLineChart.DeselectLines("Estimated_" +  item.SignalName);
+            }
+            catch (Exception ex)
+            {
+                Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+            }
+        }
+       void SignalChecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Signal item = (Signal)(sender as DataGridCell).DataContext;
+                 
+
+                //draw result line for testing
+                Dictionary<DateTime, double[]> result = new Dictionary<DateTime, double[]>();
+                slse_handler.GetSignalResult(item.SignalName, result);
+                ResultLineChart.SetTimeStampLabel(result.Keys.ToList());
+                List<double> original_values = new List<double>();
+                List<double> estimated_values = new List<double>();
+                foreach (var frame in result)
+                {
+                    original_values.Add(frame.Value[0]);
+                    estimated_values.Add(frame.Value[1]);
+
+                }
+
+                ResultLineChart.AddLines(item.SignalName, original_values);
+                ResultLineChart.AddLines("Estimated_" + item.SignalName, estimated_values);
+            }
+            catch (Exception ex)
+            {
+                Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+            }
         }
         #endregion
     }

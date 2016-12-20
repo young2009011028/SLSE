@@ -42,7 +42,14 @@ namespace SLSE.Logger
         #region public function
         public void LogEntries(LogEntry entry)
         {
-            realtime_log.Add(entry);
+            try
+            { 
+                realtime_log.Add(entry);
+            }
+            catch (Exception ex)
+            {
+               //log to file
+            }
         }
         public ObservableCollection<LogEntry> GetEntries()
         {
