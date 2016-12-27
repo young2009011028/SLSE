@@ -62,3 +62,9 @@ C:\Users\Lin\Documents\GitHub\SLSE\SLSE\obj\Debug\charts\RealTimeLineChart.baml
 C:\Users\Lin\Documents\GitHub\SLSE\SLSE\obj\Debug\SLSE.g.resources
 C:\Users\Lin\Documents\GitHub\SLSE\SLSE\obj\Debug\SLSE.Properties.Resources.resources
 C:\Users\Lin\Documents\GitHub\SLSE\SLSE\obj\Debug\SLSE.csproj.GenerateResource.Cache
+D:\AG\SLSE\SLSE\obj\Debug\charts\ToolKitLineChart.baml
+D:\AG\SLSE\SLSE\obj\Debug\charts\ToolKitLineChart.g.cs
+D:\AG\SLSE\SLSE\bin\Debug\system.windows.controls.datavisualization.toolkit.dll
+D:\AG\SLSE\SLSE\bin\Debug\WPFToolkit.dll
+D:\AG\SLSE\SLSE\bin\Debug\system.windows.controls.datavisualization.toolkit.pdb
+D:\AG\SLSE\SLSE\bin\Debug\WPFToolkit.pdb

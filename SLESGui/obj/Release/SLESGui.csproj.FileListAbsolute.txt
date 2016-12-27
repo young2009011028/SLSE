@@ -1,0 +1,14 @@
+D:\AG\SLSE\SLESGui\bin\Release\SLESGui.exe.config
+D:\AG\SLSE\SLESGui\bin\Release\SLESGui.exe
+D:\AG\SLSE\SLESGui\bin\Release\SLESGui.pdb
+D:\AG\SLSE\SLESGui\bin\Release\SubstationLSE.exe
+D:\AG\SLSE\SLESGui\bin\Release\MathNet.Numerics.dll
+D:\AG\SLSE\SLESGui\bin\Release\SubstationLSE.pdb
+D:\AG\SLSE\SLESGui\bin\Release\MathNet.Numerics.xml
+D:\AG\SLSE\SLESGui\obj\Release\SLESGui.csprojResolveAssemblyReference.cache
+D:\AG\SLSE\SLESGui\obj\Release\SLESGui.chart.LineChart.resources
+D:\AG\SLSE\SLESGui\obj\Release\SLESGui.MainGui.resources
+D:\AG\SLSE\SLESGui\obj\Release\SLESGui.Properties.Resources.resources
+D:\AG\SLSE\SLESGui\obj\Release\SLESGui.csproj.GenerateResource.Cache
+D:\AG\SLSE\SLESGui\obj\Release\SLESGui.exe
+D:\AG\SLSE\SLESGui\obj\Release\SLESGui.pdb

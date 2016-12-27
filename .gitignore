@@ -2,6 +2,8 @@
 /SubstationLSE/obj
 /SLSE/bin
 /SLSE/obj
+/SLSEGui/obj
+/SLSEGui/obin
 /ConsoleApplication1
 *.exe
 *.pdb

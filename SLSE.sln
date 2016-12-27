@@ -10,6 +10,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubstationLSE", "Substation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{526F4528-095A-4BFF-8DA4-E7676BCEA72B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLESGui", "SLESGui\SLESGui.csproj", "{CF48CE13-1084-4418-A5AC-5FA08ED4EC15}"
+	ProjectSection(ProjectDependencies) = postProject
+		{83AB10F3-37D1-484F-9BA1-284920D119BE} = {83AB10F3-37D1-484F-9BA1-284920D119BE}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +33,10 @@ Global
 		{526F4528-095A-4BFF-8DA4-E7676BCEA72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526F4528-095A-4BFF-8DA4-E7676BCEA72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526F4528-095A-4BFF-8DA4-E7676BCEA72B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF48CE13-1084-4418-A5AC-5FA08ED4EC15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF48CE13-1084-4418-A5AC-5FA08ED4EC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF48CE13-1084-4418-A5AC-5FA08ED4EC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF48CE13-1084-4418-A5AC-5FA08ED4EC15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

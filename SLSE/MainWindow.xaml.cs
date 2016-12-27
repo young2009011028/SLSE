@@ -178,9 +178,9 @@ namespace SLSE
         {
             try
             {
-                Signal item = (Signal)(sender as DataGridCell).DataContext;            
+                Signal item = (Signal)(sender as DataGridCell).DataContext;
                 ResultLineChart.DeselectLines(item.SignalName);
-                ResultLineChart.DeselectLines("Estimated_" +  item.SignalName);
+                ResultLineChart.DeselectLines("Estimated_" + item.SignalName);
             }
             catch (Exception ex)
             {
@@ -197,18 +197,34 @@ namespace SLSE
                 //draw result line for testing
                 Dictionary<DateTime, double[]> result = new Dictionary<DateTime, double[]>();
                 slse_handler.GetSignalResult(item.SignalName, result);
+               // ResultLineChart.SetTimeStampLabel(result.Keys.ToList());
+                //List<KeyValuePair<DateTime, double>> original_values = new List<KeyValuePair<DateTime, double>>();
+                //List<KeyValuePair<DateTime, double>> estimated_values = new List<KeyValuePair<DateTime, double>>();
+                //foreach (var frame in result)
+                //{
+                //    original_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[0]));
+                //    estimated_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[1]));
+
+                //}
+
+                //ResultLineChart.AddLines(item.SignalName, original_values);
+                //ResultLineChart.AddLines("Estimated_" + item.SignalName, estimated_values);
+
+                //for lvchart
                 ResultLineChart.SetTimeStampLabel(result.Keys.ToList());
                 List<double> original_values = new List<double>();
                 List<double> estimated_values = new List<double>();
                 foreach (var frame in result)
                 {
-                    original_values.Add(frame.Value[0]);
-                    estimated_values.Add(frame.Value[1]);
+                    original_values.Add( frame.Value[0]);
+                    estimated_values.Add( frame.Value[1]);
 
                 }
 
                 ResultLineChart.AddLines(item.SignalName, original_values);
                 ResultLineChart.AddLines("Estimated_" + item.SignalName, estimated_values);
+
+
             }
             catch (Exception ex)
             {

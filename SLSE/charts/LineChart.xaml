@@ -8,10 +8,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" DisableAnimations="True">
-            <lvc:CartesianChart.AxisY>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--<Button Grid.Row="0" Name="btnhide" Click="btnhide_Click" Content="HIDE" ></Button>-->
+        <lvc:CartesianChart Grid.Row="1" Name="linechart" Series="{Binding SeriesCollection}" LegendLocation="Right" DisableAnimations="True" Hoverable="False" >
+            <!--<lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="Value" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-            </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart.AxisY>-->
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Time" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>

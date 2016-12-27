@@ -49,21 +49,11 @@ namespace Wpf.CartesianChart.PointShapeLine
             Labels = new[] { "00:00" };
            // YFormatter = value => value.ToString("C");
 
-            //modifying the series collection will animate and update the chart
-            //SeriesCollection.Add(new LineSeries
-            //{
-            //    Title = "Series 4",
-            //    Values = new ChartValues<double> { 5, 3, 2, 4 },
-            //    LineSmoothness = 0, //0: straight lines, 1: really smooth lines
-            //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
-            //    PointGeometrySize = 50,
-            //    PointForeround = Brushes.Gray
-            //});
 
-            //modifying any series values will also animate and update the chart
-           // SeriesCollection[3].Values.Add(5d);
-
+            linechart.DataTooltip = null;
+            linechart.DisableAnimations = true;
             DataContext = this;
+
         }
 
 
@@ -91,10 +81,14 @@ namespace Wpf.CartesianChart.PointShapeLine
                     {
                         Title = signalname,
                         Values = new ChartValues<double>(values),
-                       // PointGeometry = null,
-                        LineSmoothness = 1
+                        PointGeometry = null,
+                        LineSmoothness = 1,
+                        Fill = Brushes.Transparent,
+
                     };
+                    
                     Lines.Add(line);
+
                     SeriesCollection.Add(line);
                     
                 }
@@ -112,8 +106,12 @@ namespace Wpf.CartesianChart.PointShapeLine
             {
                 if (Lines.Exists(x => (x.Title == signalname )))
                 {
-                    Lines.Find(x => (x.Title == signalname)).Visibility = System.Windows.Visibility.Hidden;
+                   // Lines.Find(x => (x.Title == signalname)).Visibility = System.Windows.Visibility.Collapsed;
+                    SeriesCollection.Remove(Lines.Find(x => (x.Title == signalname)));
+                    Lines.Remove(Lines.Find(x => (x.Title == signalname)));
+
                 }
+
             }
             catch (Exception ex)
             {
@@ -121,6 +119,11 @@ namespace Wpf.CartesianChart.PointShapeLine
             }
         }
         #endregion
+
+        //private void btnhide_Click(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //    ((LineSeries)SeriesCollection[0]).Visibility = System.Windows.Visibility.Collapsed;
+        //}
 
 
     }

@@ -1,20 +1,22 @@
-﻿<Window x:Class="SLSE.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:lvcrtl="clr-namespace:Wpf.CartesianChart.ConstantChanges"  
         xmlns:lvclinechart="clr-namespace:Wpf.CartesianChart.PointShapeLine"  
+        xmlns:toolkitlinechart="clr-namespace:SLSE.charts"  
+        x:Class="SLSE.MainWindow"  
         Title="Substation LSE" Height="350" Width="525"
         Closing="Window_Closing">
-        
-        <Grid Name="gdwhole">
+
+    <Grid x:Name="gdwhole">
         <Grid.RowDefinitions>
-        <RowDefinition Height="25" />
-        <RowDefinition Height="0.7*" />
-        <RowDefinition Height="20" />
-         <RowDefinition Height="0.3*" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="0.3*" />
         </Grid.RowDefinitions>
-        <DockPanel Name="dpmenu" Grid.Row="0">
+        <DockPanel x:Name="dpmenu" Grid.Row="0">
             <Menu>
                 <MenuItem Header="文件">
                     <MenuItem Header="新建">
@@ -25,38 +27,35 @@
                     <MenuItem Header="打开"/>
                     <MenuItem Header="存储"/>
                 </MenuItem>
-                <MenuItem Header="编辑">
-                </MenuItem>
-                <MenuItem Header="视图">
-                </MenuItem>
-                <MenuItem Header="帮助">
-                </MenuItem>
+                <MenuItem Header="编辑"/>
+                <MenuItem Header="视图"/>
+                <MenuItem Header="帮助"/>
             </Menu>
         </DockPanel>
-        
-         <TabControl Name="tabMainControl" Grid.Row="1">
+
+        <TabControl x:Name="tabMainControl" Grid.Row="1">
             <TabItem Header="输入">
-                <Grid Name="gdinput">
+                <Grid x:Name="gdinput">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Label HorizontalContentAlignment="Center" Content="输入控制" />
                         <WrapPanel >
                             <Label Content="输入文件" Width="100"/>
                             <TextBox Height="32" HorizontalAlignment="Left" x:Name="tbxInputFileName"
-                        		VerticalAlignment="Top" Width="300" />
+								VerticalAlignment="Top" Width="300" />
                             <Button Content="Browse" Height="32" HorizontalAlignment="Left"
-                        		x:Name="btnBrowseInputFile" VerticalAlignment="Top" Width="88" Click="btnInputFileClick" />
+								x:Name="btnBrowseInputFile" VerticalAlignment="Top" Width="88" Click="btnInputFileClick" />
                         </WrapPanel>
 
                         <WrapPanel>
                             <Label Content="SLSE模型输入" Width="100"/>
                             <TextBox Height="32" HorizontalAlignment="Left" x:Name="tbxInputModelName"
-                        		VerticalAlignment="Top" Width="300" />
+								VerticalAlignment="Top" Width="300" />
                             <Button Content="Browse" Height="32" HorizontalAlignment="Left"
-                        		x:Name="btnBrowseInputModel" VerticalAlignment="Top" Width="88" Click="btnInputModelClick" />
-                        </WrapPanel >
+								x:Name="btnBrowseInputModel" VerticalAlignment="Top" Width="88" Click="btnInputModelClick" />
+                        </WrapPanel>
                         <WrapPanel HorizontalAlignment="Center">
-                        <Button Content="载入" Width="100" Name="btnLoadFiles"  Click="btnLoadFileClick"></Button>
-                        <Button Content="开始运算" Width="100" Name="btnCalculate"  Click="btnCalculateClick"></Button>
+                            <Button Content="载入" Width="100" x:Name="btnLoadFiles"  Click="btnLoadFileClick"/>
+                            <Button Content="开始运算" Width="100" x:Name="btnCalculate"  Click="btnCalculateClick"/>
                         </WrapPanel>
                         <!--<Label HorizontalContentAlignment="Center" Content="进度条"></Label>-->
 
@@ -71,31 +70,33 @@
             <TabItem Header="结果" >
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="dgResultSignals" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Column="0">
+                    <DataGrid x:Name="dgResultSignals" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Column="0">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="9*" Header="信号名称"  Binding="{Binding SignalName}"/>
                             <DataGridCheckBoxColumn  Width="*" Header="选择框" Binding="{Binding IsChecked}" >
                                 <DataGridCheckBoxColumn.CellStyle>
                                     <Style>
-                                        <EventSetter Event="CheckBox.Checked" Handler="SignalChecked"/>
-                                        <EventSetter Event="CheckBox.Unchecked" Handler="SignalUnChecked"/>
+                                        <EventSetter Event="ToggleButton.Checked" Handler="SignalChecked"/>
+                                        <EventSetter Event="ToggleButton.Unchecked" Handler="SignalUnChecked"/>
                                     </Style>
                                 </DataGridCheckBoxColumn.CellStyle>
                             </DataGridCheckBoxColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <lvclinechart:PointShapeLineExample x:Name="ResultLineChart" Grid.Column="1"/>
+                    <!--<toolkitlinechart:ToolKitLineChart x:Name="ResultLineChart" Grid.Column="1"/>-->
+
                 </Grid>
 
             </TabItem>
         </TabControl>
-        
-        <ProgressBar Name="pbCalculate" Minimum="0" Maximum="100" Value="0" Height="20" Grid.Row="2"/>
-        
-        <DataGrid Name="dgLog" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Row="3" >
+
+        <ProgressBar x:Name="pbCalculate" Minimum="0" Maximum="100" Value="0" Height="20" Grid.Row="2"/>
+
+        <DataGrid x:Name="dgLog" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Row="3" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="2*" Header="错误时间"  Binding="{Binding Time}"/>
                 <DataGridTextColumn Width="2*" Header="错误种类"  Binding="{Binding Type}"/>
@@ -103,8 +104,8 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-    
-    
-    
-    
+
+
+
+
 </Window>
