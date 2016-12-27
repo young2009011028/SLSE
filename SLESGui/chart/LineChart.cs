@@ -37,11 +37,35 @@ namespace SLESGui.chart
 
         public void SetChartAreaYMaxMin()
         {
-            foreach (var ca in multiplelinechart.ChartAreas)
+            foreach (var ca in VolChart.ChartAreas)
             {
                 if (ca.Visible)
                 {
-                    var series = multiplelinechart.Series.Where(o => o.ChartArea == ca.Name);
+                    var series = VolChart.Series.Where(o => o.ChartArea == ca.Name);
+                    List<System.Windows.Forms.DataVisualization.Charting.Series> newseris = new List<System.Windows.Forms.DataVisualization.Charting.Series>();
+                    //only count enabled series
+                    foreach (var s in series)
+                    {
+                        if (s.Enabled)
+                        {
+                            newseris.Add(s);
+                        }
+                    }
+                    double max = newseris.Max(o => o.Points.Max(p => p.YValues[0]));
+                    double min = newseris.Min(o => o.Points.Min(p => p.YValues[0]));
+
+                    double offset = (max - min) * 0.1;
+
+                    ca.AxisY.Minimum = (min >= 0 && (min - offset) <= 0) ? 0 : min - offset;
+                    ca.AxisY.Maximum = max + offset;
+                }
+            }
+
+            foreach (var ca in CurChart.ChartAreas)
+            {
+                if (ca.Visible)
+                {
+                    var series = CurChart.Series.Where(o => o.ChartArea == ca.Name);
                     List<System.Windows.Forms.DataVisualization.Charting.Series> newseris = new List<System.Windows.Forms.DataVisualization.Charting.Series>();
                     //only count enabled series
                     foreach (var s in series)
@@ -63,10 +87,17 @@ namespace SLESGui.chart
         }
         private void SetChartAreaProperties()
         {
-            foreach (var ca in multiplelinechart.ChartAreas)
+            foreach (var ca in VolChart.ChartAreas)
             {
                 ca.AlignmentOrientation = AreaAlignmentOrientations.Vertical;
-                ca.AlignWithChartArea = multiplelinechart.ChartAreas[0].Name;
+                ca.AlignWithChartArea = VolChart.ChartAreas[0].Name;
+                ca.AxisX.LabelStyle.Font = new System.Drawing.Font("Arial Narrow", 6.0f);
+                ca.AxisY.LabelStyle.Font = new System.Drawing.Font("Arial Narrow", 7.0f);
+            }
+            foreach (var ca in CurChart.ChartAreas)
+            {
+                ca.AlignmentOrientation = AreaAlignmentOrientations.Vertical;
+                ca.AlignWithChartArea = CurChart.ChartAreas[0].Name;
                 ca.AxisX.LabelStyle.Font = new System.Drawing.Font("Arial Narrow", 6.0f);
                 ca.AxisY.LabelStyle.Font = new System.Drawing.Font("Arial Narrow", 7.0f);
             }
@@ -98,34 +129,39 @@ namespace SLESGui.chart
                     {
                         line.ChartArea = "VMArea";
                         line.Legend = "VMLegend";
+                        VolChart.Series.Add(line);
 
                     }
                     else if (line.Name.Contains(".VA"))
                     {
                         line.ChartArea = "VAArea";
                         line.Legend = "VALegend";
+                        VolChart.Series.Add(line);
                     }
                     else if (line.Name.Contains(".IM"))
                     {
                         line.ChartArea = "IMArea";
                         line.Legend = "IMLegend";
+                        CurChart.Series.Add(line);
                     }
                     else if (line.Name.Contains(".IA"))
                     {
                         line.ChartArea = "IAArea";
                         line.Legend = "IALegend";
+                        CurChart.Series.Add(line);
     
                     }
                     Lines.Add(line); 
                                 
-                    multiplelinechart.Series.Add(line);
+
 
                 }
 
                 SetChartVisibility();
                 SetChartAreaYMaxMin();
 
-                multiplelinechart.Update();
+                VolChart.Update();
+                CurChart.Update();
             }
             catch (Exception ex)
             {
@@ -145,7 +181,8 @@ namespace SLESGui.chart
 
                 SetChartVisibility();
                 SetChartAreaYMaxMin();
-                multiplelinechart.Update();
+                VolChart.Update();
+                CurChart.Update();
             }
             catch (Exception ex)
             {
@@ -179,10 +216,34 @@ namespace SLESGui.chart
                     iaflag = true;
                 }
             }
-            multiplelinechart.ChartAreas["VMArea"].Visible = vmflag;
-            multiplelinechart.ChartAreas["VAArea"].Visible = vaflag;
-            multiplelinechart.ChartAreas["IMArea"].Visible = imflag;
-            multiplelinechart.ChartAreas["IAArea"].Visible = iaflag;
+            VolChart.ChartAreas["VMArea"].Visible = vmflag;
+            VolChart.ChartAreas["VAArea"].Visible = vaflag;
+            CurChart.ChartAreas["IMArea"].Visible = imflag;
+            CurChart.ChartAreas["IAArea"].Visible = iaflag;
+
+            VolChart.Visible = (vmflag || vaflag);
+            CurChart.Visible = (imflag || iaflag);
+            if (VolChart.Visible && !CurChart.Visible)
+            {
+                tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[1].Height = 0;
+                tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[0].Height = 100;
+            }
+            else if (!VolChart.Visible && CurChart.Visible)
+            {
+                tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[0].Height = 0;
+                tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[1].Height = 100;
+            }
+            else
+            {
+                tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[0].Height = 50;
+                tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[1].Height = 50;
+            }
         }
 
 

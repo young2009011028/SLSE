@@ -30,20 +30,22 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.SignaName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.multiplelinechart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.VolChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.CurChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.multiplelinechart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VolChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CurChart)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -52,13 +54,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.multiplelinechart, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.VolChart, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.CurChart, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(937, 580);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -71,6 +74,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
+            this.tableLayoutPanel1.SetRowSpan(this.dataGridView1, 2);
             this.dataGridView1.Size = new System.Drawing.Size(462, 574);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -90,7 +94,7 @@
             this.IsCheckedColumn.Name = "IsCheckedColumn";
             this.IsCheckedColumn.TrueValue = "true";
             // 
-            // multiplelinechart
+            // VolChart
             // 
             chartArea1.AxisX.LabelStyle.Format = "HH:mm:ss";
             chartArea1.Name = "VMArea";
@@ -98,35 +102,42 @@
             chartArea2.AxisX.LabelStyle.Format = "HH:mm:ss";
             chartArea2.Name = "VAArea";
             chartArea2.Visible = false;
-            chartArea3.AxisX.LabelStyle.Format = "HH:mm:ss";
-            chartArea3.Name = "IMArea";
-            chartArea3.Visible = false;
-            chartArea4.AxisX.LabelStyle.Format = "HH:mm:ss";
-            chartArea4.Name = "IAArea";
-            chartArea4.Visible = false;
-            this.multiplelinechart.ChartAreas.Add(chartArea1);
-            this.multiplelinechart.ChartAreas.Add(chartArea2);
-            this.multiplelinechart.ChartAreas.Add(chartArea3);
-            this.multiplelinechart.ChartAreas.Add(chartArea4);
-            this.multiplelinechart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VolChart.ChartAreas.Add(chartArea1);
+            this.VolChart.ChartAreas.Add(chartArea2);
+            this.VolChart.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.DockedToChartArea = "VMArea";
             legend1.Name = "VMLegend";
             legend2.DockedToChartArea = "VAArea";
             legend2.Name = "VALegend";
+            this.VolChart.Legends.Add(legend1);
+            this.VolChart.Legends.Add(legend2);
+            this.VolChart.Location = new System.Drawing.Point(471, 3);
+            this.VolChart.Name = "VolChart";
+            this.VolChart.Size = new System.Drawing.Size(463, 284);
+            this.VolChart.TabIndex = 1;
+            this.VolChart.Text = "VolChart";
+            this.VolChart.Click += new System.EventHandler(this.multiplelinechart_Click);
+            // 
+            // CurChart
+            // 
+            chartArea3.Name = "IMArea";
+            chartArea3.Visible = false;
+            chartArea4.Name = "IAArea";
+            chartArea4.Visible = false;
+            this.CurChart.ChartAreas.Add(chartArea3);
+            this.CurChart.ChartAreas.Add(chartArea4);
+            this.CurChart.Dock = System.Windows.Forms.DockStyle.Fill;
             legend3.DockedToChartArea = "IMArea";
             legend3.Name = "IMLegend";
             legend4.DockedToChartArea = "IAArea";
             legend4.Name = "IALegend";
-            this.multiplelinechart.Legends.Add(legend1);
-            this.multiplelinechart.Legends.Add(legend2);
-            this.multiplelinechart.Legends.Add(legend3);
-            this.multiplelinechart.Legends.Add(legend4);
-            this.multiplelinechart.Location = new System.Drawing.Point(471, 3);
-            this.multiplelinechart.Name = "multiplelinechart";
-            this.multiplelinechart.Size = new System.Drawing.Size(463, 574);
-            this.multiplelinechart.TabIndex = 1;
-            this.multiplelinechart.Text = "chart1";
-            this.multiplelinechart.Click += new System.EventHandler(this.multiplelinechart_Click);
+            this.CurChart.Legends.Add(legend3);
+            this.CurChart.Legends.Add(legend4);
+            this.CurChart.Location = new System.Drawing.Point(471, 293);
+            this.CurChart.Name = "CurChart";
+            this.CurChart.Size = new System.Drawing.Size(463, 284);
+            this.CurChart.TabIndex = 2;
+            this.CurChart.Text = "IChart";
             // 
             // LineChart
             // 
@@ -137,7 +148,8 @@
             this.Size = new System.Drawing.Size(937, 580);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.multiplelinechart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VolChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CurChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -146,8 +158,9 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart multiplelinechart;
+        private System.Windows.Forms.DataVisualization.Charting.Chart VolChart;
         private System.Windows.Forms.DataGridViewTextBoxColumn SignaName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn IsCheckedColumn;
+        private System.Windows.Forms.DataVisualization.Charting.Chart CurChart;
     }
 }
