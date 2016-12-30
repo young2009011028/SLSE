@@ -49,6 +49,12 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.defaulttab = new System.Windows.Forms.TabPage();
+            this.tabresult = new System.Windows.Forms.TabControl();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAddChart = new System.Windows.Forms.Button();
+            this.btnSaveAsCSV = new System.Windows.Forms.Button();
             this.resultchart = new SLESGui.chart.LineChart();
             this.lineChart1 = new SLESGui.chart.LineChart();
             this.tableLayoutPanel1.SuspendLayout();
@@ -58,6 +64,10 @@
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.defaulttab.SuspendLayout();
+            this.tabresult.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -287,7 +297,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.resultchart);
+            this.tabPage3.Controls.Add(this.tableLayoutPanel3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(963, 306);
@@ -295,13 +305,82 @@
             this.tabPage3.Text = "结果";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.tabresult, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel1, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(963, 306);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // defaulttab
+            // 
+            this.defaulttab.Controls.Add(this.resultchart);
+            this.defaulttab.Location = new System.Drawing.Point(4, 22);
+            this.defaulttab.Name = "defaulttab";
+            this.defaulttab.Padding = new System.Windows.Forms.Padding(3);
+            this.defaulttab.Size = new System.Drawing.Size(949, 239);
+            this.defaulttab.TabIndex = 0;
+            this.defaulttab.Text = "图表";
+            this.defaulttab.UseVisualStyleBackColor = true;
+            // 
+            // tabresult
+            // 
+            this.tabresult.Controls.Add(this.defaulttab);
+            this.tabresult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabresult.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabresult.Location = new System.Drawing.Point(3, 38);
+            this.tabresult.Name = "tabresult";
+            this.tabresult.Padding = new System.Drawing.Point(21, 3);
+            this.tabresult.SelectedIndex = 0;
+            this.tabresult.Size = new System.Drawing.Size(957, 265);
+            this.tabresult.TabIndex = 0;
+            this.tabresult.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabresult_DrawItem);
+            this.tabresult.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabresult_MouseDown);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnAddChart);
+            this.flowLayoutPanel1.Controls.Add(this.btnSaveAsCSV);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(193, 29);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // btnAddChart
+            // 
+            this.btnAddChart.Location = new System.Drawing.Point(3, 3);
+            this.btnAddChart.Name = "btnAddChart";
+            this.btnAddChart.Size = new System.Drawing.Size(75, 23);
+            this.btnAddChart.TabIndex = 0;
+            this.btnAddChart.Text = "新增图表";
+            this.btnAddChart.UseVisualStyleBackColor = true;
+            this.btnAddChart.Click += new System.EventHandler(this.btnAddChart_Click);
+            // 
+            // btnSaveAsCSV
+            // 
+            this.btnSaveAsCSV.Location = new System.Drawing.Point(84, 3);
+            this.btnSaveAsCSV.Name = "btnSaveAsCSV";
+            this.btnSaveAsCSV.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveAsCSV.TabIndex = 1;
+            this.btnSaveAsCSV.Text = "导出csv文件";
+            this.btnSaveAsCSV.UseVisualStyleBackColor = true;
+            this.btnSaveAsCSV.Click += new System.EventHandler(this.btnSaveAsCSV_Click);
+            // 
             // resultchart
             // 
             this.resultchart.Data_Handler = null;
             this.resultchart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resultchart.Location = new System.Drawing.Point(0, 0);
+            this.resultchart.Location = new System.Drawing.Point(3, 3);
             this.resultchart.Name = "resultchart";
-            this.resultchart.Size = new System.Drawing.Size(963, 306);
+            this.resultchart.Size = new System.Drawing.Size(943, 233);
             this.resultchart.TabIndex = 0;
             // 
             // lineChart1
@@ -331,6 +410,10 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.defaulttab.ResumeLayout(false);
+            this.tabresult.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -354,12 +437,18 @@
         private System.Windows.Forms.TabControl tbMain;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Message;
         private chart.LineChart lineChart1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TabControl tabresult;
+        private System.Windows.Forms.TabPage defaulttab;
         private chart.LineChart resultchart;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnAddChart;
+        private System.Windows.Forms.Button btnSaveAsCSV;
 
 
     }

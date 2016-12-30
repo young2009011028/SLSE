@@ -245,6 +245,47 @@ namespace SLSE.Engine
                 
             }
         }
+
+       public void DumpToCSV(string filepath)
+       {
+           try
+           {
+              // using (StreamWriter sw = new StreamWriter())
+               string outputstring = "";
+               
+                   //write header
+                   string header = "TimeStamp,";
+                   for (int i = 0; i < _signals.Count;i++ )
+                   {
+                         header = header + _signals[i].SignalName + ",Estimated_" + _signals[i].SignalName+",";
+                   }
+                   header = header.TrimEnd(',');
+                   outputstring = outputstring + header + "\n";
+
+                   for (int i = 0; i < _data_buffer.Count; i++)
+                   {
+                       string frame = "";
+                       var ori_item = _data_buffer.ElementAt(i);
+                       var est_item = _result_buffer.ElementAt(i);
+                       frame = frame + ori_item.Key+",";
+
+                       for (int k = 0; k < _signals.Count; k++)
+                       {
+                           frame = frame + ori_item.Value[_signals[k].SignalName] + "," + est_item.Value[_signals[k].SignalName] + ",";
+                       }
+                       frame.TrimEnd(',');
+                       outputstring = outputstring + frame + "\n";
+                   }
+
+                   System.IO.File.WriteAllText(filepath, outputstring);
+               
+           }
+           catch (Exception ex)
+           {
+               Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+
+           }
+       }
         #endregion
 
 

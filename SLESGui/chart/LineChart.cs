@@ -17,6 +17,7 @@ namespace SLESGui.chart
     {
         #region Properties
         private List<Series> Lines;
+        private BindingList<Signal> _signals;
         public  SLSEDataHandler Data_Handler{get;set;}
         #endregion
         #region Functions
@@ -25,14 +26,23 @@ namespace SLESGui.chart
             InitializeComponent();
 
             Lines = new List<Series>();
+            _signals = new BindingList<Signal>();
             SetChartAreaProperties();
             //dataGridView1.DataSource = Data_Handler.Signals;
         }
 
         public void InitializeDataGrid()
         {
-            dataGridView1.DataSource = Data_Handler.Signals;
-           
+            //dataGridView1.DataSource = Data_Handler.Signals.
+            
+            foreach (var item in Data_Handler.Signals)
+            {
+                var newsignal = new Signal(item.SignalName,false);
+                _signals.Add(newsignal);
+
+            }
+
+            dataGridView1.DataSource = _signals;
         }
 
         public void SetChartAreaYMaxMin()

@@ -120,8 +120,10 @@
             // 
             // CurChart
             // 
+            chartArea3.AxisX.LabelStyle.Format = "HH:mm:ss";
             chartArea3.Name = "IMArea";
             chartArea3.Visible = false;
+            chartArea4.AxisX.LabelStyle.Format = "HH:mm:ss";
             chartArea4.Name = "IAArea";
             chartArea4.Visible = false;
             this.CurChart.ChartAreas.Add(chartArea3);
