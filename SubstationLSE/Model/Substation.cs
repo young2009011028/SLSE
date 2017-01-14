@@ -450,12 +450,22 @@ namespace SubstationLSE
         {
             if (currentEstimator == null || breakerStatusChange || measurementStatusChange)
             {
-                currentEstimator = new CurrentEstimator(activeBreakerCurrentMeasurements, activeCurrentMeasurements, topologyProcessor);
-                currentEstimator.CompleteCurrentLSE();
+                if (Mode.Equals("PositiveSequence"))
+                {
+                    currentEstimator = new CurrentEstimator(activeBreakerCurrentMeasurements, activeCurrentMeasurements, topologyProcessor);
+                    currentEstimator.CompleteCurrentLSE();
 
-                voltageEstimator = new VoltageEstimator(activeVoltageMeasurements, topologyProcessor);
-                voltageEstimator.CompleteVoltageLSE();
+                    voltageEstimator = new VoltageEstimator(activeVoltageMeasurements, topologyProcessor);
+                    voltageEstimator.CompleteVoltageLSE();
+                }
+                if (Mode.Equals("ThreePhase"))
+                {
+                    currentEstimator = new CurrentEstimator(activeBreakerCurrentMeasurements, activeCurrentMeasurements, topologyProcessor);
+                    currentEstimator.CompleteThreePhaseCurrentLSE();
 
+                    voltageEstimator = new VoltageEstimator(activeVoltageMeasurements, topologyProcessor);
+                    voltageEstimator.CompleteThreePhaseVoltageLSE();
+                }
                 //breakerStatusChange = false;
                 //measurementStatusChange = false;
             }
@@ -539,6 +549,15 @@ namespace SubstationLSE
                             outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
                         }
                     }
+                    // if (input has NaN, LSE can still give estimate)
+                    //if (!inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                    //{
+                    //    if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                    //    {
+                    //        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                    //    }
+                    //}
+
                     if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
                     {
                         if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
@@ -546,6 +565,15 @@ namespace SubstationLSE
                             outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
                         }
                     }
+
+                    // if (input has NaN, LSE can still give estimate)
+                    //if (!inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                    //{
+                    //    if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                    //    {
+                    //        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                    //    }
+                    //}
                 }
             }
 

@@ -383,6 +383,16 @@ namespace SubstationLSE.Algorithm
             }
         }
 
+        private void ThreePhaseCurrentLSEFormulation()
+        {
+
+        }
+
+        private void SolveThreePhaseLSE()
+        {
+
+        }
+
         private DenseMatrix GetPositiveSequenceMeasurementVector(List<BreakerCurrentPhasorGroup> islandActiveBreakerCurrentMeasurements, List<CurrentPhasorGroup> islandActiveCurrentMeasurements)
         {
 
@@ -437,6 +447,13 @@ namespace SubstationLSE.Algorithm
             {
                 var i = ex.Message;
             }
+        }
+
+        public void CompleteThreePhaseCurrentLSE()
+        {
+            DistributeMeasurements();
+            ThreePhaseCurrentLSEFormulation();
+            SolveThreePhaseLSE();
         }
 
         public void FastCurrentLSE(Dictionary<string, BreakerCurrentPhasorGroup> activeBreakerCurrentMeasurements, Dictionary<string, CurrentPhasorGroup> activeCurrentMeasurements)

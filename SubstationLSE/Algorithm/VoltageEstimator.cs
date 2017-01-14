@@ -190,8 +190,20 @@ namespace SubstationLSE.Algorithm
                     {
                         islandVoltageMeasurements[i].PositiveSequence.Estimate.PerUnitComplexPhasor = X[0, 0];
                     }
+                    // if (input has NaN, LSE can still give estimate to all the nodes in this island)
+
                 }
             }
+        }
+
+        private void ThreePhaseVoltageLSEFormulation()
+        {
+
+        }
+
+        private void SolveThreePhaseLSE()
+        {
+
         }
 
         #endregion
@@ -203,6 +215,13 @@ namespace SubstationLSE.Algorithm
             DistributeMeasurements();
             VoltageLSEFormulation();
             SolveLSE();
+        }
+
+        public void CompleteThreePhaseVoltageLSE()
+        {
+            DistributeMeasurements();
+            ThreePhaseVoltageLSEFormulation();
+            SolveThreePhaseLSE();
         }
 
         public void FastVoltageLSE(Dictionary<string, VoltagePhasorGroup> activeVoltageMeasurements)
