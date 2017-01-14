@@ -36,7 +36,12 @@ namespace SLESGui
                 resultchart.Data_Handler = slse_handler;
                 //data binding
                 dgLog.DataSource = Log4NetHelper.Instance.GetEntries();
-                
+                dgSignals.AutoGenerateColumns = false;
+                dgSignals.DataSource = slse_handler.Signals;
+
+                //settable view
+                tableLayoutresult.Enabled = false;
+
                // dgResultSignals.DataContext = slse_handler.Signals;
             }
             catch (Exception ex)
@@ -110,6 +115,11 @@ namespace SLESGui
                 else
                 {
                     pbCalculate.Value = ((ProgressEventArgs)e).Percentage;
+                    if (pbCalculate.Value == 100)
+                    {
+                        tbMain.SelectedTab = tabpageresult;
+                        tableLayoutresult.Enabled = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -131,13 +141,23 @@ namespace SLESGui
                     slse_handler.LoadData();
                     slse_handler.LoadModel();
 
+                    //set sample rate
+                    if (tbxsamplecount.Text != "")
+                        slse_handler.SampleRate = Convert.ToInt32(tbxsamplecount.Text);
+                    else
+                        slse_handler.SampleRate = 0;
+
                     //initialize linechart datagrid
                     resultchart.InitializeDataGrid();
                     //Calculate
                     slse_handler.ProgressUpdate += (s, status) =>
                     {
                         CalculationStatusReceived(s, (ProgressEventArgs)status);
+                        //if (((ProgressEventArgs)status).Percentage == 100)
+                        //{
 
+        
+                        //}
                     };
                     LSEthread = new Thread(new ParameterizedThreadStart(slse_handler.Run));
                     LSEthread.Start();
@@ -238,6 +258,11 @@ namespace SLESGui
             {
                 Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
 
 

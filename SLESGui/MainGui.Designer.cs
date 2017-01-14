@@ -33,11 +33,9 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbCalculate = new System.Windows.Forms.ProgressBar();
             this.dgLog = new System.Windows.Forms.DataGridView();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabinput = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,27 +45,38 @@
             this.btnBrowseInputFile = new System.Windows.Forms.Button();
             this.tbxInputModelName = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.defaulttab = new System.Windows.Forms.TabPage();
+            this.dgSignals = new System.Windows.Forms.DataGridView();
+            this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabrealtime = new System.Windows.Forms.TabPage();
+            this.tabpageresult = new System.Windows.Forms.TabPage();
+            this.tableLayoutresult = new System.Windows.Forms.TableLayoutPanel();
             this.tabresult = new System.Windows.Forms.TabControl();
+            this.defaulttab = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAddChart = new System.Windows.Forms.Button();
             this.btnSaveAsCSV = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbxsamplecount = new System.Windows.Forms.TextBox();
             this.resultchart = new SLESGui.chart.LineChart();
             this.lineChart1 = new SLESGui.chart.LineChart();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLog)).BeginInit();
             this.tbMain.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabinput.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.defaulttab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSignals)).BeginInit();
+            this.tabpageresult.SuspendLayout();
+            this.tableLayoutresult.SuspendLayout();
             this.tabresult.SuspendLayout();
+            this.defaulttab.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -130,31 +139,12 @@
             this.dgLog.Size = new System.Drawing.Size(971, 164);
             this.dgLog.TabIndex = 2;
             // 
-            // Time
-            // 
-            this.Time.DataPropertyName = "Time";
-            this.Time.HeaderText = "错误时间";
-            this.Time.Name = "Time";
-            // 
-            // Type
-            // 
-            this.Type.DataPropertyName = "Type";
-            this.Type.HeaderText = "错误类型";
-            this.Type.Name = "Type";
-            // 
-            // Message
-            // 
-            this.Message.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Message.DataPropertyName = "Message";
-            this.Message.HeaderText = "错误信息";
-            this.Message.Name = "Message";
-            // 
             // tbMain
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.tbMain, 2);
-            this.tbMain.Controls.Add(this.tabPage1);
-            this.tbMain.Controls.Add(this.tabPage2);
-            this.tbMain.Controls.Add(this.tabPage3);
+            this.tbMain.Controls.Add(this.tabinput);
+            this.tbMain.Controls.Add(this.tabrealtime);
+            this.tbMain.Controls.Add(this.tabpageresult);
             this.tbMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbMain.Location = new System.Drawing.Point(3, 28);
             this.tbMain.Name = "tbMain";
@@ -162,16 +152,31 @@
             this.tbMain.Size = new System.Drawing.Size(971, 332);
             this.tbMain.TabIndex = 4;
             // 
-            // tabPage1
+            // tabinput
             // 
-            this.tabPage1.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(963, 306);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "输入";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabinput.Controls.Add(this.tableLayoutPanel4);
+            this.tabinput.Location = new System.Drawing.Point(4, 22);
+            this.tabinput.Name = "tabinput";
+            this.tabinput.Padding = new System.Windows.Forms.Padding(3);
+            this.tabinput.Size = new System.Drawing.Size(963, 306);
+            this.tabinput.TabIndex = 0;
+            this.tabinput.Text = "输入";
+            this.tabinput.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.dgSignals, 1, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(957, 300);
+            this.tableLayoutPanel4.TabIndex = 4;
             // 
             // tableLayoutPanel2
             // 
@@ -186,7 +191,8 @@
             this.tableLayoutPanel2.Controls.Add(this.btnBrowseInputModel, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.btnBrowseInputFile, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.tbxInputModelName, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btnStart, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnStart, 2, 3);
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -195,7 +201,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.77273F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.77273F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(957, 300);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(472, 294);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // label1
@@ -203,9 +209,9 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(190, 0);
+            this.label1.Location = new System.Drawing.Point(95, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(457, 34);
+            this.label1.Size = new System.Drawing.Size(222, 33);
             this.label1.TabIndex = 0;
             this.label1.Text = "输入控制";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -215,9 +221,9 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(3, 34);
+            this.label2.Location = new System.Drawing.Point(3, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(181, 119);
+            this.label2.Size = new System.Drawing.Size(86, 116);
             this.label2.TabIndex = 1;
             this.label2.Text = "输入模型";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -227,9 +233,9 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(3, 153);
+            this.label3.Location = new System.Drawing.Point(3, 149);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(181, 119);
+            this.label3.Size = new System.Drawing.Size(86, 116);
             this.label3.TabIndex = 2;
             this.label3.Text = "输入数据";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -238,15 +244,15 @@
             // 
             this.tbxInputFileName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbxInputFileName.Enabled = false;
-            this.tbxInputFileName.Location = new System.Drawing.Point(268, 202);
+            this.tbxInputFileName.Location = new System.Drawing.Point(95, 197);
             this.tbxInputFileName.Name = "tbxInputFileName";
-            this.tbxInputFileName.Size = new System.Drawing.Size(300, 20);
+            this.tbxInputFileName.Size = new System.Drawing.Size(222, 20);
             this.tbxInputFileName.TabIndex = 4;
             // 
             // btnBrowseInputModel
             // 
             this.btnBrowseInputModel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnBrowseInputModel.Location = new System.Drawing.Point(766, 82);
+            this.btnBrowseInputModel.Location = new System.Drawing.Point(358, 79);
             this.btnBrowseInputModel.Name = "btnBrowseInputModel";
             this.btnBrowseInputModel.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseInputModel.TabIndex = 5;
@@ -257,7 +263,7 @@
             // btnBrowseInputFile
             // 
             this.btnBrowseInputFile.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnBrowseInputFile.Location = new System.Drawing.Point(766, 201);
+            this.btnBrowseInputFile.Location = new System.Drawing.Point(358, 195);
             this.btnBrowseInputFile.Name = "btnBrowseInputFile";
             this.btnBrowseInputFile.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseInputFile.TabIndex = 6;
@@ -269,15 +275,15 @@
             // 
             this.tbxInputModelName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbxInputModelName.Enabled = false;
-            this.tbxInputModelName.Location = new System.Drawing.Point(268, 83);
+            this.tbxInputModelName.Location = new System.Drawing.Point(95, 81);
             this.tbxInputModelName.Name = "tbxInputModelName";
-            this.tbxInputModelName.Size = new System.Drawing.Size(300, 20);
+            this.tbxInputModelName.Size = new System.Drawing.Size(222, 20);
             this.tbxInputModelName.TabIndex = 3;
             // 
             // btnStart
             // 
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnStart.Location = new System.Drawing.Point(381, 275);
+            this.btnStart.Location = new System.Drawing.Point(358, 268);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 22);
             this.btnStart.TabIndex = 7;
@@ -285,51 +291,58 @@
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // tabPage2
+            // dgSignals
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(963, 306);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "实时监控和警报";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.dgSignals.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgSignals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSignals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SignalName});
+            this.dgSignals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgSignals.Location = new System.Drawing.Point(481, 3);
+            this.dgSignals.Name = "dgSignals";
+            this.dgSignals.Size = new System.Drawing.Size(473, 294);
+            this.dgSignals.TabIndex = 4;
             // 
-            // tabPage3
+            // SignalName
             // 
-            this.tabPage3.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(963, 306);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "结果";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.SignalName.DataPropertyName = "SignalName";
+            this.SignalName.HeaderText = "信号";
+            this.SignalName.Name = "SignalName";
             // 
-            // tableLayoutPanel3
+            // tabrealtime
             // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.Controls.Add(this.tabresult, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel1, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(963, 306);
-            this.tableLayoutPanel3.TabIndex = 1;
+            this.tabrealtime.Location = new System.Drawing.Point(4, 22);
+            this.tabrealtime.Name = "tabrealtime";
+            this.tabrealtime.Padding = new System.Windows.Forms.Padding(3);
+            this.tabrealtime.Size = new System.Drawing.Size(963, 306);
+            this.tabrealtime.TabIndex = 1;
+            this.tabrealtime.Text = "实时监控和警报";
+            this.tabrealtime.UseVisualStyleBackColor = true;
             // 
-            // defaulttab
+            // tabpageresult
             // 
-            this.defaulttab.Controls.Add(this.resultchart);
-            this.defaulttab.Location = new System.Drawing.Point(4, 22);
-            this.defaulttab.Name = "defaulttab";
-            this.defaulttab.Padding = new System.Windows.Forms.Padding(3);
-            this.defaulttab.Size = new System.Drawing.Size(949, 239);
-            this.defaulttab.TabIndex = 0;
-            this.defaulttab.Text = "图表";
-            this.defaulttab.UseVisualStyleBackColor = true;
+            this.tabpageresult.Controls.Add(this.tableLayoutresult);
+            this.tabpageresult.Location = new System.Drawing.Point(4, 22);
+            this.tabpageresult.Name = "tabpageresult";
+            this.tabpageresult.Size = new System.Drawing.Size(963, 306);
+            this.tabpageresult.TabIndex = 2;
+            this.tabpageresult.Text = "结果";
+            this.tabpageresult.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutresult
+            // 
+            this.tableLayoutresult.ColumnCount = 1;
+            this.tableLayoutresult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutresult.Controls.Add(this.tabresult, 0, 1);
+            this.tableLayoutresult.Controls.Add(this.flowLayoutPanel1, 0, 0);
+            this.tableLayoutresult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutresult.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutresult.Name = "tableLayoutresult";
+            this.tableLayoutresult.RowCount = 2;
+            this.tableLayoutresult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutresult.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutresult.Size = new System.Drawing.Size(963, 306);
+            this.tableLayoutresult.TabIndex = 1;
             // 
             // tabresult
             // 
@@ -344,6 +357,17 @@
             this.tabresult.TabIndex = 0;
             this.tabresult.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabresult_DrawItem);
             this.tabresult.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabresult_MouseDown);
+            // 
+            // defaulttab
+            // 
+            this.defaulttab.Controls.Add(this.resultchart);
+            this.defaulttab.Location = new System.Drawing.Point(4, 22);
+            this.defaulttab.Name = "defaulttab";
+            this.defaulttab.Padding = new System.Windows.Forms.Padding(3);
+            this.defaulttab.Size = new System.Drawing.Size(949, 239);
+            this.defaulttab.TabIndex = 0;
+            this.defaulttab.Text = "图表";
+            this.defaulttab.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -374,6 +398,34 @@
             this.btnSaveAsCSV.UseVisualStyleBackColor = true;
             this.btnSaveAsCSV.Click += new System.EventHandler(this.btnSaveAsCSV_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tbxsamplecount);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(95, 268);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(222, 23);
+            this.panel1.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "每秒钟数据量";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // tbxsamplecount
+            // 
+            this.tbxsamplecount.Location = new System.Drawing.Point(128, 0);
+            this.tbxsamplecount.Name = "tbxsamplecount";
+            this.tbxsamplecount.Size = new System.Drawing.Size(26, 20);
+            this.tbxsamplecount.TabIndex = 1;
+            this.tbxsamplecount.Text = "30";
+            // 
             // resultchart
             // 
             this.resultchart.Data_Handler = null;
@@ -392,6 +444,25 @@
             this.lineChart1.Size = new System.Drawing.Size(963, 306);
             this.lineChart1.TabIndex = 0;
             // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "错误时间";
+            this.Time.Name = "Time";
+            // 
+            // Type
+            // 
+            this.Type.DataPropertyName = "Type";
+            this.Type.HeaderText = "错误类型";
+            this.Type.Name = "Type";
+            // 
+            // Message
+            // 
+            this.Message.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Message.DataPropertyName = "Message";
+            this.Message.HeaderText = "错误信息";
+            this.Message.Name = "Message";
+            // 
             // MainGui
             // 
             this.AutoSize = true;
@@ -406,14 +477,18 @@
             this.menuMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLog)).EndInit();
             this.tbMain.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabinput.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.defaulttab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgSignals)).EndInit();
+            this.tabpageresult.ResumeLayout(false);
+            this.tableLayoutresult.ResumeLayout(false);
             this.tabresult.ResumeLayout(false);
+            this.defaulttab.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -435,20 +510,26 @@
         private System.Windows.Forms.Button btnBrowseInputFile;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TabControl tbMain;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Message;
+        private System.Windows.Forms.TabPage tabinput;
+        private System.Windows.Forms.TabPage tabrealtime;
         private chart.LineChart lineChart1;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TabPage tabpageresult;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutresult;
         private System.Windows.Forms.TabControl tabresult;
         private System.Windows.Forms.TabPage defaulttab;
         private chart.LineChart resultchart;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAddChart;
         private System.Windows.Forms.Button btnSaveAsCSV;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.DataGridView dgSignals;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SignalName;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbxsamplecount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Message;
 
 
     }
