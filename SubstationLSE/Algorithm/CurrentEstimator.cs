@@ -385,7 +385,161 @@ namespace SubstationLSE.Algorithm
 
         private void ThreePhaseCurrentLSEFormulation()
         {
+            foreach (KeyValuePair<string, Tree> kv in m_topologyProcessor)
+            {
+                if (m_islandBreakerCurrentMeasurements[kv.Key] == null || m_islandBreakerCurrentMeasurements[kv.Key].Count < 1)
+                {
+                    Console.WriteLine("Current State Estimator: unobservable island");
+                    continue;
+                }
 
+                Dictionary<string, BreakerCurrentPhasorGroup> islandActiveBreakerCurrentMeasurements = new Dictionary<string, BreakerCurrentPhasorGroup>();
+                if (m_islandBreakerCurrentMeasurements.ContainsKey(kv.Key))
+                {
+                    islandActiveBreakerCurrentMeasurements = m_islandBreakerCurrentMeasurements[kv.Key];
+                }
+                DenseMatrix m_CB_temp = DenseMatrix.OfArray(new Complex[1, 1]);
+                List<BreakerCurrentPhasorGroup> m_islandActiveBreakerCurrentMeasurements = islandActiveBreakerCurrentMeasurements.Values.ToList();
+                m_CB_temp = DenseMatrix.OfArray(new Complex[3 * m_islandActiveBreakerCurrentMeasurements.Count, 3 * m_islandActiveBreakerCurrentMeasurements.Count]);
+                foreach (BreakerCurrentPhasorGroup breakerCurrentPhasorGroup in m_islandActiveBreakerCurrentMeasurements)
+                {
+                    m_CB_temp[m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrentPhasorGroup), m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrentPhasorGroup)] = new Complex(1, 0);
+                }
+                m_island_CB.Add(kv.Key, m_CB_temp);
+
+                Dictionary<string, CurrentPhasorGroup> islandActiveCurrentMeasurements = new Dictionary<string, CurrentPhasorGroup>();
+                if (m_islandCurrentMeasurements.ContainsKey(kv.Key))
+                {
+                    islandActiveCurrentMeasurements = m_islandCurrentMeasurements[kv.Key];
+                }
+
+                foreach (KeyValuePair<string, CurrentPhasorGroup> kw in islandActiveCurrentMeasurements)
+                {
+                    //kw.Value.m
+                    if (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerOne) || (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerTwo)))
+                    {
+                        islandActiveCurrentMeasurements.Remove(kw.Key);
+                        m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                    }
+
+                    //if (kv.Value.ContainsKey(kw.Key))
+                    //{
+                    //    HashSet<string> edges = new HashSet<string>();
+                    //    edges = kv.Value[kw.Key];       
+                    //    foreach (string ku in edges)
+                    //    {
+                    //        if (!islandActiveBreakerCurrentMeasurements.ContainsKey(ku))
+                    //        {
+                    //            islandActiveCurrentMeasurements.Remove(kw.Key);
+                    //            m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                    //        }
+                    //    }
+                    //}
+                }
+
+                DenseMatrix m_EQ_temp = DenseMatrix.OfArray(new Complex[1, 1]);
+                m_EQ_temp = DenseMatrix.OfArray(new Complex[islandActiveCurrentMeasurements.Count, islandActiveBreakerCurrentMeasurements.Count]);
+
+                List<CurrentPhasorGroup> m_islandActiveCurrentMeasurements = islandActiveCurrentMeasurements.Values.ToList();
+
+                foreach (CurrentPhasorGroup EQ_Current in m_islandActiveCurrentMeasurements)
+                {
+                    if (islandActiveBreakerCurrentMeasurements.ContainsKey(EQ_Current.MeasuredBreakerOne))
+                    {
+                        if (EQ_Current.MeasuredBreakerOneDirection.Equals("Positive"))
+                        {
+                            m_EQ_temp[m_islandActiveCurrentMeasurements.IndexOf(EQ_Current), m_islandActiveBreakerCurrentMeasurements.IndexOf(islandActiveBreakerCurrentMeasurements[EQ_Current.MeasuredBreakerOne])] = new Complex(1, 0);
+                        }
+                        else if (EQ_Current.MeasuredBreakerOneDirection.Equals("Negative"))
+                        {
+                            m_EQ_temp[m_islandActiveCurrentMeasurements.IndexOf(EQ_Current), m_islandActiveBreakerCurrentMeasurements.IndexOf(islandActiveBreakerCurrentMeasurements[EQ_Current.MeasuredBreakerOne])] = new Complex(-1, 0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("No breaker current direction assigned:     " + EQ_Current.MeasuredBreakerOne);
+                        }
+                    }
+
+                    if (islandActiveBreakerCurrentMeasurements.ContainsKey(EQ_Current.MeasuredBreakerTwo))
+                    {
+                        if (EQ_Current.MeasuredBreakerTwoDirection.Equals("Positive"))
+                        {
+                            m_EQ_temp[m_islandActiveCurrentMeasurements.IndexOf(EQ_Current), m_islandActiveBreakerCurrentMeasurements.IndexOf(islandActiveBreakerCurrentMeasurements[EQ_Current.MeasuredBreakerTwo])] = new Complex(1, 0);
+                        }
+                        else if (EQ_Current.MeasuredBreakerTwoDirection.Equals("Negative"))
+                        {
+                            m_EQ_temp[m_islandActiveCurrentMeasurements.IndexOf(EQ_Current), m_islandActiveBreakerCurrentMeasurements.IndexOf(islandActiveBreakerCurrentMeasurements[EQ_Current.MeasuredBreakerTwo])] = new Complex(-1, 0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("No breaker current direction assigned:      " + EQ_Current.MeasuredBreakerTwo);
+                        }
+                    }
+
+                    //HashSet<string> edges = new HashSet<string>();
+                    //edges = kv.Value[EQ_Current.Key];  
+                    //foreach(string edge in edges)
+                    //{
+                    //    if (islandActiveBreakerCurrentMeasurements.ContainsKey(edge))
+                    //    {
+                    //        if (islandActiveBreakerCurrentMeasurements[edge].FromNodeID.Equals(EQ_Current.Key))
+                    //        {
+                    //            // "-"
+                    //            m_EQ_temp[m_islandActiveCurrentMeasurements.IndexOf(EQ_Current.Value), m_islandActiveBreakerCurrentMeasurements.IndexOf(islandActiveBreakerCurrentMeasurements[edge])] = new Complex(-1, 0);
+                    //        }
+                    //        if (islandActiveBreakerCurrentMeasurements[edge].ToNodeID.Equals(EQ_Current.Key))
+                    //        {
+                    //            // "+"
+                    //            m_EQ_temp[m_islandActiveCurrentMeasurements.IndexOf(EQ_Current.Value), m_islandActiveBreakerCurrentMeasurements.IndexOf(islandActiveBreakerCurrentMeasurements[edge])] = new Complex(1, 0);
+                    //        }
+                    //    }
+                    //}
+                }
+                m_island_EQ.Add(kv.Key, m_EQ_temp);
+
+                DenseMatrix m_W_temp = DenseMatrix.OfArray(new Complex[1, 1]);
+                m_W_temp = DenseMatrix.OfArray(new Complex[m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count, m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count]);
+                for (int i = 0; i < m_W_temp.RowCount; i++)
+                {
+                    if (i < m_islandActiveBreakerCurrentMeasurements.Count)
+                    {
+                        m_W_temp[i, i] = new Complex(1 / m_islandActiveBreakerCurrentMeasurements[i].PositiveSequence.Measurement.MeasurementCovariance, 0);
+                    }
+                    else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count))
+                    {
+                        m_W_temp[i, i] = new Complex(1 / (m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PositiveSequence.Measurement.MeasurementCovariance), 0);
+                    }
+                    else
+                    {
+                        Console.WriteLine("unexpected measurement");
+                    }
+                }
+                m_island_W.Add(kv.Key, m_W_temp);
+
+                Dictionary<int, string> measurementList_temp = new Dictionary<int, string>();
+                DenseMatrix m_Z_temp = DenseMatrix.OfArray(new Complex[1, 1]);
+                m_Z_temp = DenseMatrix.OfArray(new Complex[m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count, 1]);
+
+                for (int i = 0; i < m_Z_temp.RowCount; i++)
+                {
+                    if (i < m_islandActiveBreakerCurrentMeasurements.Count)
+                    {
+                        measurementList_temp.Add(i, m_islandActiveBreakerCurrentMeasurements[i].MeasuredBreakerID);
+                        m_Z_temp[i, 0] = m_islandActiveBreakerCurrentMeasurements[i].PositiveSequence.Measurement.PerUnitComplexPhasor;
+                    }
+                    else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count))
+                    {
+                        measurementList_temp.Add(i, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].MeasuredNodeID);
+                        m_Z_temp[i, 0] = m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PositiveSequence.Measurement.PerUnitComplexPhasor;
+                    }
+                    else
+                    {
+                        Console.WriteLine("unexpected measurement");
+                    }
+                }
+                m_measurementList.Add(kv.Key, measurementList_temp);
+                m_island_Z.Add(kv.Key, m_Z_temp);
+            }
         }
 
         private void SolveThreePhaseLSE()
