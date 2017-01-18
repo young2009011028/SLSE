@@ -46,6 +46,11 @@ namespace SLSE.Engine
 
         private Substation _substation;
 
+       //sample count
+        private int _sample_per_sec;
+
+       //bad data list
+        List<string> _bad_data;
         #endregion
         #region Properties
         public string DataPath
@@ -66,6 +71,18 @@ namespace SLSE.Engine
         public BindingList<Signal> Signals
         {
             get { return this._signals; }
+        }
+
+        public int SampleRate
+        {
+            get
+            {
+                return this._sample_per_sec;
+            }
+            set
+            {
+                this._sample_per_sec = value;
+            }
         }
         public event EventHandler ProgressUpdate;
         #endregion
@@ -201,7 +218,40 @@ namespace SLSE.Engine
                         ProgressUpdate(this, status);
 
                     count++;
+
+                    if (_sample_per_sec != 0)
+                    {
+                        Thread.Sleep(1000/_sample_per_sec);
+                    }
                     //Thread.Sleep(10);
+
+                    //handle bad datalist
+                    if (_bad_data == null)
+                    {
+                        _bad_data = _substation.BadDataList.ToList();
+                        string info = "";
+                        foreach (var badname in _bad_data)
+                        {
+                            info = info + badname + "; ";
+                        }
+                        Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Info", info));
+                    }
+                    else
+                    {
+                        var temp_bad_data = _substation.BadDataList.ToList();
+                        if (!temp_bad_data.SequenceEqual(_bad_data))
+                        {
+                            _bad_data = temp_bad_data;
+                            string info = "";
+                            foreach (var badname in _bad_data)
+                            {
+                                info = info + badname + "; ";
+                            }
+                            Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Info", info));
+                        }
+                    }
+
+
                 }
 
 

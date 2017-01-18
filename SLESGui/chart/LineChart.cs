@@ -18,7 +18,11 @@ namespace SLESGui.chart
         #region Properties
         private List<Series> Lines;
         private BindingList<Signal> _signals;
+        private BindingList<string> _refs;
+        private string _refAngle;
         public  SLSEDataHandler Data_Handler{get;set;}
+
+        public string Ref { get; set; }
         #endregion
         #region Functions
         public LineChart()
@@ -27,6 +31,8 @@ namespace SLESGui.chart
 
             Lines = new List<Series>();
             _signals = new BindingList<Signal>();
+            _refs = new BindingList<string>();
+            _refAngle = "";
             SetChartAreaProperties();
             //dataGridView1.DataSource = Data_Handler.Signals;
         }
@@ -34,15 +40,19 @@ namespace SLESGui.chart
         public void InitializeDataGrid()
         {
             //dataGridView1.DataSource = Data_Handler.Signals.
-            
+            _refs.Add("");
             foreach (var item in Data_Handler.Signals)
             {
                 var newsignal = new Signal(item.SignalName,false);
                 _signals.Add(newsignal);
-
+                if (newsignal.SignalName.Contains(".VA") || newsignal.SignalName.Contains(".IA"))
+                {
+                    _refs.Add(newsignal.SignalName);
+                }
             }
-
+           
             dataGridView1.DataSource = _signals;
+            cbRef.DataSource = _refs;
         }
 
         public void SetChartAreaYMaxMin()
@@ -68,6 +78,13 @@ namespace SLESGui.chart
 
                     ca.AxisY.Minimum = (min >= 0 && (min - offset) <= 0) ? 0 : min - offset;
                     ca.AxisY.Maximum = max + offset;
+
+                    if (ca.AxisY.Minimum == ca.AxisY.Maximum)
+                    {
+                        ca.AxisY.Minimum = ca.AxisY.Minimum - 1;
+                        ca.AxisY.Maximum = ca.AxisY.Maximum + 1;
+
+                    }
                 }
             }
 
@@ -92,6 +109,13 @@ namespace SLESGui.chart
 
                     ca.AxisY.Minimum = (min >= 0 && (min - offset) <= 0) ? 0 : min - offset;
                     ca.AxisY.Maximum = max + offset;
+
+                    if (ca.AxisY.Minimum == ca.AxisY.Maximum)
+                    {
+                        ca.AxisY.Minimum = ca.AxisY.Minimum - 1;
+                        ca.AxisY.Maximum = ca.AxisY.Maximum + 1;
+
+                    }
                 }
             }
         }
@@ -132,8 +156,17 @@ namespace SLESGui.chart
 
                     foreach (var value in valuelist)
                     {
-                        line.Points.AddXY(value.Key, value.Value);
+                        if (line.Name.Contains(".VM"))
+                        {
+                            line.Points.AddXY(value.Key, value.Value*1.732/1000);
+                        }
+                        else
+                        {
+                            line.Points.AddXY(value.Key, value.Value);
+                        }
+                       
                     }
+
 
                     if (line.Name.Contains(".VM"))
                     {
@@ -180,6 +213,89 @@ namespace SLESGui.chart
 
 
         }
+
+
+        public void AddLinesWithRef(string signalname, List<KeyValuePair<DateTime, double>> valuelist, List<KeyValuePair<DateTime, double>> reflist)
+        {
+            try
+            {
+                if (Lines.Exists(x => (x.Name == signalname)))
+                {
+                    Lines.Find(x => (x.Name == signalname)).Enabled = true;
+                }
+                else
+                {
+                    var line = new Series
+                    {
+                        Name = signalname,
+                        XValueType = ChartValueType.DateTime,
+                        ChartType = SeriesChartType.Line
+
+                    };
+
+                    foreach (var value in valuelist)
+                    {
+                        if (line.Name.Contains(".VM"))
+                        {
+                            line.Points.AddXY(value.Key, value.Value * 1.732 / 1000);
+                        }
+                        else if (line.Name.Contains(".VA") || line.Name.Contains(".IA"))
+                        {
+                            line.Points.AddXY(value.Key, value.Value - reflist.Find(pair => pair.Key == value.Key).Value);
+                        }
+                        else
+                        {
+                            line.Points.AddXY(value.Key, value.Value);
+                        }
+
+                    }
+
+
+                    if (line.Name.Contains(".VM"))
+                    {
+                        line.ChartArea = "VMArea";
+                        line.Legend = "VMLegend";
+                        VolChart.Series.Add(line);
+
+                    }
+                    else if (line.Name.Contains(".VA"))
+                    {
+                        line.ChartArea = "VAArea";
+                        line.Legend = "VALegend";
+                        VolChart.Series.Add(line);
+                    }
+                    else if (line.Name.Contains(".IM"))
+                    {
+                        line.ChartArea = "IMArea";
+                        line.Legend = "IMLegend";
+                        CurChart.Series.Add(line);
+                    }
+                    else if (line.Name.Contains(".IA"))
+                    {
+                        line.ChartArea = "IAArea";
+                        line.Legend = "IALegend";
+                        CurChart.Series.Add(line);
+
+                    }
+                    Lines.Add(line);
+
+
+
+                }
+
+                SetChartVisibility();
+                SetChartAreaYMaxMin();
+
+                VolChart.Update();
+                CurChart.Update();
+            }
+            catch (Exception ex)
+            {
+                Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+            }
+        }
+
+
         public void DeselectLines(string signalname)
         {
             try
@@ -268,18 +384,38 @@ namespace SLESGui.chart
                 if ((bool)this.dataGridView1.CurrentCell.Value == true)
                 {
                     Dictionary<DateTime, double[]> result = new Dictionary<DateTime, double[]>();
-                    Data_Handler.GetSignalResult(signalname, result);
+                    Dictionary<DateTime, double[]> ref_result = new Dictionary<DateTime, double[]>();
+
                     List<KeyValuePair<DateTime, double>> original_values = new List<KeyValuePair<DateTime, double>>();
                     List<KeyValuePair<DateTime, double>> estimated_values = new List<KeyValuePair<DateTime, double>>();
+                    List<KeyValuePair<DateTime, double>> ref_original_values = new List<KeyValuePair<DateTime, double>>();
+                    List<KeyValuePair<DateTime, double>> ref_estimated_values = new List<KeyValuePair<DateTime, double>>();
+                    Data_Handler.GetSignalResult(signalname, result);
                     foreach (var frame in result)
                     {
                         original_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[0]));
                         estimated_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[1]));
 
                     }
+                    if (Ref != "")
+                    {
+                        Data_Handler.GetSignalResult(signalname, ref_result);
+                        foreach (var frame in ref_result)
+                        {
+                            ref_original_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[0]));
+                            ref_estimated_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[1]));
 
-                    AddLines(signalname, original_values);
-                    AddLines("Estimated_" + signalname, estimated_values);
+                        }
+                        AddLinesWithRef(signalname, original_values,ref_original_values);
+                        AddLinesWithRef("Estimated_" + signalname, estimated_values, ref_estimated_values);
+                    }
+                    else
+                    {
+
+                        AddLines(signalname, original_values);
+                        AddLines("Estimated_" + signalname, estimated_values);
+                    }
+
                 }
                 else
                 {
@@ -298,6 +434,40 @@ namespace SLESGui.chart
         private void multiplelinechart_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbRef_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _refAngle = cbRef.SelectedItem.ToString();
+
+            foreach (var line in Lines)
+            {
+                if (line.Name.Contains("VA"))
+                {
+                    VolChart.Series.Remove(line);
+                }
+
+                if (line.Name.Contains("IA"))
+                {
+                    CurChart.Series.Remove(line);
+                }
+            }
+
+            Lines.RemoveAll(item => (item.Name.Contains("IA") || item.Name.Contains("VA")));
+
+            foreach (var signal in _signals)
+            {
+                if (signal.SignalName.Contains("VA") || signal.SignalName.Contains("IA"))
+                {
+                    signal.IsChecked = false;
+                }
+            }
+
+            SetChartVisibility();
+            SetChartAreaYMaxMin();
+            VolChart.Update();
+            CurChart.Update();
+            dataGridView1.Refresh();
         }
 
     }
