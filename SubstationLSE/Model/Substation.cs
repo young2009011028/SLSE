@@ -582,6 +582,84 @@ namespace SubstationLSE
             }
             if (Mode.Equals("ThreePhase"))
             {
+                foreach (KeyValuePair<string, Dictionary<string, BreakerCurrentPhasorGroup>> kv in currentEstimator.IslandBreakerCurrentMeasurements)
+                {
+                    foreach (KeyValuePair<string, BreakerCurrentPhasorGroup> kw in kv.Value)
+                    {
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.MagnitudeKey, kw.Value.PhaseA.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.AngleKey, kw.Value.PhaseA.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.MagnitudeKey, kw.Value.PhaseB.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.AngleKey, kw.Value.PhaseB.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.MagnitudeKey, kw.Value.PhaseC.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.AngleKey, kw.Value.PhaseC.Estimate.AngleInDegrees);
+                        }
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                        //}
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        //}
+                    }
+                }
+
+                foreach (KeyValuePair<string, Dictionary<string, CurrentPhasorGroup>> kv in currentEstimator.IslandCurrentMeasurements)
+                {
+                    foreach (KeyValuePair<string, CurrentPhasorGroup> kw in kv.Value)
+                    {
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.MagnitudeKey, kw.Value.PhaseA.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.AngleKey, kw.Value.PhaseA.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.MagnitudeKey, kw.Value.PhaseB.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.AngleKey, kw.Value.PhaseB.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.MagnitudeKey, kw.Value.PhaseC.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.AngleKey, kw.Value.PhaseC.Estimate.AngleInDegrees);
+                        }
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                        //}
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        //}
+                    }
+                }
+
                 foreach (Node node in nodes)
                 {
                     if (inputMeasurements.ContainsKey(node.Voltage.PhaseA.Estimate.MagnitudeKey))
