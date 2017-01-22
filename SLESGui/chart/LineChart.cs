@@ -156,6 +156,13 @@ namespace SLESGui.chart
 
                     foreach (var value in valuelist)
                     {
+
+                        if (double.IsNaN( value.Value))
+                        {
+                            line.Points.AddXY(value.Key, double.NaN);
+                            continue;
+                        }
+
                         if (line.Name.Contains(".VM"))
                         {
                             line.Points.AddXY(value.Key, value.Value*1.732/1000);
