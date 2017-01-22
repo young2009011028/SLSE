@@ -397,7 +397,7 @@ namespace SLESGui.chart
                         estimated_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[1]));
 
                     }
-                    if (Ref != "")
+                    if (Ref != "" && Ref !=null)
                     {
                         Data_Handler.GetSignalResult(signalname, ref_result);
                         foreach (var frame in ref_result)
