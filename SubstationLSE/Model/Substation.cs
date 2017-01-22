@@ -450,12 +450,22 @@ namespace SubstationLSE
         {
             if (currentEstimator == null || breakerStatusChange || measurementStatusChange)
             {
-                currentEstimator = new CurrentEstimator(activeBreakerCurrentMeasurements, activeCurrentMeasurements, topologyProcessor);
-                currentEstimator.CompleteCurrentLSE();
+                if (Mode.Equals("PositiveSequence"))
+                {
+                    currentEstimator = new CurrentEstimator(activeBreakerCurrentMeasurements, activeCurrentMeasurements, topologyProcessor);
+                    currentEstimator.CompleteCurrentLSE();
 
-                voltageEstimator = new VoltageEstimator(activeVoltageMeasurements, topologyProcessor);
-                voltageEstimator.CompleteVoltageLSE();
+                    voltageEstimator = new VoltageEstimator(activeVoltageMeasurements, topologyProcessor, nodes);
+                    voltageEstimator.CompleteVoltageLSE();
+                }
+                if (Mode.Equals("ThreePhase"))
+                {
+                    currentEstimator = new CurrentEstimator(activeBreakerCurrentMeasurements, activeCurrentMeasurements, topologyProcessor);
+                    currentEstimator.CompleteThreePhaseCurrentLSE();
 
+                    voltageEstimator = new VoltageEstimator(activeVoltageMeasurements, topologyProcessor, nodes);
+                    voltageEstimator.CompleteThreePhaseVoltageLSE();
+                }
                 //breakerStatusChange = false;
                 //measurementStatusChange = false;
             }
@@ -498,144 +508,498 @@ namespace SubstationLSE
             }
 
             outputMeasurements.Clear();
-            foreach(KeyValuePair<string, Dictionary<string, BreakerCurrentPhasorGroup>> kv in currentEstimator.IslandBreakerCurrentMeasurements)
+            if (Mode.Equals("PositiveSequence"))
             {
-                foreach(KeyValuePair<string, BreakerCurrentPhasorGroup> kw in kv.Value)
+                foreach (KeyValuePair<string, Dictionary<string, BreakerCurrentPhasorGroup>> kv in currentEstimator.IslandBreakerCurrentMeasurements)
                 {
-                    if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                    foreach (KeyValuePair<string, BreakerCurrentPhasorGroup> kw in kv.Value)
                     {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
-                    }
-                    if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
-                    {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
-                    }
-                }
-            }
-
-            foreach (KeyValuePair<string, Dictionary<string, CurrentPhasorGroup>> kv in currentEstimator.IslandCurrentMeasurements)
-            {
-                foreach (KeyValuePair<string, CurrentPhasorGroup> kw in kv.Value)
-                {
-                    if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
-                    {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
-                    }
-                    if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
-                    {
-                        outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
-                    }
-                }
-            }
-
-            foreach (KeyValuePair<string, Dictionary<string, VoltagePhasorGroup>> kv in voltageEstimator.IslandVoltageMeasurements)
-            {
-                foreach (KeyValuePair<string, VoltagePhasorGroup> kw in kv.Value)
-                {
-                    if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
-                    {
-                        if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                        if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
                         {
                             outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
                         }
-                    }
-                    if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
-                    {
-                        if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                        if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
                         {
                             outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
                         }
                     }
                 }
-            }
 
-            //take output here
+                foreach (KeyValuePair<string, Dictionary<string, CurrentPhasorGroup>> kv in currentEstimator.IslandCurrentMeasurements)
+                {
+                    foreach (KeyValuePair<string, CurrentPhasorGroup> kw in kv.Value)
+                    {
+                        if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        }
+                    }
+                }
+
+                foreach (Node node in nodes)
+                {            
+                    if (inputMeasurements.ContainsKey(node.Voltage.PositiveSequence.Estimate.MagnitudeKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PositiveSequence.Estimate.MagnitudeKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PositiveSequence.Estimate.Magnitude))
+                            outputMeasurements.Add(node.Voltage.PositiveSequence.Estimate.MagnitudeKey, node.Voltage.PositiveSequence.Estimate.Magnitude);
+                        }
+                    }
+                    if (inputMeasurements.ContainsKey(node.Voltage.PositiveSequence.Estimate.AngleKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PositiveSequence.Estimate.AngleKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PositiveSequence.Estimate.AngleInDegrees))
+                            outputMeasurements.Add(node.Voltage.PositiveSequence.Estimate.AngleKey, node.Voltage.PositiveSequence.Estimate.AngleInDegrees);
+                        }
+                    }      
+                }
+                //foreach (KeyValuePair<string, Dictionary<string, VoltagePhasorGroup>> kv in voltageEstimator.IslandVoltageMeasurements)
+                //{
+                //    foreach (KeyValuePair<string, VoltagePhasorGroup> kw in kv.Value)
+                //    {
+                //        if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                //        {
+                //            if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                //            {
+                //                outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                //            }
+                //        }
+                //        if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                //        {
+                //            if (!outputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                //            {
+                //                outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                //            }
+                //        }
+                //    }
+                //}
+            }
+            if (Mode.Equals("ThreePhase"))
+            {
+                foreach (KeyValuePair<string, Dictionary<string, BreakerCurrentPhasorGroup>> kv in currentEstimator.IslandBreakerCurrentMeasurements)
+                {
+                    foreach (KeyValuePair<string, BreakerCurrentPhasorGroup> kw in kv.Value)
+                    {
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.MagnitudeKey, kw.Value.PhaseA.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.AngleKey, kw.Value.PhaseA.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.MagnitudeKey, kw.Value.PhaseB.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.AngleKey, kw.Value.PhaseB.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.MagnitudeKey, kw.Value.PhaseC.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.AngleKey, kw.Value.PhaseC.Estimate.AngleInDegrees);
+                        }
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                        //}
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        //}
+                    }
+                }
+
+                foreach (KeyValuePair<string, Dictionary<string, CurrentPhasorGroup>> kv in currentEstimator.IslandCurrentMeasurements)
+                {
+                    foreach (KeyValuePair<string, CurrentPhasorGroup> kw in kv.Value)
+                    {
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.MagnitudeKey, kw.Value.PhaseA.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseA.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseA.Estimate.AngleKey, kw.Value.PhaseA.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.MagnitudeKey, kw.Value.PhaseB.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseB.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseB.Estimate.AngleKey, kw.Value.PhaseB.Estimate.AngleInDegrees);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.MagnitudeKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.MagnitudeKey, kw.Value.PhaseC.Estimate.Magnitude);
+                        }
+                        if (inputMeasurements.ContainsKey(kw.Value.PhaseC.Estimate.AngleKey))
+                        {
+                            outputMeasurements.Add(kw.Value.PhaseC.Estimate.AngleKey, kw.Value.PhaseC.Estimate.AngleInDegrees);
+                        }
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.MagnitudeKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.MagnitudeKey, kw.Value.PositiveSequence.Estimate.Magnitude);
+                        //}
+                        //if (inputMeasurements.ContainsKey(kw.Value.PositiveSequence.Estimate.AngleKey))
+                        //{
+                        //    outputMeasurements.Add(kw.Value.PositiveSequence.Estimate.AngleKey, kw.Value.PositiveSequence.Estimate.AngleInDegrees);
+                        //}
+                    }
+                }
+
+                foreach (Node node in nodes)
+                {
+                    if (inputMeasurements.ContainsKey(node.Voltage.PhaseA.Estimate.MagnitudeKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PhaseA.Estimate.MagnitudeKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PhaseA.Estimate.Magnitude))
+                                outputMeasurements.Add(node.Voltage.PhaseA.Estimate.MagnitudeKey, node.Voltage.PhaseA.Estimate.Magnitude);
+                        }
+                    }
+                    if (inputMeasurements.ContainsKey(node.Voltage.PhaseA.Estimate.AngleKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PhaseA.Estimate.AngleKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PhaseA.Estimate.AngleInDegrees))
+                                outputMeasurements.Add(node.Voltage.PhaseA.Estimate.AngleKey, node.Voltage.PhaseA.Estimate.AngleInDegrees);
+                        }
+                    }
+                    if (inputMeasurements.ContainsKey(node.Voltage.PhaseB.Estimate.MagnitudeKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PhaseB.Estimate.MagnitudeKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PhaseB.Estimate.Magnitude))
+                                outputMeasurements.Add(node.Voltage.PhaseB.Estimate.MagnitudeKey, node.Voltage.PhaseB.Estimate.Magnitude);
+                        }
+                    }
+                    if (inputMeasurements.ContainsKey(node.Voltage.PhaseB.Estimate.AngleKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PhaseB.Estimate.AngleKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PhaseB.Estimate.AngleInDegrees))
+                                outputMeasurements.Add(node.Voltage.PhaseB.Estimate.AngleKey, node.Voltage.PhaseB.Estimate.AngleInDegrees);
+                        }
+                    }
+                    if (inputMeasurements.ContainsKey(node.Voltage.PhaseC.Estimate.MagnitudeKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PhaseC.Estimate.MagnitudeKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PhaseC.Estimate.Magnitude))
+                                outputMeasurements.Add(node.Voltage.PhaseC.Estimate.MagnitudeKey, node.Voltage.PhaseC.Estimate.Magnitude);
+                        }
+                    }
+                    if (inputMeasurements.ContainsKey(node.Voltage.PhaseC.Estimate.AngleKey))
+                    {
+                        if (!outputMeasurements.ContainsKey(node.Voltage.PhaseC.Estimate.AngleKey))
+                        {
+                            if (!double.IsNaN(node.Voltage.PhaseC.Estimate.AngleInDegrees))
+                                outputMeasurements.Add(node.Voltage.PhaseC.Estimate.AngleKey, node.Voltage.PhaseC.Estimate.AngleInDegrees);
+                        }
+                    }
+                }
+            }
 
         }
 
         private void InsertSubstationMeasurements()
         {
-            double value = 0; 
-            foreach (Node node in nodes)
+            double value = 0;
+            if (Mode.Equals("PositiveSequence"))
             {
-                if (inputMeasurements.TryGetValue(node.Voltage.PositiveSequence.Measurement.MagnitudeKey, out value))
+                foreach (Node node in nodes)
                 {
-                    node.Voltage.PositiveSequence.Measurement.Magnitude = value;
-                    value = 0; 
+                    if (inputMeasurements.TryGetValue(node.Voltage.PositiveSequence.Measurement.MagnitudeKey, out value))
+                    {
+                        node.Voltage.PositiveSequence.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(node.Voltage.PositiveSequence.Measurement.AngleKey, out value))
+                    {
+                        node.Voltage.PositiveSequence.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
                 }
-                if (inputMeasurements.TryGetValue(node.Voltage.PositiveSequence.Measurement.AngleKey, out value))
+
+                foreach (CircuitBreaker cb in circuitBreakers)
                 {
-                    node.Voltage.PositiveSequence.Measurement.AngleInDegrees = value;
-                    value = 0;
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
+                    {
+                        cb.BreakerCurrent.PositiveSequence.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PositiveSequence.Measurement.AngleKey, out value))
+                    {
+                        cb.BreakerCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+
+
+                foreach (TransmissionLine line in transmissionLines)
+                {
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
+                    {
+                        line.LineCurrent.PositiveSequence.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PositiveSequence.Measurement.AngleKey, out value))
+                    {
+                        line.LineCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+
+                foreach (Transformer XF in transformers)
+                {
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.FromNodeCurrent.PositiveSequence.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PositiveSequence.Measurement.AngleKey, out value))
+                    {
+                        XF.FromNodeCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.ToNodeCurrent.PositiveSequence.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PositiveSequence.Measurement.AngleKey, out value))
+                    {
+                        XF.ToNodeCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+
+                foreach (ShuntCompensator shunt in shunts)
+                {
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
+                    {
+                        shunt.ShuntCurrent.PositiveSequence.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PositiveSequence.Measurement.AngleKey, out value))
+                    {
+                        shunt.ShuntCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+            }
+            if (Mode.Equals("ThreePhase"))
+            {
+                foreach (Node node in nodes)
+                {
+                    if (inputMeasurements.TryGetValue(node.Voltage.PhaseA.Measurement.MagnitudeKey, out value))
+                    {
+                        node.Voltage.PhaseA.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(node.Voltage.PhaseA.Measurement.AngleKey, out value))
+                    {
+                        node.Voltage.PhaseA.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(node.Voltage.PhaseB.Measurement.MagnitudeKey, out value))
+                    {
+                        node.Voltage.PhaseB.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(node.Voltage.PhaseB.Measurement.AngleKey, out value))
+                    {
+                        node.Voltage.PhaseB.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(node.Voltage.PhaseC.Measurement.MagnitudeKey, out value))
+                    {
+                        node.Voltage.PhaseC.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(node.Voltage.PhaseC.Measurement.AngleKey, out value))
+                    {
+                        node.Voltage.PhaseC.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+                foreach (CircuitBreaker cb in circuitBreakers)
+                {
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PhaseA.Measurement.MagnitudeKey, out value))
+                    {
+                        cb.BreakerCurrent.PhaseA.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PhaseA.Measurement.AngleKey, out value))
+                    {
+                        cb.BreakerCurrent.PhaseA.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PhaseB.Measurement.MagnitudeKey, out value))
+                    {
+                        cb.BreakerCurrent.PhaseB.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PhaseB.Measurement.AngleKey, out value))
+                    {
+                        cb.BreakerCurrent.PhaseB.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PhaseC.Measurement.MagnitudeKey, out value))
+                    {
+                        cb.BreakerCurrent.PhaseC.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PhaseC.Measurement.AngleKey, out value))
+                    {
+                        cb.BreakerCurrent.PhaseC.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+                foreach (TransmissionLine line in transmissionLines)
+                {
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PhaseA.Measurement.MagnitudeKey, out value))
+                    {
+                        line.LineCurrent.PhaseA.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PhaseA.Measurement.AngleKey, out value))
+                    {
+                        line.LineCurrent.PhaseA.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PhaseB.Measurement.MagnitudeKey, out value))
+                    {
+                        line.LineCurrent.PhaseB.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PhaseB.Measurement.AngleKey, out value))
+                    {
+                        line.LineCurrent.PhaseB.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PhaseC.Measurement.MagnitudeKey, out value))
+                    {
+                        line.LineCurrent.PhaseC.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(line.LineCurrent.PhaseC.Measurement.AngleKey, out value))
+                    {
+                        line.LineCurrent.PhaseC.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+                foreach (Transformer XF in transformers)
+                {
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PhaseA.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.FromNodeCurrent.PhaseA.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PhaseA.Measurement.AngleKey, out value))
+                    {
+                        XF.FromNodeCurrent.PhaseA.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PhaseA.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.ToNodeCurrent.PhaseA.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PhaseA.Measurement.AngleKey, out value))
+                    {
+                        XF.ToNodeCurrent.PhaseA.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PhaseB.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.FromNodeCurrent.PhaseB.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PhaseB.Measurement.AngleKey, out value))
+                    {
+                        XF.FromNodeCurrent.PhaseB.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PhaseB.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.ToNodeCurrent.PhaseB.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PhaseB.Measurement.AngleKey, out value))
+                    {
+                        XF.ToNodeCurrent.PhaseB.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PhaseC.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.FromNodeCurrent.PhaseC.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PhaseC.Measurement.AngleKey, out value))
+                    {
+                        XF.FromNodeCurrent.PhaseC.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PhaseC.Measurement.MagnitudeKey, out value))
+                    {
+                        XF.ToNodeCurrent.PhaseC.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PhaseC.Measurement.AngleKey, out value))
+                    {
+                        XF.ToNodeCurrent.PhaseC.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                }
+                foreach (ShuntCompensator shunt in shunts)
+                {
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PhaseA.Measurement.MagnitudeKey, out value))
+                    {
+                        shunt.ShuntCurrent.PhaseA.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PhaseA.Measurement.AngleKey, out value))
+                    {
+                        shunt.ShuntCurrent.PhaseA.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PhaseB.Measurement.MagnitudeKey, out value))
+                    {
+                        shunt.ShuntCurrent.PhaseB.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PhaseB.Measurement.AngleKey, out value))
+                    {
+                        shunt.ShuntCurrent.PhaseB.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PhaseC.Measurement.MagnitudeKey, out value))
+                    {
+                        shunt.ShuntCurrent.PhaseC.Measurement.Magnitude = value;
+                        value = 0;
+                    }
+                    if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PhaseC.Measurement.AngleKey, out value))
+                    {
+                        shunt.ShuntCurrent.PhaseC.Measurement.AngleInDegrees = value;
+                        value = 0;
+                    }
                 }
             }
 
-            foreach (CircuitBreaker cb in circuitBreakers)
-            {
-                if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
-                {
-                    cb.BreakerCurrent.PositiveSequence.Measurement.Magnitude = value;
-                    value = 0;
-                }
-                if (inputMeasurements.TryGetValue(cb.BreakerCurrent.PositiveSequence.Measurement.AngleKey, out value))
-                {
-                    cb.BreakerCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
-                    value = 0;
-                }
-            }
-
-
-            foreach (TransmissionLine line in transmissionLines)
-            {
-                if (inputMeasurements.TryGetValue(line.LineCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
-                {
-                    line.LineCurrent.PositiveSequence.Measurement.Magnitude = value;
-                    value = 0;
-                }
-                if (inputMeasurements.TryGetValue(line.LineCurrent.PositiveSequence.Measurement.AngleKey, out value))
-                {
-                    line.LineCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
-                    value = 0;
-                }
-            }
-
-            foreach (Transformer XF in transformers)
-            {
-                if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
-                {
-                    XF.FromNodeCurrent.PositiveSequence.Measurement.Magnitude = value;
-                    value = 0;
-                }
-                if (inputMeasurements.TryGetValue(XF.FromNodeCurrent.PositiveSequence.Measurement.AngleKey, out value))
-                {
-                    XF.FromNodeCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
-                    value = 0;
-                }
-                if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
-                {
-                    XF.ToNodeCurrent.PositiveSequence.Measurement.Magnitude = value;
-                    value = 0;
-                }
-                if (inputMeasurements.TryGetValue(XF.ToNodeCurrent.PositiveSequence.Measurement.AngleKey, out value))
-                {
-                    XF.ToNodeCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
-                    value = 0;
-                }
-            }
-
-            foreach (ShuntCompensator shunt in shunts)
-            {
-                if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PositiveSequence.Measurement.MagnitudeKey, out value))
-                {
-                    shunt.ShuntCurrent.PositiveSequence.Measurement.Magnitude = value;
-                    value = 0;
-                }
-                if (inputMeasurements.TryGetValue(shunt.ShuntCurrent.PositiveSequence.Measurement.AngleKey, out value))
-                {
-                    shunt.ShuntCurrent.PositiveSequence.Measurement.AngleInDegrees = value;
-                    value = 0;
-                }
-            }
         }
 
         private void DetermineActiveMeasurements()
@@ -644,27 +1008,56 @@ namespace SubstationLSE
             activeCurrentMeasurements.Clear();
             activeVoltageMeasurements.Clear();
 
-            foreach (VoltagePhasorGroup voltagePhasorGroup in voltageMeasurements)
+            if (Mode.Equals("PositiveSequence"))
             {
-                if (voltagePhasorGroup.IncludeInPositiveSequenceEstimator)
+                foreach (VoltagePhasorGroup voltagePhasorGroup in voltageMeasurements)
                 {
-                    activeVoltageMeasurements.Add(voltagePhasorGroup.MeasuredNodeID, voltagePhasorGroup);
+                    if (voltagePhasorGroup.IncludeInPositiveSequenceEstimator)
+                    {
+                        activeVoltageMeasurements.Add(voltagePhasorGroup.MeasuredNodeID, voltagePhasorGroup);
+                    }
+                }
+                foreach (CurrentPhasorGroup currentPhasorGroup in currentMeasurements)
+                {
+                    if (currentPhasorGroup.IncludeInPositiveSequenceEstimator)
+                    {
+                        activeCurrentMeasurements.Add(currentPhasorGroup.MeasuredNodeID, currentPhasorGroup);
+                    }
+                }
+                foreach (BreakerCurrentPhasorGroup breakerCurrent in breakerCurrentMeasurements)
+                {
+                    if (breakerCurrent.IncludeInPositiveSequenceEstimator)
+                    {
+                        //activeBreakerCurrentMeasurements.Add(breakerCurrent.FromNodeID, breakerCurrent);
+                        //activeBreakerCurrentMeasurements.Add(breakerCurrent.ToNodeID, breakerCurrent); 
+                        activeBreakerCurrentMeasurements.Add(breakerCurrent.MeasuredBreakerID, breakerCurrent);
+                    }
                 }
             }
-            foreach (CurrentPhasorGroup currentPhasorGroup in currentMeasurements)
+            if (Mode.Equals("ThreePhase"))
             {
-                if (currentPhasorGroup.IncludeInPositiveSequenceEstimator)
+                foreach (VoltagePhasorGroup voltagePhasorGroup in voltageMeasurements)
                 {
-                    activeCurrentMeasurements.Add(currentPhasorGroup.MeasuredNodeID, currentPhasorGroup);
+                    if (voltagePhasorGroup.IncludeInEstimator)
+                    {
+                        activeVoltageMeasurements.Add(voltagePhasorGroup.MeasuredNodeID, voltagePhasorGroup);
+                    }
                 }
-            }
-            foreach (BreakerCurrentPhasorGroup breakerCurrent in breakerCurrentMeasurements)
-            {
-                if (breakerCurrent.IncludeInPositiveSequenceEstimator)
+                foreach (CurrentPhasorGroup currentPhasorGroup in currentMeasurements)
                 {
-                    //activeBreakerCurrentMeasurements.Add(breakerCurrent.FromNodeID, breakerCurrent);
-                    //activeBreakerCurrentMeasurements.Add(breakerCurrent.ToNodeID, breakerCurrent); 
-                    activeBreakerCurrentMeasurements.Add(breakerCurrent.MeasuredBreakerID, breakerCurrent);
+                    if (currentPhasorGroup.IncludeInEstimator)
+                    {
+                        activeCurrentMeasurements.Add(currentPhasorGroup.MeasuredNodeID, currentPhasorGroup);
+                    }
+                }
+                foreach (BreakerCurrentPhasorGroup breakerCurrent in breakerCurrentMeasurements)
+                {
+                    if (breakerCurrent.IncludeInEstimator)
+                    {
+                        //activeBreakerCurrentMeasurements.Add(breakerCurrent.FromNodeID, breakerCurrent);
+                        //activeBreakerCurrentMeasurements.Add(breakerCurrent.ToNodeID, breakerCurrent); 
+                        activeBreakerCurrentMeasurements.Add(breakerCurrent.MeasuredBreakerID, breakerCurrent);
+                    }
                 }
             }
         }

@@ -26,6 +26,7 @@ namespace SubstationLSE.Algorithm
 
         private Dictionary<string, VoltagePhasorGroup> m_activeVoltageMeasurements = new Dictionary<string, VoltagePhasorGroup>();
         private TopologyProcessor m_topologyProcessor = new TopologyProcessor();
+        private List<Node> m_Nodes = new List<Node>();
 
         #endregion
 
@@ -71,10 +72,11 @@ namespace SubstationLSE.Algorithm
 
         #region [ Constructor ]
 
-        public VoltageEstimator(Dictionary<string, VoltagePhasorGroup> activeBreakerCurrentMeasurements, TopologyProcessor topologyProcessor)
+        public VoltageEstimator(Dictionary<string, VoltagePhasorGroup> activeBreakerCurrentMeasurements, TopologyProcessor topologyProcessor, List<Node> nodes)
         {
             m_activeVoltageMeasurements = activeBreakerCurrentMeasurements;
             m_topologyProcessor = topologyProcessor;
+            m_Nodes = nodes;
         }
 
         #endregion
@@ -118,9 +120,9 @@ namespace SubstationLSE.Algorithm
                 List<VoltagePhasorGroup> m_islandActiveVoltageMeasurements = islandActiveVoltageMeasurements.Values.ToList();
                 m_H_temp = DenseMatrix.OfArray(new Complex[m_islandActiveVoltageMeasurements.Count, 1]);
 
-                foreach (VoltagePhasorGroup VoltagePhasorGroup in m_islandActiveVoltageMeasurements)
+                foreach (VoltagePhasorGroup voltagePhasorGroup in m_islandActiveVoltageMeasurements)
                 {
-                    m_H_temp[m_islandActiveVoltageMeasurements.IndexOf(VoltagePhasorGroup),0] = new Complex(1, 0);
+                    m_H_temp[m_islandActiveVoltageMeasurements.IndexOf(voltagePhasorGroup),0] = new Complex(1, 0);
                 }
                 m_island_H.Add(kv.Key, m_H_temp);
 
@@ -185,11 +187,147 @@ namespace SubstationLSE.Algorithm
 
                 if (X.RowCount > 0)
                 {
-                    List<VoltagePhasorGroup> islandVoltageMeasurements = m_islandVoltageMeasurements[kv.Key].Values.ToList();
-                    for (int i = 0; i < islandVoltageMeasurements.Count; i++)
+                    foreach (Node node in m_Nodes)
                     {
-                        islandVoltageMeasurements[i].PositiveSequence.Estimate.PerUnitComplexPhasor = X[0, 0];
+                        if (kv.Value.ContainsKey(node.InternalID))
+                        {
+                            node.Voltage.PositiveSequence.Estimate.PerUnitComplexPhasor = X[0, 0];
+                        }
                     }
+
+                    //List<VoltagePhasorGroup> islandVoltageMeasurements = m_islandVoltageMeasurements[kv.Key].Values.ToList();
+
+                    //for (int i = 0; i < islandVoltageMeasurements.Count; i++)
+                    //{
+                    //    islandVoltageMeasurements[i].PositiveSequence.Estimate.PerUnitComplexPhasor = X[0, 0];
+                    //}
+                    // if (input has NaN, LSE can still give estimate to all the nodes in this island)
+
+                }
+            }
+        }
+
+        private void ThreePhaseVoltageLSEFormulation()
+        {
+            foreach (KeyValuePair<string, Tree> kv in m_topologyProcessor)
+            {
+                if (m_islandVoltageMeasurements[kv.Key] == null || m_islandVoltageMeasurements[kv.Key].Count < 1)
+                {
+                    Console.WriteLine("Voltage State Estimator: unobservable island");
+                    continue;
+                }
+
+                Dictionary<string, VoltagePhasorGroup> islandActiveVoltageMeasurements = new Dictionary<string, VoltagePhasorGroup>();
+                if (m_islandVoltageMeasurements.ContainsKey(kv.Key))
+                {
+                    islandActiveVoltageMeasurements = m_islandVoltageMeasurements[kv.Key];
+                }
+
+                DenseMatrix m_H_temp = DenseMatrix.OfArray(new Complex[1, 1]);
+                List<VoltagePhasorGroup> m_islandActiveVoltageMeasurements = islandActiveVoltageMeasurements.Values.ToList();
+                m_H_temp = DenseMatrix.OfArray(new Complex[3 * m_islandActiveVoltageMeasurements.Count, 3 * 1]);
+
+                foreach (VoltagePhasorGroup voltagePhasorGroup in m_islandActiveVoltageMeasurements)
+                {
+                    int indexOfMeasuredVoltage = m_islandActiveVoltageMeasurements.IndexOf(voltagePhasorGroup);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (i == j)
+                            {
+                                m_H_temp[3 * indexOfMeasuredVoltage + i, j] = new Complex(1, 0);
+                            }
+                        }
+                    }
+                }
+                m_island_H.Add(kv.Key, m_H_temp);
+
+                DenseMatrix m_W_temp = DenseMatrix.OfArray(new Complex[1, 1]);
+                m_W_temp = DenseMatrix.OfArray(new Complex[3 * m_islandActiveVoltageMeasurements.Count, 3 * m_islandActiveVoltageMeasurements.Count]);
+                for (int i = 0; i < m_islandActiveVoltageMeasurements.Count; i++)
+                {
+                    if (i < m_islandActiveVoltageMeasurements.Count)
+                    {
+                        m_W_temp[3 * i, 3 * i] = new Complex(1 / m_islandActiveVoltageMeasurements[i].PhaseA.Measurement.MeasurementCovariance, 0);
+                        m_W_temp[3 * i + 1, 3 * i + 1] = new Complex(1 / m_islandActiveVoltageMeasurements[i].PhaseB.Measurement.MeasurementCovariance, 0);
+                        m_W_temp[3 * i + 2, 3 * i + 2] = new Complex(1 / m_islandActiveVoltageMeasurements[i].PhaseC.Measurement.MeasurementCovariance, 0);
+                    }
+                    else
+                    {
+                        Console.WriteLine("unexpected measurement");
+                    }
+                }
+                m_island_W.Add(kv.Key, m_W_temp);
+
+                Dictionary<int, string> measurementList_temp = new Dictionary<int, string>();
+                DenseMatrix m_Z_temp = DenseMatrix.OfArray(new Complex[1, 1]);
+                m_Z_temp = DenseMatrix.OfArray(new Complex[3 * m_islandActiveVoltageMeasurements.Count, 1]);
+
+                for (int i = 0; i < m_islandActiveVoltageMeasurements.Count; i++)
+                {
+                    if (i < m_islandActiveVoltageMeasurements.Count)
+                    {
+                        measurementList_temp.Add(3 * i, m_islandActiveVoltageMeasurements[i].MeasuredNodeID + "PhaseA");
+                        measurementList_temp.Add(3 * i + 1, m_islandActiveVoltageMeasurements[i].MeasuredNodeID + "PhaseB");
+                        measurementList_temp.Add(3 * i + 2, m_islandActiveVoltageMeasurements[i].MeasuredNodeID + "PhaseC");
+                        m_Z_temp[3 * i, 0] = m_islandActiveVoltageMeasurements[i].PhaseA.Measurement.PerUnitComplexPhasor;
+                        m_Z_temp[3 * i + 1, 0] = m_islandActiveVoltageMeasurements[i].PhaseB.Measurement.PerUnitComplexPhasor;
+                        m_Z_temp[3 * i + 2, 0] = m_islandActiveVoltageMeasurements[i].PhaseC.Measurement.PerUnitComplexPhasor;
+                    }
+                    else
+                    {
+                        Console.WriteLine("unexpected measurement");
+                    }
+                }
+                m_measurementList.Add(kv.Key, measurementList_temp);
+                m_island_Z.Add(kv.Key, m_Z_temp);
+            }
+        }
+
+        private void SolveThreePhaseLSE()
+        {
+            m_badDataList.Clear();
+            foreach (KeyValuePair<string, Tree> kv in m_topologyProcessor)
+            {
+                if (m_island_H == null || !m_island_H.ContainsKey(kv.Key))
+                {
+                    Console.WriteLine("not enough voltage measurement");
+                    continue;
+                }
+                HashSet<int> badDataList = new HashSet<int>();
+                DenseMatrix X;
+                DenseMatrix Z;
+                DenseMatrix H;
+                DenseMatrix W;
+                DenseMatrix P;
+
+                Z = m_island_Z[kv.Key];
+                H = m_island_H[kv.Key];
+                W = m_island_W[kv.Key];
+                badDataList = LSECalculation.CalculateLSE(H, W, Z, out X, 10, true);
+                m_badDataList.Add(kv.Key, badDataList);
+
+                if (X.RowCount > 0)
+                {
+                    foreach (Node node in m_Nodes)
+                    {
+                        if (kv.Value.ContainsKey(node.InternalID))
+                        {
+                            node.Voltage.PhaseA.Estimate.PerUnitComplexPhasor = X[0, 0];
+                            node.Voltage.PhaseB.Estimate.PerUnitComplexPhasor = X[1, 0];
+                            node.Voltage.PhaseC.Estimate.PerUnitComplexPhasor = X[2, 0];
+                        }
+                    }
+
+                    //List<VoltagePhasorGroup> islandVoltageMeasurements = m_islandVoltageMeasurements[kv.Key].Values.ToList();
+
+                    //for (int i = 0; i < islandVoltageMeasurements.Count; i++)
+                    //{
+                    //    islandVoltageMeasurements[i].PositiveSequence.Estimate.PerUnitComplexPhasor = X[0, 0];
+                    //}
+                    // if (input has NaN, LSE can still give estimate to all the nodes in this island)
+
                 }
             }
         }
@@ -203,6 +341,13 @@ namespace SubstationLSE.Algorithm
             DistributeMeasurements();
             VoltageLSEFormulation();
             SolveLSE();
+        }
+
+        public void CompleteThreePhaseVoltageLSE()
+        {
+            DistributeMeasurements();
+            ThreePhaseVoltageLSEFormulation();
+            SolveThreePhaseLSE();
         }
 
         public void FastVoltageLSE(Dictionary<string, VoltagePhasorGroup> activeVoltageMeasurements)
