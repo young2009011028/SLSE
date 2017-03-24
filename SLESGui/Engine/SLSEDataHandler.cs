@@ -251,7 +251,7 @@ namespace SLSE.Engine
                         }
                     }
 
-
+                    AlarmLogger.Instance.GetAlarmSignal(status.TimeStamp, _bad_data);
                 }
 
 

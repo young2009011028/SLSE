@@ -52,7 +52,9 @@
     <Compile Include="chart\LineChart.Designer.cs">
       <DependentUpon>LineChart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Engine\PhasorConverter.cs" />
     <Compile Include="Engine\SLSEDataHandler.cs" />
+    <Compile Include="Logger\AlarmLogger.cs" />
     <Compile Include="Logger\Log4NetHelper.cs" />
     <Compile Include="Logger\logger.cs" />
     <Compile Include="MainGui.cs">
@@ -96,6 +98,9 @@
       <Project>{83ab10f3-37d1-484f-9ba1-284920d119be}</Project>
       <Name>SubstationLSE</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

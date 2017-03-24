@@ -33,6 +33,9 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbCalculate = new System.Windows.Forms.ProgressBar();
             this.dgLog = new System.Windows.Forms.DataGridView();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbMain = new System.Windows.Forms.TabControl();
             this.tabinput = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -45,6 +48,9 @@
             this.btnBrowseInputFile = new System.Windows.Forms.Button();
             this.tbxInputModelName = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tbxsamplecount = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.dgSignals = new System.Windows.Forms.DataGridView();
             this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabrealtime = new System.Windows.Forms.TabPage();
@@ -55,14 +61,15 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAddChart = new System.Windows.Forms.Button();
             this.btnSaveAsCSV = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbxsamplecount = new System.Windows.Forms.TextBox();
+            this.dgAlarm = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.resultchart = new SLESGui.chart.LineChart();
             this.lineChart1 = new SLESGui.chart.LineChart();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbxAlarm = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgLog)).BeginInit();
@@ -70,13 +77,15 @@
             this.tabinput.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSignals)).BeginInit();
+            this.tabrealtime.SuspendLayout();
             this.tabpageresult.SuspendLayout();
             this.tableLayoutresult.SuspendLayout();
             this.tabresult.SuspendLayout();
             this.defaulttab.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAlarm)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -139,6 +148,25 @@
             this.dgLog.Size = new System.Drawing.Size(971, 164);
             this.dgLog.TabIndex = 2;
             // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "错误时间";
+            this.Time.Name = "Time";
+            // 
+            // Type
+            // 
+            this.Type.DataPropertyName = "Type";
+            this.Type.HeaderText = "错误类型";
+            this.Type.Name = "Type";
+            // 
+            // Message
+            // 
+            this.Message.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Message.DataPropertyName = "Message";
+            this.Message.HeaderText = "错误信息";
+            this.Message.Name = "Message";
+            // 
             // tbMain
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.tbMain, 2);
@@ -199,10 +227,11 @@
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.36364F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.77273F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.77273F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.78912F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.53061F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(472, 294);
             this.tableLayoutPanel2.TabIndex = 3;
+            this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
             // label1
             // 
@@ -235,7 +264,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(3, 149);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 116);
+            this.label3.Size = new System.Drawing.Size(86, 66);
             this.label3.TabIndex = 2;
             this.label3.Text = "输入数据";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,7 +273,7 @@
             // 
             this.tbxInputFileName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tbxInputFileName.Enabled = false;
-            this.tbxInputFileName.Location = new System.Drawing.Point(95, 197);
+            this.tbxInputFileName.Location = new System.Drawing.Point(95, 172);
             this.tbxInputFileName.Name = "tbxInputFileName";
             this.tbxInputFileName.Size = new System.Drawing.Size(222, 20);
             this.tbxInputFileName.TabIndex = 4;
@@ -263,7 +292,7 @@
             // btnBrowseInputFile
             // 
             this.btnBrowseInputFile.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnBrowseInputFile.Location = new System.Drawing.Point(358, 195);
+            this.btnBrowseInputFile.Location = new System.Drawing.Point(358, 170);
             this.btnBrowseInputFile.Name = "btnBrowseInputFile";
             this.btnBrowseInputFile.Size = new System.Drawing.Size(75, 23);
             this.btnBrowseInputFile.TabIndex = 6;
@@ -283,13 +312,44 @@
             // btnStart
             // 
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnStart.Location = new System.Drawing.Point(358, 268);
+            this.btnStart.Location = new System.Drawing.Point(358, 243);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 22);
             this.btnStart.TabIndex = 7;
             this.btnStart.Text = "开始运算";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.tbxAlarm);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.tbxsamplecount);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(95, 218);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(222, 73);
+            this.panel1.TabIndex = 8;
+            // 
+            // tbxsamplecount
+            // 
+            this.tbxsamplecount.Location = new System.Drawing.Point(142, 11);
+            this.tbxsamplecount.Name = "tbxsamplecount";
+            this.tbxsamplecount.Size = new System.Drawing.Size(26, 20);
+            this.tbxsamplecount.TabIndex = 1;
+            this.tbxsamplecount.Text = "30";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "每秒钟数据量";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // dgSignals
             // 
@@ -311,6 +371,7 @@
             // 
             // tabrealtime
             // 
+            this.tabrealtime.Controls.Add(this.dgAlarm);
             this.tabrealtime.Location = new System.Drawing.Point(4, 22);
             this.tabrealtime.Name = "tabrealtime";
             this.tabrealtime.Padding = new System.Windows.Forms.Padding(3);
@@ -398,33 +459,37 @@
             this.btnSaveAsCSV.UseVisualStyleBackColor = true;
             this.btnSaveAsCSV.Click += new System.EventHandler(this.btnSaveAsCSV_Click);
             // 
-            // panel1
+            // dgAlarm
             // 
-            this.panel1.Controls.Add(this.tbxsamplecount);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(95, 268);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(222, 23);
-            this.panel1.TabIndex = 8;
+            this.dgAlarm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAlarm.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.Column1,
+            this.dataGridViewTextBoxColumn3});
+            this.dgAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgAlarm.Location = new System.Drawing.Point(3, 3);
+            this.dgAlarm.Name = "dgAlarm";
+            this.dgAlarm.Size = new System.Drawing.Size(957, 300);
+            this.dgAlarm.TabIndex = 3;
             // 
-            // label4
+            // dataGridViewTextBoxColumn1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "每秒钟数据量";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Time";
+            this.dataGridViewTextBoxColumn1.HeaderText = "警报时间";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
-            // tbxsamplecount
+            // Column1
             // 
-            this.tbxsamplecount.Location = new System.Drawing.Point(128, 0);
-            this.tbxsamplecount.Name = "tbxsamplecount";
-            this.tbxsamplecount.Size = new System.Drawing.Size(26, 20);
-            this.tbxsamplecount.TabIndex = 1;
-            this.tbxsamplecount.Text = "30";
+            this.Column1.DataPropertyName = "Type";
+            this.Column1.HeaderText = "警报类型";
+            this.Column1.Name = "Column1";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Message";
+            this.dataGridViewTextBoxColumn3.HeaderText = "警报信息";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
             // resultchart
             // 
@@ -432,6 +497,7 @@
             this.resultchart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resultchart.Location = new System.Drawing.Point(3, 3);
             this.resultchart.Name = "resultchart";
+            this.resultchart.Ref = null;
             this.resultchart.Size = new System.Drawing.Size(943, 233);
             this.resultchart.TabIndex = 0;
             // 
@@ -441,27 +507,36 @@
             this.lineChart1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lineChart1.Location = new System.Drawing.Point(0, 0);
             this.lineChart1.Name = "lineChart1";
+            this.lineChart1.Ref = null;
             this.lineChart1.Size = new System.Drawing.Size(963, 306);
             this.lineChart1.TabIndex = 0;
             // 
-            // Time
+            // label5
             // 
-            this.Time.DataPropertyName = "Time";
-            this.Time.HeaderText = "错误时间";
-            this.Time.Name = "Time";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 43);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "警报持续时间";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // Type
+            // tbxAlarm
             // 
-            this.Type.DataPropertyName = "Type";
-            this.Type.HeaderText = "错误类型";
-            this.Type.Name = "Type";
+            this.tbxAlarm.Location = new System.Drawing.Point(142, 40);
+            this.tbxAlarm.Name = "tbxAlarm";
+            this.tbxAlarm.Size = new System.Drawing.Size(26, 20);
+            this.tbxAlarm.TabIndex = 3;
+            this.tbxAlarm.Text = "5";
             // 
-            // Message
+            // label6
             // 
-            this.Message.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Message.DataPropertyName = "Message";
-            this.Message.HeaderText = "错误信息";
-            this.Message.Name = "Message";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(175, 43);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(19, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "帧";
             // 
             // MainGui
             // 
@@ -481,14 +556,16 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSignals)).EndInit();
+            this.tabrealtime.ResumeLayout(false);
             this.tabpageresult.ResumeLayout(false);
             this.tableLayoutresult.ResumeLayout(false);
             this.tabresult.ResumeLayout(false);
             this.defaulttab.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgAlarm)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -530,6 +607,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Message;
+        private System.Windows.Forms.DataGridView dgAlarm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbxAlarm;
 
 
     }

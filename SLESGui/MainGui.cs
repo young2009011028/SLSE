@@ -36,6 +36,7 @@ namespace SLESGui
                 resultchart.Data_Handler = slse_handler;
                 //data binding
                 dgLog.DataSource = Log4NetHelper.Instance.GetEntries();
+                dgAlarm.DataSource = AlarmLogger.Instance.GetEntries();
                 dgSignals.AutoGenerateColumns = false;
                 dgSignals.DataSource = slse_handler.Signals;
 
@@ -135,6 +136,7 @@ namespace SLESGui
             {
                 if (File.Exists(tbxInputModelName.Text) && File.Exists(tbxInputFileName.Text))
                 {
+                    AlarmLogger.Instance.SetAlarmThreshold(Convert.ToInt32(tbxAlarm.Text));
                     //MessageBox.Show("成功");
                     slse_handler.ModelPath = tbxInputModelName.Text;
                     slse_handler.DataPath = tbxInputFileName.Text;
@@ -261,6 +263,16 @@ namespace SLESGui
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
