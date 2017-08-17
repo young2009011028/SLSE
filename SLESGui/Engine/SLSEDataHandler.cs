@@ -15,7 +15,7 @@ namespace SLSE.Engine
     public class Signal
     {
         public Signal(string name, bool ischecked) { SignalName = name; IsChecked = ischecked; }
-        public string SignalName{get;set;}
+        public string SignalName { get; set; }
         public bool IsChecked { get; set; }
     }
 
@@ -27,16 +27,18 @@ namespace SLSE.Engine
         public List<Double> Value { get; set; }
     }
 
-   public class SLSEDataHandler
+    public class SLSEDataHandler
     {
         #region Private Member
         //path
         private string _datafile_path;
+        private string _scada_datafile_path;
         private string _modelfile_path;
 
         //databuffer
         //<timestamp,<measurment,value>>
         private Dictionary<string, Dictionary<string, double>> _data_buffer;
+        private Dictionary<string, Dictionary<string, double>> _scada_data_buffer;
         private BindingList<Signal> _signals;
 
         //result buffer
@@ -46,10 +48,10 @@ namespace SLSE.Engine
 
         private Substation _substation;
 
-       //sample count
+        //sample count
         private int _sample_per_sec;
 
-       //bad data list
+        //bad data list
         List<string> _bad_data;
         #endregion
         #region Properties
@@ -61,6 +63,14 @@ namespace SLSE.Engine
             { return this._datafile_path; }
         }
 
+
+        public string Scada_Path
+        {
+            set
+            { this._scada_datafile_path = value; }
+            get
+            { return this._scada_datafile_path; }
+        }
         public string ModelPath
         {
             set
@@ -91,6 +101,7 @@ namespace SLSE.Engine
         public SLSEDataHandler()
         {
             _data_buffer = new Dictionary<string, Dictionary<string, double>>();
+            _scada_data_buffer = new Dictionary<string, Dictionary<string, double>>();
             _result_buffer = new Dictionary<string, Dictionary<string, double>>();
             _signals = new BindingList<Signal>();
             _substation = new Substation();
@@ -105,6 +116,7 @@ namespace SLSE.Engine
             try
             {
                 _data_buffer.Clear();
+                _scada_data_buffer.Clear();
                 _signals.Clear();
                 using (TextFieldParser parser = new TextFieldParser(_datafile_path))
                 {
@@ -119,14 +131,14 @@ namespace SLSE.Engine
                         string timestamp = "";
                         Dictionary<string, double> frame = new Dictionary<string, double>();
                         //clear frame
-                       // frame.Clear();
+                        // frame.Clear();
                         //Process row
                         string[] fields = parser.ReadFields();
                         foreach (string field in fields)
                         {
                             if (rowcount == 1)
                             {
-                                _signals.Add(new Signal(field,false));
+                                _signals.Add(new Signal(field, false));
                             }
                             else
                             {
@@ -142,7 +154,7 @@ namespace SLSE.Engine
                                     }
                                     else
                                     {
-                                        frame.Add(_signals[columncount-1].SignalName, Convert.ToDouble(field));
+                                        frame.Add(_signals[columncount - 1].SignalName, Convert.ToDouble(field));
                                     }
                                 }
                             }
@@ -156,6 +168,71 @@ namespace SLSE.Engine
 
                 ////remove first column of csv for _signals
                 _signals.RemoveAt(0);
+
+
+
+
+                if (!File.Exists(_scada_datafile_path))
+                { return true; }
+
+
+                using (TextFieldParser parser = new TextFieldParser(_scada_datafile_path))
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(",");
+                    List<Signal> temp_scada_signal = new List<Signal>();
+                    int rowcount = 1;
+                    while (!parser.EndOfData)
+                    {
+
+                        int columncount = 1;
+                        string timestamp = "";
+                        Dictionary<string, double> frame = new Dictionary<string, double>();
+                        //clear frame
+                        // frame.Clear();
+                        //Process row
+                        string[] fields = parser.ReadFields();
+                        foreach (string field in fields)
+                        {
+                            if (rowcount == 1 && columncount != 1)
+                            {
+                                temp_scada_signal.Add(new Signal(field, false));
+                            }
+                            else if(rowcount!=1)
+                            {
+                                if (columncount == 1)
+                                {
+                                    timestamp = field;
+                                }
+                                else
+                                {
+                                    frame.Add(temp_scada_signal[columncount - 2].SignalName, Convert.ToDouble(field));
+                                }
+                            }
+                            columncount++;
+                        }
+                        if (rowcount != 1)
+                        {
+                            // _data_buffer[timestamp][frame.]
+                            foreach (var s in frame)
+                            {
+                                _scada_data_buffer[timestamp].Add(s.Key, s.Value);
+                            }
+                        }
+
+                        if (rowcount == 1)
+                        {
+                            foreach (var s in temp_scada_signal)
+                            {
+                                _signals.Add(s);
+                            }
+                        }
+                        rowcount++;
+                    }
+
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -201,11 +278,11 @@ namespace SLSE.Engine
                 foreach (var frame_time in _data_buffer)
                 {
                     var frame = frame_time.Value;
-                    _substation.InputMeasurements = new Dictionary<string,double>(frame);
+                    _substation.InputMeasurements = new Dictionary<string, double>(frame);
                     _substation.SLSE();
                     //pass frame to engine
 
-                    var outputframe = new Dictionary<string,double>(_substation.OutputMeasurements);
+                    var outputframe = new Dictionary<string, double>(_substation.OutputMeasurements);
 
                     //get result and insert to _result_buffer with timestamp
 
@@ -221,7 +298,7 @@ namespace SLSE.Engine
 
                     if (_sample_per_sec != 0)
                     {
-                        Thread.Sleep(1000/_sample_per_sec);
+                        Thread.Sleep(1000 / _sample_per_sec);
                     }
                     //Thread.Sleep(10);
 
@@ -255,7 +332,7 @@ namespace SLSE.Engine
                 }
 
 
-                status.Percentage =100;
+                status.Percentage = 100;
                 if (ProgressUpdate != null)
                     ProgressUpdate(this, status);
 
@@ -267,7 +344,7 @@ namespace SLSE.Engine
         }
 
 
-        public void GetSignalResult(string signalname,  Dictionary<DateTime,double[]> result )
+        public void GetSignalResult(string signalname, Dictionary<DateTime, double[]> result)
         {
 
             try
@@ -292,50 +369,50 @@ namespace SLSE.Engine
             catch (Exception ex)
             {
                 Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
-                
+
             }
         }
 
-       public void DumpToCSV(string filepath)
-       {
-           try
-           {
-              // using (StreamWriter sw = new StreamWriter())
-               string outputstring = "";
-               
-                   //write header
-                   string header = "TimeStamp,";
-                   for (int i = 0; i < _signals.Count;i++ )
-                   {
-                         header = header + _signals[i].SignalName + ",Estimated_" + _signals[i].SignalName+",";
-                   }
-                   header = header.TrimEnd(',');
-                   outputstring = outputstring + header + "\n";
+        public void DumpToCSV(string filepath)
+        {
+            try
+            {
+                // using (StreamWriter sw = new StreamWriter())
+                string outputstring = "";
 
-                   for (int i = 0; i < _data_buffer.Count; i++)
-                   {
-                       string frame = "";
-                       var ori_item = _data_buffer.ElementAt(i);
-                       var est_item = _result_buffer.ElementAt(i);
-                       frame = frame + ori_item.Key+",";
+                //write header
+                string header = "TimeStamp,";
+                for (int i = 0; i < _signals.Count; i++)
+                {
+                    header = header + _signals[i].SignalName + ",Estimated_" + _signals[i].SignalName + ",";
+                }
+                header = header.TrimEnd(',');
+                outputstring = outputstring + header + "\n";
 
-                       for (int k = 0; k < _signals.Count; k++)
-                       {
-                           frame = frame + ori_item.Value[_signals[k].SignalName] + "," + est_item.Value[_signals[k].SignalName] + ",";
-                       }
-                       frame.TrimEnd(',');
-                       outputstring = outputstring + frame + "\n";
-                   }
+                for (int i = 0; i < _data_buffer.Count; i++)
+                {
+                    string frame = "";
+                    var ori_item = _data_buffer.ElementAt(i);
+                    var est_item = _result_buffer.ElementAt(i);
+                    frame = frame + ori_item.Key + ",";
 
-                   System.IO.File.WriteAllText(filepath, outputstring);
-               
-           }
-           catch (Exception ex)
-           {
-               Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+                    for (int k = 0; k < _signals.Count; k++)
+                    {
+                        frame = frame + ori_item.Value[_signals[k].SignalName] + "," + est_item.Value[_signals[k].SignalName] + ",";
+                    }
+                    frame.TrimEnd(',');
+                    outputstring = outputstring + frame + "\n";
+                }
 
-           }
-       }
+                System.IO.File.WriteAllText(filepath, outputstring);
+
+            }
+            catch (Exception ex)
+            {
+                Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+
+            }
+        }
         #endregion
 
 

@@ -1,14 +1,7 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows;
 using System.IO;
 
 using System.Threading;
@@ -75,6 +68,34 @@ namespace SLESGui
             }
         }
 
+
+        private void btnBrowseScadaFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+                OpenFileDialog ofd = new OpenFileDialog();
+                // Set filter for file extension and default file extension
+                ofd.DefaultExt = ".csv";
+                ofd.Filter = "CSV documents (.csv)|*.csv";
+
+                DialogResult dr = ofd.ShowDialog();
+
+                if (dr == DialogResult.OK)
+                {
+                    tbxInputScadaDataName.Text = ofd.FileName;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Error", ex.Message));
+            }
+        }
+
+
         private void btnBrowseInputFile_Click(object sender, EventArgs e)
         {
             try
@@ -134,12 +155,17 @@ namespace SLESGui
         {
             try
             {
-                if (File.Exists(tbxInputModelName.Text) && File.Exists(tbxInputFileName.Text))
+                if (File.Exists(tbxInputFileName.Text) && File.Exists(tbxInputModelName.Text))
                 {
                     AlarmLogger.Instance.SetAlarmThreshold(Convert.ToInt32(tbxAlarm.Text));
                     //MessageBox.Show("成功");
                     slse_handler.ModelPath = tbxInputModelName.Text;
                     slse_handler.DataPath = tbxInputFileName.Text;
+
+                    if (File.Exists(tbxInputScadaDataName.Text))
+                    {
+                        slse_handler.Scada_Path = tbxInputScadaDataName.Text;
+                    }
                     slse_handler.LoadData();
                     slse_handler.LoadModel();
 
@@ -165,7 +191,7 @@ namespace SLESGui
                     LSEthread.Start();
 
                 }
-                else if (!File.Exists(tbxInputFileName.Text))
+                else if (!File.Exists(tbxInputModelName.Text))
                 {  
                     MessageBox.Show("无法打开数据文件");
                     Log4NetHelper.Instance.LogEntries(new LogEntry(DateTime.Now, "Info", "无法打开数据文件"));
@@ -277,6 +303,18 @@ namespace SLESGui
 
         }
 
+        private void new_proj_menu_Click(object sender, EventArgs e)
+        {
 
+            DialogResult dialogResult = MessageBox.Show("新建项目会丢失现有的所有内容，继续？","新建项目", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Application.Restart();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+             }
+        }
     }
 }

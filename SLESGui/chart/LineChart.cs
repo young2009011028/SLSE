@@ -404,9 +404,9 @@ namespace SLESGui.chart
                         estimated_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[1]));
 
                     }
-                    if (Ref != "" && Ref !=null)
+                    if (_refAngle != "" && _refAngle != null)
                     {
-                        Data_Handler.GetSignalResult(signalname, ref_result);
+                        Data_Handler.GetSignalResult(_refAngle, ref_result);
                         foreach (var frame in ref_result)
                         {
                             ref_original_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[0]));

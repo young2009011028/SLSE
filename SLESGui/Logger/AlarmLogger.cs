@@ -12,6 +12,7 @@ namespace SLSE.Logger
         private static readonly AlarmLogger instance = new AlarmLogger();
         private BindingList<LogEntry> realtime_log; 
         private int alarm_sample_num = 5;
+        private List<string> alarm_signals;
         Dictionary<DateTime, List<string>> alarm_table;
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit
@@ -24,6 +25,7 @@ namespace SLSE.Logger
         {
             realtime_log = new BindingList<LogEntry>();
             alarm_table = new Dictionary<DateTime, List<string>>();
+            alarm_signals = new List<string>();
         }
 
         public static AlarmLogger Instance
@@ -57,8 +59,34 @@ namespace SLSE.Logger
 
             foreach (var signal in signal_list)
             {
-                LogEntry newlog = new LogEntry(time, "Alarm",signal + " is exceeding limit!");
-                realtime_log.Add(newlog);
+                //check if alarm last for the setting time
+                bool findflag = true;
+                foreach (var alarm in alarm_table)
+                {
+                    string result = alarm.Value.FirstOrDefault(x => x == signal);
+                    if(result == null)
+                    {
+                        findflag = false;
+                        break;
+                    }
+                }
+                string last_frame_result = alarm_signals.FirstOrDefault(x => x == signal);
+                if (findflag == true && last_frame_result==null)
+                {
+                    LogEntry newlog = new LogEntry(time, "Alarm", signal + " is exceeding limit!");
+                    realtime_log.Add(newlog);
+                    alarm_signals.Add(signal);
+                }
+            }
+
+
+            foreach (var alarm_signal in alarm_signals.ToList())
+            {
+                string result = signal_names.FirstOrDefault(x => x == alarm_signal);
+                if (result == null)
+                {
+                    alarm_signals.Remove(alarm_signal);
+                }
             }
         }
 

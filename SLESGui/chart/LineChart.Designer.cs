@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.VolChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.CurChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -57,8 +57,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.84312F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.15688F));
             this.tableLayoutPanel1.Controls.Add(this.VolChart, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.CurChart, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
@@ -68,66 +68,65 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(937, 580);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // VolChart
             // 
-            chartArea1.AxisX.LabelStyle.Format = "HH:mm:ss";
-            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.Name = "VMArea";
-            chartArea1.Visible = false;
-            chartArea2.AxisX.LabelStyle.Format = "HH:mm:ss";
-            chartArea2.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea2.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea2.Name = "VAArea";
-            chartArea2.Visible = false;
-            this.VolChart.ChartAreas.Add(chartArea1);
-            this.VolChart.ChartAreas.Add(chartArea2);
+            chartArea5.AxisX.LabelStyle.Format = "HH:mm:ss";
+            chartArea5.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea5.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea5.Name = "VMArea";
+            chartArea5.Visible = false;
+            chartArea6.AxisX.LabelStyle.Format = "HH:mm:ss";
+            chartArea6.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea6.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea6.Name = "VAArea";
+            chartArea6.Visible = false;
+            this.VolChart.ChartAreas.Add(chartArea5);
+            this.VolChart.ChartAreas.Add(chartArea6);
             this.VolChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.BackColor = System.Drawing.Color.Transparent;
-            legend1.DockedToChartArea = "VMArea";
-            legend1.Name = "VMLegend";
-            legend1.TitleBackColor = System.Drawing.Color.Transparent;
-            legend2.BackColor = System.Drawing.Color.Transparent;
-            legend2.DockedToChartArea = "VAArea";
-            legend2.Name = "VALegend";
-            legend2.TitleBackColor = System.Drawing.Color.Transparent;
-            this.VolChart.Legends.Add(legend1);
-            this.VolChart.Legends.Add(legend2);
-            this.VolChart.Location = new System.Drawing.Point(471, 3);
+            legend5.BackColor = System.Drawing.Color.Transparent;
+            legend5.DockedToChartArea = "VMArea";
+            legend5.Name = "VMLegend";
+            legend5.TitleBackColor = System.Drawing.Color.Transparent;
+            legend6.BackColor = System.Drawing.Color.Transparent;
+            legend6.DockedToChartArea = "VAArea";
+            legend6.Name = "VALegend";
+            legend6.TitleBackColor = System.Drawing.Color.Transparent;
+            this.VolChart.Legends.Add(legend5);
+            this.VolChart.Legends.Add(legend6);
+            this.VolChart.Location = new System.Drawing.Point(292, 3);
             this.VolChart.Name = "VolChart";
-            this.VolChart.Size = new System.Drawing.Size(463, 284);
+            this.VolChart.Size = new System.Drawing.Size(642, 284);
             this.VolChart.TabIndex = 1;
             this.VolChart.Text = "VolChart";
             this.VolChart.Click += new System.EventHandler(this.multiplelinechart_Click);
             // 
             // CurChart
             // 
-            chartArea3.AxisX.LabelStyle.Format = "HH:mm:ss";
-            chartArea3.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea3.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea3.Name = "IMArea";
-            chartArea3.Visible = false;
-            chartArea4.AxisX.LabelStyle.Format = "HH:mm:ss";
-            chartArea4.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea4.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea4.Name = "IAArea";
-            chartArea4.Visible = false;
-            this.CurChart.ChartAreas.Add(chartArea3);
-            this.CurChart.ChartAreas.Add(chartArea4);
+            chartArea7.AxisX.LabelStyle.Format = "HH:mm:ss";
+            chartArea7.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea7.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea7.Name = "IMArea";
+            chartArea7.Visible = false;
+            chartArea8.AxisX.LabelStyle.Format = "HH:mm:ss";
+            chartArea8.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea8.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea8.Name = "IAArea";
+            chartArea8.Visible = false;
+            this.CurChart.ChartAreas.Add(chartArea7);
+            this.CurChart.ChartAreas.Add(chartArea8);
             this.CurChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.DockedToChartArea = "IMArea";
-            legend3.Name = "IMLegend";
-            legend4.DockedToChartArea = "IAArea";
-            legend4.Name = "IALegend";
-            this.CurChart.Legends.Add(legend3);
-            this.CurChart.Legends.Add(legend4);
-            this.CurChart.Location = new System.Drawing.Point(471, 293);
+            legend7.DockedToChartArea = "IMArea";
+            legend7.Name = "IMLegend";
+            legend8.DockedToChartArea = "IAArea";
+            legend8.Name = "IALegend";
+            this.CurChart.Legends.Add(legend7);
+            this.CurChart.Legends.Add(legend8);
+            this.CurChart.Location = new System.Drawing.Point(292, 293);
             this.CurChart.Name = "CurChart";
-            this.CurChart.Size = new System.Drawing.Size(463, 284);
+            this.CurChart.Size = new System.Drawing.Size(642, 284);
             this.CurChart.TabIndex = 2;
             this.CurChart.Text = "IChart";
             // 
@@ -144,7 +143,7 @@
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 2);
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(462, 574);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(283, 574);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // dataGridView1
@@ -156,7 +155,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 33);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(456, 538);
+            this.dataGridView1.Size = new System.Drawing.Size(277, 538);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -181,15 +180,15 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(456, 24);
+            this.panel1.Size = new System.Drawing.Size(277, 24);
             this.panel1.TabIndex = 1;
             // 
             // cbRef
             // 
             this.cbRef.FormattingEnabled = true;
-            this.cbRef.Location = new System.Drawing.Point(166, 2);
+            this.cbRef.Location = new System.Drawing.Point(110, 2);
             this.cbRef.Name = "cbRef";
-            this.cbRef.Size = new System.Drawing.Size(212, 21);
+            this.cbRef.Size = new System.Drawing.Size(149, 21);
             this.cbRef.TabIndex = 1;
             this.cbRef.SelectionChangeCommitted += new System.EventHandler(this.cbRef_SelectionChangeCommitted);
             // 
