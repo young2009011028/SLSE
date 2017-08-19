@@ -303,6 +303,10 @@ namespace SLESGui
 
         }
 
+        private void MainGui_Load(object sender, EventArgs e)
+        {
+
+        }
         private void new_proj_menu_Click(object sender, EventArgs e)
         {
 
@@ -315,6 +319,7 @@ namespace SLESGui
             {
                 //do something else
              }
+
         }
     }
 }

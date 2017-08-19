@@ -1,0 +1,16 @@
+[USI QuickSummary]
+RemoteID=83
+FaultID=1294
+Date=08/16/2016
+Time=11:45:08.296166
+TimeCode=-8td
+Company=Southern Cal Edison
+Sync=Y
+LogF=Y
+LT=N
+TestRun=N
+DigitalEvents=T56,T81,T84,T49,T55,T80,T83,
+Prefault=100.165
+Postfault=137.501
+Length=237.667
+FileExt=inf,cfg,dat

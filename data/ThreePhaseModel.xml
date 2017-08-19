@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-	<Substation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Uid="0128acfe-cc22-4138-9f4f-bcbf31f33200" ID="SUBSTATION" Number="" Acronym="" Name="SUBSTATION" Description="" Mode="PositiveSequence">
+	<Substation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Uid="0128acfe-cc22-4138-9f4f-bcbf31f33200" ID="SUBSTATION" Number="" Acronym="" Name="SUBSTATION" Description="" Mode="ThreePhase">
 		<Nodes>
 			<Node Uid="0396d4eb-c845-4891-a694-33118f435351" ID="SUBSTATION_500_906" Number="" Acronym="" Name="SUBSTATION_500_906" Description="" BaseKV="500" ParentSubstation="SUBSTATION" ParentTransmissionLine="">
 				<Voltage Uid="c38b49fa-f39e-45e1-ab8d-76eea59134c8" ID="1" Number="" Acronym="" Name="" Description="" Enabled="true" UseStatusFlag="false" StatusWord="0" NegativeSequenceKey="Undefined">

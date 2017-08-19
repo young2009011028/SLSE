@@ -213,7 +213,9 @@ namespace SLSE.Engine
                         }
                         if (rowcount != 1)
                         {
-                            // _data_buffer[timestamp][frame.]
+
+                            _scada_data_buffer.Add(timestamp, new Dictionary<string, double>());
+
                             foreach (var s in frame)
                             {
                                 _scada_data_buffer[timestamp].Add(s.Key, s.Value);
@@ -358,13 +360,29 @@ namespace SLSE.Engine
                         {
                             if (frame.Key == signalname)
                             {
-                                var result_frame = (_result_buffer[signal.Key])[frame.Key];
+                                 var result_frame = (_result_buffer[signal.Key])[frame.Key];
 
                                 result.Add(Convert.ToDateTime(signal.Key), new double[] { frame.Value, result_frame });
                             }
                         }
                     }
                 }
+
+                if(result.Count==0)
+                {
+                    foreach (var signal in _scada_data_buffer)
+                    {
+                        foreach (var frame in signal.Value)
+                        {
+                            if (frame.Key == signalname)
+                            {
+
+                                result.Add(Convert.ToDateTime(signal.Key), new double[] { frame.Value });
+                            }
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {

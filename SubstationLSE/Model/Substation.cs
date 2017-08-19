@@ -487,8 +487,8 @@ namespace SubstationLSE
                 {
                     if (measurementMapping.ContainsKey(kw))
                     {
-                        Console.WriteLine("Current Measurement Bad Data at:    " + Node_EQ[measurementMapping[kw]]);
-                        badDataList.Add(Node_EQ[measurementMapping[kw]]);
+                        Console.WriteLine("Current Measurement Bad Data at:    " + measurementMapping[kw]);
+                        badDataList.Add(measurementMapping[kw]);
                     }
                 }
             }

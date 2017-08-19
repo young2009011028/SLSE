@@ -400,8 +400,10 @@ namespace SLESGui.chart
                     Data_Handler.GetSignalResult(signalname, result);
                     foreach (var frame in result)
                     {
+                        
                         original_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[0]));
-                        estimated_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[1]));
+                        if (frame.Value.Count() == 2)
+                        { estimated_values.Add(new KeyValuePair<DateTime, double>(frame.Key, frame.Value[1])); }
 
                     }
                     if (_refAngle != "" && _refAngle != null)
@@ -414,13 +416,15 @@ namespace SLESGui.chart
 
                         }
                         AddLinesWithRef(signalname, original_values,ref_original_values);
-                        AddLinesWithRef("Estimated_" + signalname, estimated_values, ref_estimated_values);
+                        if (estimated_values.Count > 0 || ref_estimated_values.Count > 0)
+                        { AddLinesWithRef("Estimated_" + signalname, estimated_values, ref_estimated_values); }
                     }
                     else
                     {
 
                         AddLines(signalname, original_values);
-                        AddLines("Estimated_" + signalname, estimated_values);
+                        if (estimated_values.Count > 0)
+                        { AddLines("Estimated_" + signalname, estimated_values); }
                     }
 
                 }
