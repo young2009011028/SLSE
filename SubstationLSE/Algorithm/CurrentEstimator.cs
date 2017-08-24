@@ -159,29 +159,45 @@ namespace SubstationLSE.Algorithm
                 {
                     islandActiveCurrentMeasurements = m_islandCurrentMeasurements[kv.Key];
                 }
-
-                foreach(KeyValuePair<string, CurrentPhasorGroup> kw in islandActiveCurrentMeasurements)
+                HashSet<string> removedActiveCurrentMeasurements = new HashSet<string>();
+                try
                 {
-                    //kw.Value.m
-                    if (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerOne) || (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerTwo)))
+                    foreach (KeyValuePair<string, CurrentPhasorGroup> kw in islandActiveCurrentMeasurements)
                     {
-                        islandActiveCurrentMeasurements.Remove(kw.Key);
-                        m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                        //kw.Value.m
+                        if (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerOne) || (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerTwo)))
+                        {
+                            removedActiveCurrentMeasurements.Add(kw.Key);
+                            //islandActiveCurrentMeasurements.Remove(kw.Key);
+                            //m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                        }
+
+                        //if (kv.Value.ContainsKey(kw.Key))
+                        //{
+                        //    HashSet<string> edges = new HashSet<string>();
+                        //    edges = kv.Value[kw.Key];       
+                        //    foreach (string ku in edges)
+                        //    {
+                        //        if (!islandActiveBreakerCurrentMeasurements.ContainsKey(ku))
+                        //        {
+                        //            islandActiveCurrentMeasurements.Remove(kw.Key);
+                        //            m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                        //        }
+                        //    }
+                        //}
+                    }
+                    foreach(string kn in removedActiveCurrentMeasurements)
+                    {
+                        if (islandActiveCurrentMeasurements.ContainsKey(kn))
+                        {
+                            islandActiveCurrentMeasurements.Remove(kn);
+                        }
                     }
 
-                    //if (kv.Value.ContainsKey(kw.Key))
-                    //{
-                    //    HashSet<string> edges = new HashSet<string>();
-                    //    edges = kv.Value[kw.Key];       
-                    //    foreach (string ku in edges)
-                    //    {
-                    //        if (!islandActiveBreakerCurrentMeasurements.ContainsKey(ku))
-                    //        {
-                    //            islandActiveCurrentMeasurements.Remove(kw.Key);
-                    //            m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
-                    //        }
-                    //    }
-                    //}
+                }
+                catch(Exception ex)
+                {
+                    int i = 1;
                 }
 
                 DenseMatrix m_EQ_temp = DenseMatrix.OfArray(new Complex[1, 1]);
@@ -242,10 +258,47 @@ namespace SubstationLSE.Algorithm
                     //    }
                     //}
                 }
-                m_island_EQ.Add(kv.Key, m_EQ_temp);
+                
+
+                // main bus current KCL check
+                // EAST BUS: with breaker currents: 4730, 4724, 4731
+                // WEST BUS: with breaker currents: 4594, 4586, 4732
+                DenseMatrix m_MainBus_temp = DenseMatrix.OfArray(new Complex[2, m_islandActiveBreakerCurrentMeasurements.Count]);
+                foreach(BreakerCurrentPhasorGroup breakerCurrent in m_islandActiveBreakerCurrentMeasurements)
+                {
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4730")
+                    {
+                        m_MainBus_temp[0, m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4724")
+                    {
+                        m_MainBus_temp[0, m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4731")
+                    {
+                        m_MainBus_temp[0, m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4594")
+                    {
+                        m_MainBus_temp[1, m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4586")
+                    {
+                        m_MainBus_temp[1, m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4732")
+                    {
+                        m_MainBus_temp[1, m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                    }
+                }
+                //m_MainBus_temp.L2Norm
+                //add main bus temp to 
+                DenseMatrix m_EQ_temp_AddMainBus = MatrixCalculationExtensions.VerticallyConcatenate(m_EQ_temp, m_MainBus_temp);
+
+                m_island_EQ.Add(kv.Key, m_EQ_temp_AddMainBus);
 
                 DenseMatrix m_W_temp = DenseMatrix.OfArray(new Complex[1, 1]);
-                m_W_temp = DenseMatrix.OfArray(new Complex[m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count, m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count]);
+                m_W_temp = DenseMatrix.OfArray(new Complex[m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count + 2, m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count + 2]);
                 for (int i=0; i<m_W_temp.RowCount; i++)
                 {
                     if (i < m_islandActiveBreakerCurrentMeasurements.Count)
@@ -256,6 +309,10 @@ namespace SubstationLSE.Algorithm
                     {
                         m_W_temp[i, i] = new Complex(1 / (m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PositiveSequence.Measurement.MeasurementCovariance), 0);
                     }
+                    else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count)+2)
+                    {
+                        m_W_temp[i, i] = m_W_temp[0, 0];                       
+                    }
                     else
                     {
                         Console.WriteLine("unexpected measurement");
@@ -265,19 +322,24 @@ namespace SubstationLSE.Algorithm
 
                 Dictionary<int, string> measurementList_temp = new Dictionary<int, string>();
                 DenseMatrix m_Z_temp = DenseMatrix.OfArray(new Complex[1, 1]);
-                m_Z_temp = DenseMatrix.OfArray(new Complex[m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count, 1]);
+                m_Z_temp = DenseMatrix.OfArray(new Complex[m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count + 2, 1]);
 
                 for (int i = 0; i < m_Z_temp.RowCount; i++)
                 {
                     if (i < m_islandActiveBreakerCurrentMeasurements.Count)
                     {
-                        measurementList_temp.Add(i, m_islandActiveBreakerCurrentMeasurements[i].MeasuredBreakerID);
+                        measurementList_temp.Add(i, m_islandActiveBreakerCurrentMeasurements[i].PositiveSequence.Measurement.MagnitudeKey);
                         m_Z_temp[i, 0] = m_islandActiveBreakerCurrentMeasurements[i].PositiveSequence.Measurement.PerUnitComplexPhasor;
                     }
                     else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count))
                     {
-                        measurementList_temp.Add(i, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].MeasuredNodeID);
+                        measurementList_temp.Add(i, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PositiveSequence.Measurement.MagnitudeKey);
                         m_Z_temp[i, 0] = m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PositiveSequence.Measurement.PerUnitComplexPhasor;
+                    }
+                    else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count)+2)
+                    {
+                        measurementList_temp.Add(i, "main bus zero injection:  "+i.ToString());
+                        m_Z_temp[i, 0] = 0;
                     }
                     else
                     {
@@ -427,28 +489,45 @@ namespace SubstationLSE.Algorithm
                     islandActiveCurrentMeasurements = m_islandCurrentMeasurements[kv.Key];
                 }
 
-                foreach (KeyValuePair<string, CurrentPhasorGroup> kw in islandActiveCurrentMeasurements)
+                HashSet<string> removedActiveCurrentMeasurements = new HashSet<string>();
+                try
                 {
-                    //kw.Value.m
-                    if (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerOne) || (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerTwo)))
+                    foreach (KeyValuePair<string, CurrentPhasorGroup> kw in islandActiveCurrentMeasurements)
                     {
-                        islandActiveCurrentMeasurements.Remove(kw.Key);
-                        m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                        //kw.Value.m
+                        if (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerOne) || (!islandActiveBreakerCurrentMeasurements.ContainsKey(kw.Value.MeasuredBreakerTwo)))
+                        {
+                            removedActiveCurrentMeasurements.Add(kw.Key);
+                            //islandActiveCurrentMeasurements.Remove(kw.Key);
+                            //m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                        }
+
+                        //if (kv.Value.ContainsKey(kw.Key))
+                        //{
+                        //    HashSet<string> edges = new HashSet<string>();
+                        //    edges = kv.Value[kw.Key];       
+                        //    foreach (string ku in edges)
+                        //    {
+                        //        if (!islandActiveBreakerCurrentMeasurements.ContainsKey(ku))
+                        //        {
+                        //            islandActiveCurrentMeasurements.Remove(kw.Key);
+                        //            m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
+                        //        }
+                        //    }
+                        //}
+                    }
+                    foreach (string kn in removedActiveCurrentMeasurements)
+                    {
+                        if (islandActiveCurrentMeasurements.ContainsKey(kn))
+                        {
+                            islandActiveCurrentMeasurements.Remove(kn);
+                        }
                     }
 
-                    //if (kv.Value.ContainsKey(kw.Key))
-                    //{
-                    //    HashSet<string> edges = new HashSet<string>();
-                    //    edges = kv.Value[kw.Key];       
-                    //    foreach (string ku in edges)
-                    //    {
-                    //        if (!islandActiveBreakerCurrentMeasurements.ContainsKey(ku))
-                    //        {
-                    //            islandActiveCurrentMeasurements.Remove(kw.Key);
-                    //            m_islandCurrentMeasurements[kv.Key].Remove(kw.Key);
-                    //        }
-                    //    }
-                    //}
+                }
+                catch (Exception ex)
+                {
+                    int i = 1;
                 }
 
                 DenseMatrix m_EQ_temp = DenseMatrix.OfArray(new Complex[1, 1]);
@@ -519,11 +598,58 @@ namespace SubstationLSE.Algorithm
                     //    }
                     //}
                 }
-                m_island_EQ.Add(kv.Key, m_EQ_temp);
+                // main bus current KCL check
+                // EAST BUS: with breaker currents: 4730, 4724, 4731
+                // WEST BUS: with breaker currents: 4594, 4586, 4732
+                DenseMatrix m_MainBus_temp = DenseMatrix.OfArray(new Complex[6, 3 * m_islandActiveBreakerCurrentMeasurements.Count]);
+                foreach (BreakerCurrentPhasorGroup breakerCurrent in m_islandActiveBreakerCurrentMeasurements)
+                {
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4730")
+                    {
+                        m_MainBus_temp[0, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                        m_MainBus_temp[1, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 1] = 1;
+                        m_MainBus_temp[2, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 2] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4724")
+                    {
+                        m_MainBus_temp[0, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                        m_MainBus_temp[1, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 1] = 1;
+                        m_MainBus_temp[2, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 2] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4731")
+                    {
+                        m_MainBus_temp[0, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                        m_MainBus_temp[1, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 1] = 1;
+                        m_MainBus_temp[2, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 2] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4594")
+                    {
+                        m_MainBus_temp[3, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                        m_MainBus_temp[4, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 1] = 1;
+                        m_MainBus_temp[5, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 2] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4586")
+                    {
+                        m_MainBus_temp[3, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                        m_MainBus_temp[4, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 1] = 1;
+                        m_MainBus_temp[5, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 2] = 1;
+                    }
+                    if (breakerCurrent.MeasuredBreakerID == "SUBSTATION_PCB_500_4732")
+                    {
+                        m_MainBus_temp[3, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent)] = 1;
+                        m_MainBus_temp[4, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 1] = 1;
+                        m_MainBus_temp[5, 3 * m_islandActiveBreakerCurrentMeasurements.IndexOf(breakerCurrent) + 2] = 1;
+                    }
+                }
+                //m_MainBus_temp.L2Norm
+                //add main bus temp to 
+                DenseMatrix m_EQ_temp_AddMainBus = MatrixCalculationExtensions.VerticallyConcatenate(m_EQ_temp, m_MainBus_temp);
+
+                m_island_EQ.Add(kv.Key, m_EQ_temp_AddMainBus);
 
                 DenseMatrix m_W_temp = DenseMatrix.OfArray(new Complex[1, 1]);
-                m_W_temp = DenseMatrix.OfArray(new Complex[3 * (m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count), 3 * (m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count)]);
-                for (int i = 0; i < m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count; i++)
+                m_W_temp = DenseMatrix.OfArray(new Complex[3 * (m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count + 2), 3 * (m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count + 2)]);
+                for (int i = 0; i < m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count+2; i++)
                 {
                     if (i < m_islandActiveBreakerCurrentMeasurements.Count)
                     {
@@ -539,6 +665,12 @@ namespace SubstationLSE.Algorithm
                         m_W_temp[3 * i + 2, 3 * i + 2] = new Complex(1 / (m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PhaseC.Measurement.MeasurementCovariance), 0);
                         //m_W_temp[i, i] = new Complex(1 / (m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PositiveSequence.Measurement.MeasurementCovariance), 0);
                     }
+                    else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count+2))
+                    {
+                        m_W_temp[3 * i, 3 * i] = m_W_temp[0, 0];
+                        m_W_temp[3 * i + 1, 3 * i + 1] = m_W_temp[1, 1];
+                        m_W_temp[3 * i + 2, 3 * i + 2] = m_W_temp[2, 2];
+                    }
                     else
                     {
                         Console.WriteLine("unexpected measurement");
@@ -548,15 +680,15 @@ namespace SubstationLSE.Algorithm
 
                 Dictionary<int, string> measurementList_temp = new Dictionary<int, string>();
                 DenseMatrix m_Z_temp = DenseMatrix.OfArray(new Complex[1, 1]);
-                m_Z_temp = DenseMatrix.OfArray(new Complex[3 * (m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count), 1]);
+                m_Z_temp = DenseMatrix.OfArray(new Complex[3 * (m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count + 2), 1]);
 
-                for (int i = 0; i < m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count; i++)
+                for (int i = 0; i < m_islandActiveCurrentMeasurements.Count + m_islandActiveBreakerCurrentMeasurements.Count + 2; i++)
                 {
                     if (i < m_islandActiveBreakerCurrentMeasurements.Count)
                     {
-                        measurementList_temp.Add(3 * i, m_islandActiveBreakerCurrentMeasurements[i].MeasuredBreakerID + "PhaseA");
-                        measurementList_temp.Add(3 * i + 1, m_islandActiveBreakerCurrentMeasurements[i].MeasuredBreakerID + "PhaseB");
-                        measurementList_temp.Add(3 * i + 2, m_islandActiveBreakerCurrentMeasurements[i].MeasuredBreakerID + "PhaseC");
+                        measurementList_temp.Add(3 * i, m_islandActiveBreakerCurrentMeasurements[i].PhaseA.Measurement.MagnitudeKey);
+                        measurementList_temp.Add(3 * i + 1, m_islandActiveBreakerCurrentMeasurements[i].PhaseB.Measurement.MagnitudeKey);
+                        measurementList_temp.Add(3 * i + 2, m_islandActiveBreakerCurrentMeasurements[i].PhaseC.Measurement.MagnitudeKey);
                         //measurementList_temp.Add(i, m_islandActiveBreakerCurrentMeasurements[i].MeasuredBreakerID);
                         m_Z_temp[3 * i, 0] = m_islandActiveBreakerCurrentMeasurements[i].PhaseA.Measurement.PerUnitComplexPhasor;
                         m_Z_temp[3 * i + 1, 0] = m_islandActiveBreakerCurrentMeasurements[i].PhaseB.Measurement.PerUnitComplexPhasor;
@@ -565,14 +697,23 @@ namespace SubstationLSE.Algorithm
                     }
                     else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count))
                     {
-                        measurementList_temp.Add(3 * i, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].MeasuredNodeID + "PhaseA");
-                        measurementList_temp.Add(3 * i + 1, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].MeasuredNodeID + "PhaseB");
-                        measurementList_temp.Add(3 * i + 2, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].MeasuredNodeID + "PhaseC");
+                        measurementList_temp.Add(3 * i, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PhaseA.Measurement.MagnitudeKey);
+                        measurementList_temp.Add(3 * i + 1, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PhaseB.Measurement.MagnitudeKey);
+                        measurementList_temp.Add(3 * i + 2, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PhaseC.Measurement.MagnitudeKey);
                         //measurementList_temp.Add(i, m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].MeasuredNodeID);
                         m_Z_temp[3 * i, 0] = m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PhaseA.Measurement.PerUnitComplexPhasor;
                         m_Z_temp[3 * i + 1, 0] = m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PhaseB.Measurement.PerUnitComplexPhasor;
                         m_Z_temp[3 * i + 2, 0] = m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PhaseC.Measurement.PerUnitComplexPhasor;
                         //m_Z_temp[i, 0] = m_islandActiveCurrentMeasurements[i - m_islandActiveBreakerCurrentMeasurements.Count].PositiveSequence.Measurement.PerUnitComplexPhasor;
+                    }
+                    else if (i < (m_islandActiveBreakerCurrentMeasurements.Count + m_islandActiveCurrentMeasurements.Count) + 2)
+                    {
+                        measurementList_temp.Add(3 * i, "main bus zero injection:PhaseA " + i.ToString());
+                        measurementList_temp.Add(3 * i + 1, "main bus zero injection:PhaseB " + i.ToString());
+                        measurementList_temp.Add(3 * i + 2, "main bus zero injection:PhaseC " + i.ToString());
+                        m_Z_temp[3 * i, 0] = 0;
+                        m_Z_temp[3 * i + 1, 0] = 0;
+                        m_Z_temp[3 * i + 2, 0] = 0;
                     }
                     else
                     {
@@ -604,7 +745,11 @@ namespace SubstationLSE.Algorithm
                 Z = m_island_Z[kv.Key];
                 H = MatrixCalculationExtensions.VerticallyConcatenate(m_island_CB[kv.Key], m_island_EQ[kv.Key]);
                 W = m_island_W[kv.Key];
-                badDataList = LSECalculation.CalculateLSE(H, W, Z, out X, 10, true);
+                badDataList = LSECalculation.CalculateLSE(H, W, Z, out X, 50, true);
+                if (badDataList.Count>0)
+                {
+                    int i = 1;
+                }
                 m_badDataList.Add(kv.Key, badDataList);
 
                 if (X.RowCount > 0)

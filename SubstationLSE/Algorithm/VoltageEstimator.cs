@@ -149,7 +149,7 @@ namespace SubstationLSE.Algorithm
                 {
                     if (i < m_islandActiveVoltageMeasurements.Count)
                     {
-                        measurementList_temp.Add(i, m_islandActiveVoltageMeasurements[i].MeasuredNodeID);
+                        measurementList_temp.Add(i, m_islandActiveVoltageMeasurements[i].PositiveSequence.Measurement.MagnitudeKey);
                         m_Z_temp[i, 0] = m_islandActiveVoltageMeasurements[i].PositiveSequence.Measurement.PerUnitComplexPhasor;
                     }
                     else
@@ -268,9 +268,9 @@ namespace SubstationLSE.Algorithm
                 {
                     if (i < m_islandActiveVoltageMeasurements.Count)
                     {
-                        measurementList_temp.Add(3 * i, m_islandActiveVoltageMeasurements[i].MeasuredNodeID + "PhaseA");
-                        measurementList_temp.Add(3 * i + 1, m_islandActiveVoltageMeasurements[i].MeasuredNodeID + "PhaseB");
-                        measurementList_temp.Add(3 * i + 2, m_islandActiveVoltageMeasurements[i].MeasuredNodeID + "PhaseC");
+                        measurementList_temp.Add(3 * i, m_islandActiveVoltageMeasurements[i].PhaseA.Measurement.MagnitudeKey);
+                        measurementList_temp.Add(3 * i + 1, m_islandActiveVoltageMeasurements[i].PhaseB.Measurement.MagnitudeKey);
+                        measurementList_temp.Add(3 * i + 2, m_islandActiveVoltageMeasurements[i].PhaseC.Measurement.MagnitudeKey);
                         m_Z_temp[3 * i, 0] = m_islandActiveVoltageMeasurements[i].PhaseA.Measurement.PerUnitComplexPhasor;
                         m_Z_temp[3 * i + 1, 0] = m_islandActiveVoltageMeasurements[i].PhaseB.Measurement.PerUnitComplexPhasor;
                         m_Z_temp[3 * i + 2, 0] = m_islandActiveVoltageMeasurements[i].PhaseC.Measurement.PerUnitComplexPhasor;

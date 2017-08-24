@@ -52,6 +52,8 @@ namespace SubstationLSE.Algorithm
                 {
                     //System.Diagnostics.Stopwatch m_stopwatch = new System.Diagnostics.Stopwatch();
                     DenseMatrix H_Transpose = H.Transpose() as DenseMatrix;
+                    DenseMatrix Gain = H_Transpose * W * H;
+                    int rank = Gain.Rank();
                     DenseMatrix P = (((H_Transpose * W * H).Inverse()) * H_Transpose * W) as DenseMatrix;
                     X = P * Z;
 
