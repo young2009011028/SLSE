@@ -481,30 +481,58 @@ namespace SubstationLSE
             badDataList.Clear();
             foreach (KeyValuePair<string, HashSet<int>> kv in currentEstimator.BadDataList)
             {
-                Console.WriteLine("Island:   "+kv.Key);
-                Dictionary<int, string> measurementMapping = currentEstimator.MeasurementList[kv.Key];
-                foreach(int kw in kv.Value)
+                if (kv.Value == null)
                 {
-                    if (measurementMapping.ContainsKey(kw))
+                    continue;
+                }
+                if (kv.Value.Count>0)
+                {
+                    Console.WriteLine("Island:   " + kv.Key);
+                    Dictionary<int, string> measurementMapping = currentEstimator.MeasurementList[kv.Key];
+                    foreach (int kw in kv.Value)
                     {
+<<<<<<< HEAD
+                        if (measurementMapping.ContainsKey(kw))
+                        {
+                            Console.WriteLine("Current Measurement Bad Data at:    " + measurementMapping[kw]);
+                            badDataList.Add(measurementMapping[kw]);
+                        }
+=======
                         Console.WriteLine("Current Measurement Bad Data at:    " + measurementMapping[kw]);
                         badDataList.Add(measurementMapping[kw]);
+>>>>>>> origin/master
                     }
                 }
+
             }
+
+            //if (voltageEstimator.BadDataList.Count>0)
+            //{
+            //    int i = 1;
+            //    i = 3;
+            //}
 
             foreach (KeyValuePair<string, HashSet<int>> kv in voltageEstimator.BadDataList)
             {
-                Console.WriteLine("Island:   " + kv.Key);
-                Dictionary<int, string> measurementMapping = voltageEstimator.MeasurementList[kv.Key];
-                foreach (int kw in kv.Value)
+                if (kv.Value == null)
                 {
-                    if (measurementMapping.ContainsKey(kw))
+                    continue;
+                }
+
+                if (kv.Value.Count>0)
+                {
+                    Console.WriteLine("Island:   " + kv.Key);
+                    Dictionary<int, string> measurementMapping = voltageEstimator.MeasurementList[kv.Key];
+                    foreach (int kw in kv.Value)
                     {
-                        Console.WriteLine("Voltage Measurement Bad Data at:    " + measurementMapping[kw]);
-                        badDataList.Add(measurementMapping[kw]);
+                        if (measurementMapping.ContainsKey(kw))
+                        {
+                            Console.WriteLine("Voltage Measurement Bad Data at:    " + measurementMapping[kw]);
+                            badDataList.Add(measurementMapping[kw]);
+                        }
                     }
                 }
+
             }
 
             outputMeasurements.Clear();
