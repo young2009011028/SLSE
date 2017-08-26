@@ -491,16 +491,12 @@ namespace SubstationLSE
                     Dictionary<int, string> measurementMapping = currentEstimator.MeasurementList[kv.Key];
                     foreach (int kw in kv.Value)
                     {
-<<<<<<< HEAD
                         if (measurementMapping.ContainsKey(kw))
                         {
                             Console.WriteLine("Current Measurement Bad Data at:    " + measurementMapping[kw]);
                             badDataList.Add(measurementMapping[kw]);
                         }
-=======
-                        Console.WriteLine("Current Measurement Bad Data at:    " + measurementMapping[kw]);
-                        badDataList.Add(measurementMapping[kw]);
->>>>>>> origin/master
+
                     }
                 }
 
